@@ -27,5 +27,16 @@ spells,attack,Teleport Other
 spells,buff,Speed up               
 spells,attack,Fire Ball                
 spells,attack,Word of Destruction      
-spells,attack,Genocide 
-                
+spells,attack,Genocide
+profession,gather,Mining
+profession,gather,Farming
+profession,gather,Wood cutter
+profession,gather,Reed collector
+profession,build,Carpenter
+profession,build,Blacksmith
+profession,build,Weaver
+profession,build,Mason
+profession,build,Engineer
+
+
+
