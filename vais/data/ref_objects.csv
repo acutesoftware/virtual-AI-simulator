@@ -1,0 +1,8 @@
+name,dmg,weight,size,buy_price,sell_price,drop_rate
+leaf,0,0,1,0,0,0
+stick,1,1,0,0,0,.01
+rock,2,2,1,0,0,0.1
+knife,4,1,1,4,3,.03
+sword,6,1,1,7,6,.02
+spear,9,2,2,8,7,.01
+food,0,1,1,1,1,0.08
