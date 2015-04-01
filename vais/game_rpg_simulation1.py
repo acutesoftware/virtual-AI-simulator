@@ -24,9 +24,12 @@ def main():
     
     character1 = Character('Albogh', str=4,int=7,sta=50)
     character2 = Character('Zoltor', str=6,int=6,sta=70)
-    print(character1)
+    print('PLAYER1 [start]:', character1)
+    print('PLAYER2 [start]:', character2)
     b = Battle(character1, character2)
     print(b)
+    print('PLAYER1 [end]:', character1)
+    print('PLAYER2 [end]:', character2)
     
 class Character():
     """
@@ -81,14 +84,14 @@ class Battle():
             self.c1.sta = self.c1.sta - dmg
             if self.is_character_dead(self.c1):
                 print(self.c1.name + ' has died')
-                exit(0)
+                return
             # player 2
             result, dmg = self.calc_move(self.c2, self.c1)
             print (self.c2.name + ' ' + result + ' for ' + str(dmg))
             self.c2.sta = self.c2.sta - dmg
             if self.is_character_dead(self.c2):
                 print(self.c2.name + ' has died')
-                exit(0)
+                return
             
     def calc_move(self, c1, c2):
         chance_hit = random.randint(2,c1.int)

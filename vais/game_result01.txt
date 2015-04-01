@@ -1,0 +1,29 @@
+PLAYER1 [start]: Character   : Albogh
+Statistics  : STA=50, INT=7, STR=4
+Status      : Alive
+Carrying    : torch, apple, 10 Gold
+PLAYER2 [start]: Character   : Zoltor
+Statistics  : STA=70, INT=6, STR=6
+Status      : Alive
+Carrying    : torch, apple, 10 Gold
+Albogh Hit for 24.5
+Zoltor Hit for 27.0
+Albogh Miss for 0
+Zoltor Hit for 21.0
+Albogh Miss for 0
+Zoltor Hit for 15.0
+Albogh Hit for 24.5
+Zoltor Hit for 12.0
+Zoltor has died
+Battle Status : Start...
+Character 1 =  Albogh
+Character 2 =  Zoltor
+
+PLAYER1 [end]: Character   : Albogh
+Statistics  : STA=1.0, INT=7, STR=4
+Status      : Alive
+Carrying    : torch, apple, 10 Gold
+PLAYER2 [end]: Character   : Zoltor
+Statistics  : STA=-5.0, INT=6, STR=6
+Status      : Alive
+Carrying    : torch, apple, 10 Gold
