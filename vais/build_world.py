@@ -15,19 +15,19 @@ def main():
     """
     generates a random world, sets terrain and runs agents in it
     """
-    width       =  120   # grid width  (takes about 5 minutes to generate 500x400 grid with 8% blockages)
-    height      =  120   # grid height
-    num_seeds   =   6   # number of seed points to start land generation
-    perc_land   =  40   # % of world that is land
-    perc_sea    =  60   # % of world that is sea
-    perc_blocked=   6   # % of world that is blocked
+    width       =  180  # grid width  (takes about 5 minutes to generate 500x400 grid with 8% blockages)
+    height      =   75  # grid height
+    num_seeds   =    8   # number of seed points to start land generation
+    perc_land   =   25   # % of world that is land
+    perc_sea    =   75   # % of world that is sea
+    perc_blocked=    2   # % of world that is blocked
     
     myWorld = my_world.World( height, width, [' ','x','#']) 
     myWorld.build_random( num_seeds, perc_land, perc_sea, perc_blocked)
     myWorld.grd.save('vais_world.txt')
     
     #Create some agents to walk the grid
-    iterations  = 250   # how many simulations to run
+    iterations  = 299   # how many simulations to run
     num_agents  =  9   # number of agents to enter the world
     target_coords = [math.floor(myWorld.grd.grid_height/2) + randint(1, math.floor(myWorld.grd.grid_height/2)) - 3, \
                      math.floor(myWorld.grd.grid_width /2) + randint(1, math.floor(myWorld.grd.grid_width/2)) - 5]

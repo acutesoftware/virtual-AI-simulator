@@ -1,0 +1,31 @@
+area,type,name
+spells,attack,Magic Missile            
+spells,info,Detect Monsters          
+spells,buff,Phase Door               
+spells,info,Light Area               
+spells,heal,Heal        
+spells,change,Find Hidden Traps/Doors  
+spells,attack,Stinking Cloud      
+spells,attack,Stun                
+spells,attack,Lightning Bolt           
+spells,buff,Trap/Door Destruction    
+spells,attack,Sleep                  
+spells,heal,Cure Poison              
+spells,buff,Teleport Self            
+spells,buff,Remove Curse             
+spells,attack,Frost Bolt               
+spells,change,Turn Stone to Mud        
+spells,change,Turn Mud to Stone    
+spells,change,Create Food              
+spells,change,Recharge Item                        
+spells,attack,Polymorph Other          
+spells,info,Identify                               
+spells,attack,Fire Bolt                
+spells,attack,Slow Monster             
+spells,attack,Frost Ball               
+spells,attack,Teleport Other           
+spells,buff,Speed up               
+spells,attack,Fire Ball                
+spells,attack,Word of Destruction      
+spells,attack,Genocide 
+                
