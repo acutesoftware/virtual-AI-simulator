@@ -46,6 +46,14 @@ World (environment)
 ================================
 
 Grounds (visual world)
+--------------------------
+The planet.py program generates a random world and populates it with 
+animals and plant life.
+
+Example below:
+
+.. image:: ./map-base1.jpg
+
 
 Materials
 
