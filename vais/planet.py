@@ -31,7 +31,7 @@ class Planet():
     earth like worlds: sun=0.2, rain=0.1, wind=0.1
     metal rich worlds: sun<0.2, wind>0.2, seismic_activity>0.6
     """
-    def __init__(self, name, height=100, width=79, wind=0.1, rain=0.1, sun=0.2, lava=0.5):
+    def __init__(self, name, height=150, width=150, wind=0.1, rain=0.1, sun=0.3, lava=0.5):
         """
         All parameters must be between 0 and 1 and show the probability of
         that event. The numbers below are rough guidelines for normal planets
@@ -84,7 +84,7 @@ class Planet():
         print('Planet ' + self.name + ' has formed!')
         self.world = my_world.World( self.grid_height, self.grid_width, [' ','x','#']) 
         
-        perc_land = (self.lava + (self.wind/20) - (self.rain/10) + (self.sun/10))*100
+        perc_land = (self.lava + (self.wind/10) - (self.rain/20) + (self.sun/10))*100
         perc_sea = (100 - perc_land)
         perc_blocked = (self.lava/5)*100
         
