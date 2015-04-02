@@ -7,9 +7,9 @@ from random import randint
 import aikif.environments.worlds as my_world
 import aikif.agents.explore.agent_explore_grid as agt
 
-log_folder = os.path.abspath(os.getcwd() + os.sep + '..' + os.sep + 'data' + os.sep + 'logs')
 temp_folder = 'C:\\temp\\'
 LOG_LEVEL = 2
+fldr = os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' 
 
 def main():
     """
@@ -24,10 +24,10 @@ def main():
     
     myWorld = my_world.World( height, width, [' ','x','#']) 
     myWorld.build_random( num_seeds, perc_land, perc_sea, perc_blocked)
-    myWorld.grd.save('vais_world.txt')
+    myWorld.grd.save(fldr + os.sep + 'vais_world.txt')
     
     #Create some agents to walk the grid
-    iterations  = 299   # how many simulations to run
+    iterations  = 99   # how many simulations to run
     num_agents  =  9   # number of agents to enter the world
     target_coords = [math.floor(myWorld.grd.grid_height/2) + randint(1, math.floor(myWorld.grd.grid_height/2)) - 3, \
                      math.floor(myWorld.grd.grid_width /2) + randint(1, math.floor(myWorld.grd.grid_width/2)) - 5]
@@ -39,6 +39,6 @@ def main():
         agt_list.append(ag)
     sim = my_world.WorldSimulation(myWorld, agt_list, LOG_LEVEL)
     sim.run(iterations, 'Y', temp_folder)
-    sim.world.grd.save('vais_world_traversed.txt')
+    sim.world.grd.save(fldr + os.sep + 'vais_world_traversed.txt')
  
 main()
