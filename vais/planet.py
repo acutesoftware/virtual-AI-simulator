@@ -5,6 +5,8 @@ import sys
 import math
 import time
 from random import randint 
+import random
+from noise import pnoise2
 import aikif.environments.worlds as my_world
 import aikif.gui_view_world as gui
  
@@ -29,7 +31,7 @@ class Planet():
     earth like worlds: sun=0.2, rain=0.1, wind=0.1
     metal rich worlds: sun<0.2, wind>0.2, seismic_activity>0.6
     """
-    def __init__(self, name, height=100, width=100, wind=0.1, rain=0.1, sun=0.2, lava=0.5):
+    def __init__(self, name, height=100, width=79, wind=0.1, rain=0.1, sun=0.2, lava=0.5):
         """
         All parameters must be between 0 and 1 and show the probability of
         that event. The numbers below are rough guidelines for normal planets
@@ -67,7 +69,7 @@ class Planet():
         """
         world_file = fldr + os.sep + self.name + '.txt'
         self.build_base()
-        self.define_heights()
+        self.world.add_mountains()
         self.add_life()
         self.world.grd.save(world_file)
         
@@ -87,18 +89,9 @@ class Planet():
         perc_blocked = (self.lava/5)*100
         
         print('Calculating world : sea=', perc_sea, ' land=', perc_land, ' mountain=', perc_blocked,  )
-        self.world.build_random( 6, perc_land, perc_sea, perc_blocked)
+        self.world.build_random( 6, perc_land, perc_sea, 0)
         
-        
-    def define_heights(self):
-        """
-        takes a rough world and organises heights. Basically this takes 
-        the 'blocked' lines created in worlds and dithers them to make
-        mountain ranges of descending height.
-        A new array is used to store heights of the world
-        """
-        print('creating mountains')
-        
+
     def add_life(self):
         """
         adds plants and animals to the world. Tries to do this in groups
@@ -107,6 +100,18 @@ class Planet():
         to planets evolution and atmosphere.
         """
         print('Adding Plants and Animals')
+        from noise import pnoise2
+        import random
+        random.seed()
+        octaves = (random.random() * 0.5) + 0.5
+        freq = 19.0 * octaves
+        for y in range(self.world.grd.grid_height - 1):
+            for x in range(self.world.grd.grid_width - 1):
+                pixel = self.world.grd.get_tile(y,x)
+                if pixel == 'X':     # denoise blocks of mountains
+                    n = int(pnoise2(x/freq, y / freq, 1)*9+3)
+                    if n < 1 and random.randint(1,10) > 7:
+                        self.world.grd.set_tile(y, x, 'A')
         
         
  
