@@ -82,14 +82,14 @@ class Planet():
         """
         create a base random land structure using the AIKIF world model
         """
-        print('Planet ' + self.name + ' has formed!')
+        #print('Planet ' + self.name + ' has formed!')
         self.world = my_world.World( self.grid_height, self.grid_width, [' ','x','#']) 
         
         perc_land = (self.lava + (self.wind/10) + (self.rain/20) + (self.sun/10))*100
         perc_sea = (100 - perc_land)
         perc_blocked = (self.lava/5)*100
         
-        print('Calculating world : sea=', perc_sea, ' land=', perc_land, ' mountain=', perc_blocked,  )
+        #print('Calculating world : sea=', perc_sea, ' land=', perc_land, ' mountain=', perc_blocked,  )
         self.world.build_random( self.num_seeds, perc_land, perc_sea, 0.0)
         
 
@@ -100,7 +100,7 @@ class Planet():
         Uses rules list to determine types and quantities of life according
         to planets evolution and atmosphere.
         """
-        print('Adding Plants and Animals')
+        #print('Adding Plants and Animals')
         from noise import pnoise2
         import random
         random.seed()
@@ -118,3 +118,4 @@ class Planet():
  
 if __name__ == '__main__':
     TEST()    
+    
