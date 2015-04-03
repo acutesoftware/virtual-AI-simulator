@@ -26,6 +26,8 @@ class CharacterCollection():
         to character traits
         """
         print('loading data files')
+        self.races = read_file(fldr + os.sep + 'ref_races.csv')
+        self.classes = read_file(fldr + os.sep + 'ref_classes.csv')
         self.stats = ['STA', 'INT', 'STR', 'CON', 'CHA', 'Health', 'XP']
         self.skills = read_file(fldr + os.sep + 'ref_skills.csv')
         self.story = ['A new character enters the game']
@@ -34,6 +36,8 @@ class CharacterCollection():
     
     def __str__(self):
         res = '=== DUMP OF ALL CHARACTER TRAITS ===\n'
+        res += '\Classes = ' + ', '.join([s for s in self.classes])
+        res += '\nRaces = ' + ', '.join([s for s in self.races])
         res += '\nSTATS = ' + ', '.join([s for s in self.stats])
         res += '\nStory = ' + ', '.join([s for s in self.story])
         res += '\nSKILLS = ' + ', '.join([s for s in self.skills])
@@ -45,27 +49,44 @@ class CharacterCollection():
         uses the traits to create a random, but plausible
         character
         """
+        ch_class = random.choice(self.classes)
+        race = random.choice(self.races)
         stats = []
         skills = []
         story = []
         inventory = ['5 gold']
         
         # pick random stuff here 
-        for i in range(5):
+        for i in range(3):
             inventory.append(self.inventory[random.randint(0,len(self.inventory)-1)])
+        for i in range(3):
+            skills.append(self.skills[random.randint(0,len(self.skills)-1)])
         
-        return Character(name, stats, skills, story, inventory)
+        return Character(name, race, ch_class, stats, skills, story, inventory)
 
-
+    def random_stats(self, race, ch_class):
+        """
+        create random stats based on the characters class and race
+        This looks up the tables from CharacterCollection to get
+        base stats and applies a close random fit
+        """
+        stats = []
+        
+        
+        
+        return stats
+        
 class Character():
     """
     character class
     """
-    def __init__(self, name, stats, skills, story, inventory):
+    def __init__(self, name, race, ch_class, stats, skills, story, inventory):
         """
         all params except name is a list
         """
         self.name = name
+        self.race = race
+        self.ch_class = ch_class
         self.stats = stats
         self.skills = skills
         self.story = story
@@ -73,10 +94,12 @@ class Character():
 
     def __str__(self):
         res = 'CHARACTER: ' + self.name + '\n'
-        res += '\nSTATS = ' + ', '.join([s for s in self.stats])
-        res += '\nStory = ' + ', '.join([s for s in self.story])
-        res += '\nSKILLS = ' + ', '.join([s for s in self.skills])
-        res += '\nINVENTORY = ' + ', '.join([s for s in self.inventory])
+        res += 'Race        = ' + self.race + '\n'
+        res += 'Class       = ' + self.ch_class + '\n'
+        res += '\nSTATS     = ' + ', '.join([s for s in self.stats])
+        res += '\nStory     = ' + ', '.join([s for s in self.story])
+        res += '\nSKILLS    =\n' + ', '.join([s for s in self.skills])
+        res += '\nINVENTORY =\n' + ', '.join([s for s in self.inventory])
         return res
         
 
