@@ -1,0 +1,8 @@
+name, num_seeds, width, height, wind, rain, sun, lava
+planet_small, 6, 70,50, 0.2, 0.24, 0.2, 0.3
+planet_med, 6, 400,300, 0.2, 0.24, 0.2, 0.5
+low_seed, 3, 70,50, 0.2, 0.24, 0.2, 0.5
+high_seed, 7, 70,50, 0.2, 0.24, 0.2, 0.5
+Divitie, 5, 200, 150, 0.2, 0.24, 0.2, 0.6
+low_lava, 5, 70,50, 0.2, 0.24, 0.2, 0.2
+high_lava, 5, 70,50, 0.2, 0.24, 0.2, 0.7

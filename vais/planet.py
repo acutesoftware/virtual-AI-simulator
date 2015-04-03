@@ -8,7 +8,7 @@ from random import randint
 import random
 from noise import pnoise2
 import aikif.environments.worlds as my_world
-import aikif.gui_view_world as gui
+#import aikif.gui_view_world as gui
  
 fldr = os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' 
 

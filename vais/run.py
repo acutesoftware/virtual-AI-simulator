@@ -36,7 +36,7 @@ def main():
         view_world.display_map(fldr + os.sep + fname)
     else:
         print('invalid command ' + cmd)
-    
+    main()
 
 def load_planet_list():
     """

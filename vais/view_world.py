@@ -2,7 +2,7 @@
 import os
 import sys
 import math
-import user_commands as mod_cmd
+#import user_commands as mod_cmd
 
 try:
 	import Tkinter as Tkinter
