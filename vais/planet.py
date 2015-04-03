@@ -16,7 +16,7 @@ def TEST():
     """
     testing planet evolution to build a virtual world
     """
-    p = Planet('Divitie', wind=0.1, rain=0.1, sun=0.2, lava=0.5)
+    p = Planet('Divitie', num_seeds=5, width=200, height=150, wind=0.2, rain=0.20, sun=0.2, lava=0.5)
     p.evolve(years=10000000)
     print(p)
     
@@ -31,7 +31,7 @@ class Planet():
     earth like worlds: sun=0.2, rain=0.1, wind=0.1
     metal rich worlds: sun<0.2, wind>0.2, seismic_activity>0.6
     """
-    def __init__(self, name, height=150, width=150, wind=0.1, rain=0.1, sun=0.3, lava=0.5):
+    def __init__(self, name, num_seeds, width, height, wind, rain, sun, lava):
         """
         All parameters must be between 0 and 1 and show the probability of
         that event. The numbers below are rough guidelines for normal planets
@@ -42,6 +42,7 @@ class Planet():
         """
         self.world = ''     # aikif.environment.world object
         self.name = name
+        self.num_seeds = num_seeds
         self.grid_height = height
         self.grid_width = width
         self.wind = wind
@@ -74,8 +75,8 @@ class Planet():
         self.world.grd.save(world_file)
         
         print('done')
-        time.sleep(3)
-        gui.display_map(world_file)
+       # time.sleep(3)
+       # gui.display_map(world_file)
     
     def build_base(self):
         """
@@ -84,12 +85,12 @@ class Planet():
         print('Planet ' + self.name + ' has formed!')
         self.world = my_world.World( self.grid_height, self.grid_width, [' ','x','#']) 
         
-        perc_land = (self.lava + (self.wind/10) - (self.rain/20) + (self.sun/10))*100
+        perc_land = (self.lava + (self.wind/10) + (self.rain/20) + (self.sun/10))*100
         perc_sea = (100 - perc_land)
         perc_blocked = (self.lava/5)*100
         
         print('Calculating world : sea=', perc_sea, ' land=', perc_land, ' mountain=', perc_blocked,  )
-        self.world.build_random( 6, perc_land, perc_sea, 0)
+        self.world.build_random( self.num_seeds, perc_land, perc_sea, 0.0)
         
 
     def add_life(self):
@@ -104,12 +105,12 @@ class Planet():
         import random
         random.seed()
         octaves = (random.random() * 0.5) + 0.5
-        freq = 19.0 * octaves
+        freq = 16.0 * octaves
         for y in range(self.world.grd.grid_height - 1):
             for x in range(self.world.grd.grid_width - 1):
                 pixel = self.world.grd.get_tile(y,x)
                 if pixel == 'X':     # denoise blocks of mountains
-                    n = int(pnoise2(x/freq, y / freq, 1)*9+3)
+                    n = int(pnoise2(x/freq, y / freq, 1)*12+3)
                     if n < 1 and random.randint(1,10) > 7:
                         self.world.grd.set_tile(y, x, 'A')
         

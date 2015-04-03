@@ -2,6 +2,7 @@
 import os
 import sys
 import math
+import user_commands as mod_cmd
 
 try:
 	import Tkinter as Tkinter
@@ -9,7 +10,7 @@ except:
 	import tkinter as Tkinter
 
 from PIL import ImageTk, Image, ImageDraw
-from tkinter import Tk, Canvas, PhotoImage, mainloop
+from tkinter import Tk, Canvas, PhotoImage, mainloop, Frame
         	
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) ) 
 
@@ -28,7 +29,22 @@ def display_map(fname):
     app.show_grid_from_file(fname)
     app.title('Map View')
     #app.after(2000,vais_main_loop(app))
+    
+        # bind mouse and keyboard for interactivity
+  #  frame = Frame(app, width=100, height=100)
+   # frame.bind("<Button-1>", callback)
+    app.canvas.bind("<Button-1>", callback)
+    app.bind("<Key>", key)
+
+    
     app.mainloop()
+    
+def callback(event):
+    mod_cmd.mouse_click(event.x, event.y)
+
+def key(event):
+   # mod_cmd.key_pressed(repr(event.char))
+   mod_cmd.key_pressed(event.char) 
     
 def vais_main_loop(app):
     """
@@ -42,7 +58,6 @@ def vais_main_loop(app):
     
     app.after(2000,vais_main_loop(app))  # [FAILS - recursion error ] reschedule event in 2 seconds
     
-
 
 class view_tk(Tkinter.Tk):
     """
@@ -64,7 +79,7 @@ class view_tk(Tkinter.Tk):
         self.appWidth = 1600   # initial values
         self.appHeight = 900
         self.cell_width = 5
-        self.cell_height = 3
+        self.cell_height = 4
         self.fname = ''
         self.screenWidth = self.winfo_screenwidth()
         self.screenHeight = self.winfo_screenheight()
@@ -80,6 +95,8 @@ class view_tk(Tkinter.Tk):
         #self.TEST_sin()   # testing - draws a sin wave
         self.appWidth = 1600   # canvas.width
         self.appHeight = 900
+        
+        
         self.canvas.pack()
         
     def TEST_sin(self):    
@@ -128,7 +145,8 @@ class view_tk(Tkinter.Tk):
                 self.img.put(val, (x*self.cell_width+i, y*self.cell_height+j))
     
     def paint_land(self, y, x):
-        self.put_standard_block(y,x,'bisque')
+        #self.put_standard_block(y,x,'bisque')
+        self.put_standard_block(y,x,'blue')
         
     def paint_block(self, y, x):
         self.put_standard_block(y,x,'gray9')

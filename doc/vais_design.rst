@@ -52,7 +52,7 @@ animals and plant life.
 
 Example below:
 
-.. image:: ./map-base1.jpg
+.. image:: ./map-base2.jpg
 
 
 Materials
