@@ -43,20 +43,9 @@ def callback(event):
     mod_cmd.mouse_click(event.x, event.y)
 
 def key(event):
-   # mod_cmd.key_pressed(repr(event.char))
-   mod_cmd.key_pressed(event.char) 
-    
-def vais_main_loop(app):
-    """
-    this is run in a loop to catch key strokes and run 
-    the simulatoin
-    """
-    print('in vais_main_loop')
-   # create_text(position, **options) 
-    app.canvas.create_text(10, 20, font="Purisa", text='Hello')
-    
-    
-    app.after(2000,vais_main_loop(app))  # [FAILS - recursion error ] reschedule event in 2 seconds
+    x = 60
+    y = 22
+    mod_cmd.key_pressed(event.char, x, y) 
     
 
 class view_tk(Tkinter.Tk):
@@ -95,6 +84,11 @@ class view_tk(Tkinter.Tk):
         #self.TEST_sin()   # testing - draws a sin wave
         self.appWidth = 1600   # canvas.width
         self.appHeight = 900
+        
+        self.canvas_id = self.canvas.create_text(50, 50, anchor="nw")
+        self.canvas.itemconfig(self.canvas_id, text="Welcome to Divitie")
+        self.canvas.insert(self.canvas_id, 18, " ")
+        
         
         
         self.canvas.pack()
