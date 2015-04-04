@@ -1,0 +1,30 @@
+# file: display.rules
+# author: Duncan Murray
+# updated: 4/4/2015
+
+[colors]
+lava: orange
+ice: white
+rock: grey
+dirt: brown
+grass: light green
+plants: green
+bushes: navy green
+shrubs: dark green
+trees: dark green
+forest: dark green
+insects: light brown
+mice: light brown
+rabbits: light brown
+deer: light brown
+bears: light red
+crocodiles: light red
+wolves: light red
+
+[grid]
+width: 10
+height: 10
+draw_0: terrain
+draw_1: plants
+draw_2: animals
+draw_3: predators
