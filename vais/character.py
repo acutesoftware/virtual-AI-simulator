@@ -11,7 +11,7 @@ def TEST():
     """
     print('creating random character')
     traits = CharacterCollection()
-    print(traits)
+    #print(traits)
     c = traits.generate_random_character('Zoltar')
     print(c)
     
@@ -30,7 +30,7 @@ class CharacterCollection():
         self.classes = read_file(fldr + os.sep + 'ref_classes.csv')
         self.stats = ['STA', 'INT', 'STR', 'CON', 'CHA', 'Health', 'XP']
         self.skills = read_file(fldr + os.sep + 'ref_skills.csv')
-        self.story = ['A new character enters the game']
+        self.stories = read_file(fldr + os.sep + 'ref_stories.csv')
         self.inventory = read_file(fldr + os.sep + 'ref_objects.csv')
          
     
@@ -51,9 +51,9 @@ class CharacterCollection():
         """
         ch_class = random.choice(self.classes)
         race = random.choice(self.races)
-        stats = []
+        stats = self.random_stats(race, ch_class)
         skills = []
-        story = []
+        story = random.choice(self.stories)
         inventory = ['5 gold']
         
         # pick random stuff here 
@@ -71,7 +71,14 @@ class CharacterCollection():
         base stats and applies a close random fit
         """
         stats = []
+        for ndx, i in enumerate(self.classes):
+            if i == race:
+                print(i)  # use stats for this class as baseline
+        for ndx, i in enumerate(self.races):
+            if i == race:
+                print(i)  # use stats for this race to modify base stats
         
+        # add 5 points to random stats
         
         
         return stats
@@ -94,10 +101,10 @@ class Character():
 
     def __str__(self):
         res = 'CHARACTER: ' + self.name + '\n'
-        res += 'Race        = ' + self.race + '\n'
-        res += 'Class       = ' + self.ch_class + '\n'
+        res += 'Race        = ' + self.race
+        res += 'Class       = ' + self.ch_class
         res += '\nSTATS     = ' + ', '.join([s for s in self.stats])
-        res += '\nStory     = ' + ', '.join([s for s in self.story])
+        res += '\nStory     = ' +  self.story
         res += '\nSKILLS    =\n' + ', '.join([s for s in self.skills])
         res += '\nINVENTORY =\n' + ', '.join([s for s in self.inventory])
         return res
