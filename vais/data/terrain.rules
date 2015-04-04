@@ -1,0 +1,58 @@
+# file: terrain.rules
+# author: Duncan Murray
+# updated: 4/4/2015
+
+[ground_names]
+lava
+ice
+rock
+dirt
+grass
+plants
+bushes
+shrubs
+trees
+forest
+
+[grow_rates]
+lava: -0.5 * temp
+ice: -0.5 * temp
+rock: 0
+dirt: 0
+grass: 0.4 + rain
+plants: 0.4 + rain
+bushes: 0.4 + rain
+shrubs: 0.4 + rain
+trees: 0.4 + rain
+forest: 0.4 + rain
+
+[animal_names]
+insects
+mice
+rabbits
+deer
+bears
+crocodiles
+wolves
+
+[animal_grow_rates]
+insects: 0.3
+mice: 0.4
+rabbits: 0.6
+deer: 0.4
+bears: 0.4
+crocodiles: 0.4
+wolves: 0.4
+
+[animal_requirements]
+insects: plants
+mice: shrubs
+rabbits: grass
+deer: grass
+bears: rabbits|deer
+crocodiles: rabbits|deer
+wolves: rabbits|deer
+
+
+
+
