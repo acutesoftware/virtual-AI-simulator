@@ -45,7 +45,11 @@ class VaisCharacterTest(unittest.TestCase):
         self.assertEqual(c2.inventory[1], 'wand')
         self.assertEqual(c2.inventory[2], 'dagger')
         
-
+    def test_03_character_collection(self):
+        traits = character.CharacterCollection()
+        self.assertEqual(len(str(traits)), 455)
+        c = traits.generate_random_character('Zoltar')
+        print(c)
         
 if __name__ == '__main__':
     unittest.main()        
