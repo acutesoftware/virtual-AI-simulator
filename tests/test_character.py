@@ -51,9 +51,9 @@ class VaisCharacterTest(unittest.TestCase):
         
     def test_03_character_collection(self):
         traits = character.CharacterCollection(ref_folder)
-        self.assertEqual(len(str(traits)), 2187)
-        c = traits.generate_random_character('Zoltar')
-        print(c)
+        self.assertEqual(len(str(traits)) > 1234, True)
+        self.assertEqual(len(traits.races.dat) , 8)
+        
         
 if __name__ == '__main__':
     unittest.main()        
