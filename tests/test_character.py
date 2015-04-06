@@ -52,7 +52,26 @@ class VaisCharacterTest(unittest.TestCase):
     def test_03_character_collection(self):
         traits = character.CharacterCollection(ref_folder)
         self.assertEqual(len(str(traits)) > 1234, True)
-        self.assertEqual(len(traits.races.dat) , 8)
+        self.assertEqual(len(traits.races.dat) > 7, True)
+        self.assertEqual(len(traits.classes.dat) > 5, True)
+        self.assertEqual(len(traits.skills.dat) > 11, True)
+        self.assertEqual(len(traits.stats.dat) > 2, True)
+        self.assertEqual(len(traits.stories.dat) > 2, True)
+        self.assertEqual(len(traits.inventory.dat) > 5, True)
+        
+        # Random samples of data - comment out if needed, or if order changes
+        self.assertEqual(traits.stats.dat[0]['stat'] , 'STA')
+        self.assertEqual(traits.stats.dat[2]['name'] , 'Intellect')
+        self.assertEqual(traits.races.dat[0]['name'] , 'Human')
+        self.assertEqual(traits.races.dat[1]['name'] , 'Half-Elf')
+        self.assertEqual(traits.classes.dat[0]['name'] , 'Warrior')
+        self.assertEqual(traits.classes.dat[1]['name'] , 'Mage')
+        self.assertEqual(traits.classes.dat[2]['name'] , 'Priest')
+        self.assertEqual(traits.classes.dat[3]['name'] , 'Ranger')
+        self.assertEqual(traits.classes.dat[0]['name'] , 'Warrior')
+        self.assertEqual(traits.skills.dat[4]['name'] , 'Heal')
+        self.assertEqual(traits.stories.dat[0]['name'] , 'A young scholar with a burning desire to learn')
+        self.assertEqual(traits.inventory.dat[0]['name'] , 'leaf')
         
         
 if __name__ == '__main__':
