@@ -100,8 +100,10 @@ class CharacterCollection():
         res = '=== DUMP OF ALL CHARACTER TRAITS ===\n'
         res += 'Classes:\n' + str(self.classes)
         res += 'Races:\n' + str(self.races)
-        res += 'STATS:\n' + str(self.stats)
-        res += 'Story:\n' + str(self.stories)
+        res += 'STATS:\n' 
+        for k,v in self.stats.items():
+            res += k + ' = ' + str(v) + ', '
+        res += '\nStory:\n' + str(self.stories)
         res += 'SKILLS:\n' + str(self.skills)
         res += 'INVENTORY:\n' + str(self.inventory)
         return res
@@ -111,12 +113,10 @@ class CharacterCollection():
         uses the traits to create a random, but plausible
         character
         """
-        print(len(self.classes.dat))
-        print(self.classes.dat[0]['name'])
-        
+      
         ch_class = self.classes.get_random_choice()
         race = self.races.get_random_choice()
-        stats = self.random_stats(race, ch_class)
+        stats = self.random_stats(self.stats.dat, race, ch_class)
         skills = []
         story = self.stories.get_random_choice()
         inventory = ['5 gold']
@@ -126,27 +126,35 @@ class CharacterCollection():
             inventory.append(self.inventory.get_random_choice())
         for i in range(3):
             skills.append(self.skills.get_random_choice())
-        
         return Character(name, race, ch_class, stats, skills, story, inventory)
 
-    def random_stats(self, race, ch_class):
+    def random_stats(self, all_stats, race, ch_class):
         """
         create random stats based on the characters class and race
         This looks up the tables from CharacterCollection to get
         base stats and applies a close random fit
         """
+        
+        # create blank list of stats to be generated
         stats = []
-        for ndx, i in enumerate(self.classes.dat):
-            if i == race:
-                print(i)  # use stats for this class as baseline
-        for ndx, i in enumerate(self.races.dat):
-            if i == race:
-                print(i)  # use stats for this race to modify base stats
+        res = {}
+        for s in all_stats:
+            stats.append(s['stat'])
+            res[s['stat']] = 0
         
-        # add 5 points to random stats
+        cur_stat = 0
+        stat_name = ''
+        for stat in stats:
+            for ndx, i in enumerate(self.classes.dat):
+                if i['name'] == ch_class:
+                    cur_stat = int(i[stat])  # use stats for this class as baseline
+            for ndx, i in enumerate(self.races.dat):
+                if i['name'] == race:
+                    cur_stat += int(i[stat])  # use stats for this race to modify base stats
+            #print(stat, cur_stat)
+            res[stat] = cur_stat
         
-        
-        return stats
+        return res
         
 class Character():
     """
@@ -166,12 +174,15 @@ class Character():
 
     def __str__(self):
         res = 'CHARACTER: ' + self.name + '\n'
-        res += 'Race        = ' + self.race
-        res += 'Class       = ' + self.ch_class
-        res += '\nSTATS     = ' + ', '.join([s for s in self.stats])
+        res += 'Race      = ' + self.race + '\n'
+        res += 'Class     = ' + self.ch_class + '\n'
+        res += 'STATS     = ' 
+        for k,v in self.stats.items():
+            res += k + ' = ' + str(v) + ', '
+
         res += '\nStory     = ' +  self.story
-        res += '\nSKILLS    =\n' + ', '.join([s for s in self.skills])
-        res += '\nINVENTORY =\n' + ', '.join([s for s in self.inventory])
+        res += '\nSKILLS    = ' + ', '.join([s for s in self.skills])
+        res += '\nINVENTORY = ' + ', '.join([s for s in self.inventory])
         return res
         
 
