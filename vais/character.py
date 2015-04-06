@@ -2,6 +2,8 @@
 
 import os
 import random
+
+## TODO - once 
 fldr = os.getcwd() + os.sep + 'data'  
 
 
@@ -10,7 +12,7 @@ def TEST():
     Module to handle character creation
     """
     print('creating random character')
-    traits = CharacterCollection()
+    traits = CharacterCollection(fldr)
     #print(traits)
     c = traits.generate_random_character('Zoltar')
     print(c)
@@ -20,18 +22,19 @@ class CharacterCollection():
     """
     Class to handle all the character traits
     """
-    def __init__(self):
+    def __init__(self, fldr):
         """
         loads all the ref_*.csv files relating 
         to character traits
         """
+        self.ref_folder = fldr
         print('loading data files')
-        self.races = read_file(fldr + os.sep + 'ref_races.csv')
-        self.classes = read_file(fldr + os.sep + 'ref_classes.csv')
+        self.races = read_file(self.ref_folder + os.sep + 'ref_races.csv')
+        self.classes = read_file(self.ref_folder + os.sep + 'ref_classes.csv')
         self.stats = ['STA', 'INT', 'STR', 'CON', 'CHA', 'Health', 'XP']
-        self.skills = read_file(fldr + os.sep + 'ref_skills.csv')
-        self.stories = read_file(fldr + os.sep + 'ref_stories.csv')
-        self.inventory = read_file(fldr + os.sep + 'ref_objects.csv')
+        self.skills = read_file(self.ref_folder + os.sep + 'ref_skills.csv')
+        self.stories = read_file(self.ref_folder + os.sep + 'ref_stories.csv')
+        self.inventory = read_file(self.ref_folder + os.sep + 'ref_objects.csv')
          
     
     def __str__(self):
@@ -39,7 +42,7 @@ class CharacterCollection():
         res += '\Classes = ' + ', '.join([s for s in self.classes])
         res += '\nRaces = ' + ', '.join([s for s in self.races])
         res += '\nSTATS = ' + ', '.join([s for s in self.stats])
-        res += '\nStory = ' + ', '.join([s for s in self.story])
+        res += '\nStory = ' + '\n'.join([s for s in self.stories])
         res += '\nSKILLS = ' + ', '.join([s for s in self.skills])
         res += '\nINVENTORY = ' + ', '.join([s for s in self.inventory])
         return res

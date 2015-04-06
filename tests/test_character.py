@@ -14,6 +14,10 @@ test_file = test_folder + os.sep + 'character.txt'
 # import vais.character as mod_char
 
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
+print('root_folder = ', root_folder )
+ref_folder = root_folder + os.sep + "data" 
+print('ref_folder = ', ref_folder )
+
 sys.path.append(root_folder)
 
 # END TODO //////////////////////////////////
@@ -46,8 +50,8 @@ class VaisCharacterTest(unittest.TestCase):
         self.assertEqual(c2.inventory[2], 'dagger')
         
     def test_03_character_collection(self):
-        traits = character.CharacterCollection()
-        self.assertEqual(len(str(traits)), 455)
+        traits = character.CharacterCollection(ref_folder)
+        self.assertEqual(len(str(traits)), 2187)
         c = traits.generate_random_character('Zoltar')
         print(c)
         
