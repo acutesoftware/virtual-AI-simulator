@@ -3,7 +3,7 @@
 VAIS Design
 ====================
 
-Last updated 03-April-2015
+Last updated 06-April-2015
 VAIS Dev version 0.0.1
 
 This document is a scratch pad area for design notes during the development of VAIS - Virtual AI Simulator
@@ -40,6 +40,7 @@ Define a series of randomly generated agents (NPC's / players)
 
 Run multiple simulations of agents in world with different parameters to determine best outcome
 
+.. image:: ./doc/VAIS-overview.jpg
 
 ================================
 World (environment)
@@ -65,7 +66,7 @@ drop rates are linked to the type of environment
 
 Structures (buildings)
 ------------------------------
-You can build on any thing
+You can build on any thing, though some surfaces have additional costs (rock/swamp)
 
 
 Building types include
@@ -87,7 +88,7 @@ Core Features
 Name and description
 
 Stats = how strong are they
-Talents = what can they do
+Skills = what can they do
 
 
 Stats (STA, INT, STR, Health)
