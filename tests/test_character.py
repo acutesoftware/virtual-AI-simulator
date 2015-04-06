@@ -29,14 +29,14 @@ class VaisCharacterTest(unittest.TestCase):
         print('running character tests')
         
     def test_01_create_character(self):
-        c1 = character.Character( 'Bob', 'Human', 'Warrior', [], ['fishing', 'charge'], 'just a test char', ['Apple', 'string', 'sword', 'ring of ice'])
+        c1 = character.Character( 'Bob', 'Human', 'Warrior', {'STR':7, 'CON':8, 'STA':5, 'AGI':8, 'INT':5}, ['fishing', 'charge'], 'just a test char', ['Apple', 'string', 'sword', 'ring of ice'])
         try:
             #os.remove(test_file)
             pass
         except:
             pass
         
-        self.assertEqual(len(str(c1)), 171)
+        self.assertEqual(len(str(c1)), 213)
         
     def test_02_get_properties(self):
         c2 = character.Character( 'Jan', 'Elf', 'Mage', [], ['fireball', 'teleport'], 'another test char', ['Orange', 'wand', 'dagger'])
@@ -51,7 +51,7 @@ class VaisCharacterTest(unittest.TestCase):
         
     def test_03_character_collection(self):
         traits = character.CharacterCollection(ref_folder)
-        self.assertEqual(len(str(traits)) > 1234, True)
+        self.assertEqual(len(str(traits)) > 800, True)
         self.assertEqual(len(traits.races.dat) > 7, True)
         self.assertEqual(len(traits.classes.dat) > 5, True)
         self.assertEqual(len(traits.skills.dat) > 11, True)

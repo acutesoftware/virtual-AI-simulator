@@ -1,7 +1,7 @@
-name,STA,STR,INT,CON,Health
-Warrior,9,9,1,8,9
-Mage,3,1,8,9,5
-Priest,2,1,9,9,5
-Ranger,6,5,4,6,7
-Rogue,4,8,4,5,6
-Paladin,8,5,7,8,7
+name,STA,STR,INT,CON,AGI,Health
+Warrior,9,9,1,8,5,9
+Mage   ,6,1,8,9,4,5
+Priest ,5,1,9,9,4,5
+Ranger ,7,5,4,6,7,7
+Rogue  ,6,8,4,5,8,6
+Paladin,8,5,7,8,5,7
