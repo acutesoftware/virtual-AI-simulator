@@ -13,10 +13,35 @@ def TEST():
     """
     print('creating random character')
     traits = CharacterCollection(fldr)
-    #print(traits)
-    c = traits.generate_random_character('Zoltar')
-    print(c)
+    print(traits)
+    #c = traits.generate_random_character('Zoltar')
+    #print(c)
     
+class RefFile():
+    """
+    Class to handle a CSV type reference file for 
+    stats, races, etc - generally has a header and
+    any column can have mulitple values if enclosed
+    by [] where values parsed by |
+    """
+    def __init__(self, fldr, fname):
+        self.name = fname[0:-4]
+        self.raw_data = read_file(fldr + os.sep + fname)
+        self.dat = self.parse_to_dict(self.raw_data) # parse raw CSV into dictionary
+        
+    def __str__(self):
+        res = ' === ' + self.name + ' Reference File ====\n'
+        res += str(len(self.raw_data)) + ' lines\n' 
+        return res
+    
+    def parse_to_dict(self, raw):
+        """
+        parse raw CSV into dictionary
+        """
+        lst = []
+        for i in raw:
+            lst.append({'name':i[0]})
+        return lst
     
 class CharacterCollection():
     """
@@ -29,22 +54,22 @@ class CharacterCollection():
         """
         self.ref_folder = fldr
         print('loading data files')
-        self.races = read_file(self.ref_folder + os.sep + 'ref_races.csv')
-        self.classes = read_file(self.ref_folder + os.sep + 'ref_classes.csv')
-        self.stats = ['STA', 'INT', 'STR', 'CON', 'CHA', 'Health', 'XP']
-        self.skills = read_file(self.ref_folder + os.sep + 'ref_skills.csv')
-        self.stories = read_file(self.ref_folder + os.sep + 'ref_stories.csv')
-        self.inventory = read_file(self.ref_folder + os.sep + 'ref_objects.csv')
+        self.races = RefFile(fldr, 'ref_races.csv')
+        self.classes = RefFile(fldr, 'ref_classes.csv')
+        self.stats = RefFile(fldr, 'ref_stats.csv')
+        self.skills = RefFile(fldr, 'ref_skills.csv')
+        self.stories = RefFile(fldr, 'ref_stories.csv')
+        self.inventory = RefFile(fldr, 'ref_objects.csv')
          
     
     def __str__(self):
         res = '=== DUMP OF ALL CHARACTER TRAITS ===\n'
-        res += '\Classes = ' + ', '.join([s for s in self.classes])
-        res += '\nRaces = ' + ', '.join([s for s in self.races])
-        res += '\nSTATS = ' + ', '.join([s for s in self.stats])
-        res += '\nStory = ' + '\n'.join([s for s in self.stories])
-        res += '\nSKILLS = ' + ', '.join([s for s in self.skills])
-        res += '\nINVENTORY = ' + ', '.join([s for s in self.inventory])
+        res += 'Classes:\n' + str(self.classes)
+        res += 'Races:\n' + str(self.races)
+        res += 'STATS:\n' + str(self.stats)
+        res += 'Story:\n' + str(self.stories)
+        res += 'SKILLS:\n' + str(self.skills)
+        res += 'INVENTORY:\n' + str(self.inventory)
         return res
         
     def generate_random_character(self, name):
