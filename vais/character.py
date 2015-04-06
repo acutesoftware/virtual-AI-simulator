@@ -16,7 +16,7 @@ def TEST():
     print(traits)
     #print("traits.stats.raw_data:", traits.stats.dat)
     #print("traits.stats:", str(traits.stats))
-    c = traits.generate_random_character('Zoltar')
+    c = traits.generate_random_character()
     print(c)
     
 class RefFile():
@@ -111,18 +111,25 @@ class CharacterCollection():
         res += 'INVENTORY:\n' + str(self.inventory)
         return res
         
-    def generate_random_character(self, name):
+    def generate_random_character(self):
         """
         uses the traits to create a random, but plausible
-        character
+        character. Sample below:
+            CHARACTER = Amador
+            Race      = Halfling
+            Class     = Priest
+            STATS     = CON = 12, STA = 4, INT = 10, STR = 0, AGI = 5,
+            Story     = A brave person looking to fight evil in the dark forests of Divitie
+            SKILLS    = Remove Curse, Frost Ball, Frost Bolt
+            INVENTORY = 5 gold, stick, leaf, sword
         """
-      
+        name = self.create_name()
         ch_class = self.classes.get_random_choice()
         race = self.races.get_random_choice()
         stats = self.random_stats(self.stats.dat, race, ch_class)
         skills = []
         story = self.stories.get_random_choice()
-        inventory = ['5 gold']
+        inventory = [str(random.randint(21,29)) + ' gold']
         
         # pick random stuff here 
         for i in range(3):
@@ -158,7 +165,12 @@ class CharacterCollection():
             res[stat] = cur_stat
         
         return res
-        
+    
+    def create_name(self):
+        a = random.choice(['Vol','Ama','Zan','Fea','Cra','Por','Tra','Are','Rek','Wol','Zat','Pli'])
+        b = random.choice(['mar','dor','mor','dar','dom','kaj','sij','lim','gri','put','eat','rey'])
+        return a + b
+    
 class Character():
     """
     character class
@@ -176,7 +188,7 @@ class Character():
         self.inventory = inventory
 
     def __str__(self):
-        res = 'CHARACTER: ' + self.name + '\n'
+        res =  'CHARACTER = ' + self.name + '\n'
         res += 'Race      = ' + self.race + '\n'
         res += 'Class     = ' + self.ch_class + '\n'
         res += 'STATS     = ' 
