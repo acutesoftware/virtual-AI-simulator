@@ -40,7 +40,7 @@ Define a series of randomly generated agents (NPC's / players)
 
 Run multiple simulations of agents in world with different parameters to determine best outcome
 
-.. image:: ./doc/VAIS-overview.jpg
+.. image:: ./VAIS-overview.jpg
 
 ================================
 World (environment)
