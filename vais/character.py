@@ -162,6 +162,12 @@ class CharacterCollection():
                 if i['name'] == race:
                     cur_stat += int(i[stat])  # use stats for this race to modify base stats
             #print(stat, cur_stat)
+            if cur_stat < 1:
+                cur_stat = 1
+            elif cur_stat > 10:
+                if stat not in ('Health', 'max_health'): # dont trim down health
+                    cur_stat = 10
+           
             res[stat] = cur_stat
         
         return res
@@ -193,15 +199,28 @@ class Character():
         res += 'Class     = ' + self.ch_class + '\n'
         res += 'STATS     = ' 
         for k,v in self.stats.items():
-            res += k + ' = ' + str(v) + ', '
+            res += k + ':' + str(v) + ' '
 
         res += '\nStory     = ' +  self.story
         res += '\nSKILLS    = ' + ', '.join([s for s in self.skills])
         res += '\nINVENTORY = ' + ', '.join([s for s in self.inventory])
         return res
+    
+    def copy(self):
+        """ 
+        make an identical copy of the character
+        """
+        return Character(self.name, self.race,self.ch_class, self.stats, self.skills, self.story, self.inventory)
         
+    def save_to_file(self, fname):
+        """
+        saves a characters data to file
+        """
+        with open(fname, 'w') as f:
+            f.write(str(self))
+     
 
-        
+     
 ############################
 #  Utility functions 
 
