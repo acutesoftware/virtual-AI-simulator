@@ -18,7 +18,7 @@ def TEST():
     #print(rules)
     
     b = Battle(character1, character2, traits, rules, print_console='Yes')
-    print(b)
+    print(b.status)
     
     """
     sim = BattleSimulator( character1, character2, traits, rules, 1000)
@@ -81,7 +81,9 @@ class BattleRules():
         for k, v in self.all_rules.items(): 
             res += 'Rule ' + k + ':' + v + '\n'
         return res
-        
+    
+
+    
 class BattleSimulator():
     """
     class to handle multiple simulation runs of Battles 
@@ -153,13 +155,14 @@ class Battle():
         on win rate over 1000 fights
         """
         for i in range(1, moves):
+            #if i == 1 and random.randint(1,100) > 50:   # randomly choose who moves first
             # player 1
             result, dmg = self.calc_move(self.c1)
             self.show_message(self.c1, self.c2, result, dmg, print_console)
             self.take_damage(self.c2, dmg)
             if self.is_character_dead(self.c2):
                 #print(self.c2.name + ' has died')
-                return self.c1.name
+                return self.c1.name + ' Wins'
                 
             # player 2
             result, dmg = self.calc_move(self.c2)
@@ -167,7 +170,7 @@ class Battle():
             self.take_damage(self.c1, dmg)
             if self.is_character_dead(self.c1):
                 #print(self.c1.name + ' has died')
-                return self.c2.name
+                return self.c2.name + ' Wins'
     
     def take_damage(self, c, dmg):
         """
@@ -219,6 +222,7 @@ class Battle():
         
         dmg_min   = eval(self.rules.all_rules['dmg_min'])
         dmg_max   = eval(self.rules.all_rules['dmg_max'])
+        #print('hit_min  =',hit_min  , 'hit_max = ',hit_max  )
         #print('dmg_min  =',dmg_min  , 'dmg_max = ',dmg_max  )
         amount_dmg = random.randint(dmg_min, dmg_max)
         

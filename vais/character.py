@@ -219,7 +219,12 @@ class Character():
         with open(fname, 'w') as f:
             f.write(str(self))
      
-
+    def load_from_file(self, fname):
+        """
+        creates a character object from file
+        """
+        print('todo')
+        return None
      
 ############################
 #  Utility functions 

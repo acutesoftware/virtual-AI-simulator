@@ -6,12 +6,12 @@
 # Step 1 - calculate Hit chance
 # example, hit = random.randint(hit_min,hit_max)
 hit_min = 1
-hit_max = round(INT/3) + round(AGI/3) + 1
-hit_limit = 9
+hit_max = round(INT/2) + round(AGI/2) + 1
+hit_limit = 10
 
 # Step 2 - calculate Damage
 dmg_min = 2
-dmg_max = round(((STR * 1.5) + (AGI * 1.02) + (INT * 1.3)) / 2 )
+dmg_max = round(((STR * 1.5) + (AGI * 1.02) + (INT * 1.3)) / 6 )
 
 # Step 3 - calculate Crit chance
 # This is based on HIT calc in step 1 above
