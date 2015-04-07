@@ -3,7 +3,7 @@
 import unittest
 import os
 import sys
-
+import time
 
 test_folder = os.getcwd() + os.sep + 'test_results'
 test_file = test_folder + os.sep + 'character.txt'
@@ -29,14 +29,28 @@ class VaisCharacterTest(unittest.TestCase):
         print('running character tests')
         
     def test_01_create_character(self):
-        c1 = character.Character( 'Bob', 'Human', 'Warrior', {'STR':7, 'CON':8, 'STA':5, 'AGI':8, 'INT':5}, ['fishing', 'charge'], 'just a test char', ['Apple', 'string', 'sword', 'ring of ice'])
+        c1 = character.Character( 'Bob', 'Human', 'Warrior', {'my_cool_stat':3,'STR':7, 'CON':8, 'STA':5, 'AGI':8, 'INT':5}, ['fishing', 'charge'], 'just a test char', ['Apple', 'string', 'sword', 'ring of ice'])
+        
         try:
-            #os.remove(test_file)
-            pass
+            os.remove(test_file)
+            time.sleep(2)
+            c1.save_to_file(test_file)
         except:
             pass
+        self.assertEqual(os.path.exists(test_file), True)
+        self.assertEqual(os.path.getsize(test_file), 220)
+        self.assertEqual(len(str(c1)), 214)
         
-        self.assertEqual(len(str(c1)), 213)
+        # now check the parameters of the test character are in the correct place
+        self.assertEqual(c1.name, 'Bob')
+        self.assertEqual(c1.race, 'Human')
+        self.assertEqual(c1.ch_class, 'Warrior')
+        self.assertEqual(c1.stats['STR'], 7)
+        self.assertEqual(c1.stats['CON'], 8)
+        self.assertEqual(c1.stats['STA'], 5)
+        self.assertEqual(c1.stats['AGI'], 8)
+        self.assertEqual(c1.stats['INT'], 5)
+        
         
     def test_02_get_properties(self):
         c2 = character.Character( 'Jan', 'Elf', 'Mage', [], ['fireball', 'teleport'], 'another test char', ['Orange', 'wand', 'dagger'])
