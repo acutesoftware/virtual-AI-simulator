@@ -2,7 +2,10 @@
 import os
 import sys
 import random  
+import parser
 import character
+
+rules_file = os.getcwd() + os.sep + 'data' + os.sep + 'battle.rules'
 
 def TEST():
     traits = character.CharacterCollection(character.fldr)
@@ -10,15 +13,29 @@ def TEST():
     character2 = traits.generate_random_character()
     print(character1)
     print(character2)
-    r = BattleRules(os.getcwd() + os.sep + 'data' + os.sep + 'battle.rules')
-    print(r.all_rules['dmg_max'])
-    #print(r)
+    rules = BattleRules(rules_file)
+    #print(rules.all_rules['dmg_max'])
+    #print(rules)
     
-    b = Battle(character1, character2, traits, print_console='No')
+    b = Battle(character1, character2, traits, rules, print_console='Yes')
     print(b)
     
-    sim = BattleSimulator( character1, character2, traits, 1000)
+    """
+    sim = BattleSimulator( character1, character2, traits, rules, 1000)
     print(sim)
+    # After 1000 fights Zatsij wins!
+    # Zatsij = 525 (52%)
+    # Rekmor = 475 (48%)
+    
+    # check - make characters the same and run simulation (should get 50%)
+    character1 = character2.copy()
+    character1.name = 'Copy'
+    sim2 = BattleSimulator( character1, character2, traits, rules, 1000)
+    print(sim2)
+    """
+    # After 1000000 fights Rekmor wins!
+    # Copy = 498402 (50%)
+    # Rekmor = 501598 (50%)
     
     #print('PLAYER1 [end]:', character1)
     #print('PLAYER2 [end]:', character2)
@@ -61,7 +78,6 @@ class BattleRules():
                     
     def __str__(self):
         res  = 'Battle Rules : ' + self.rules_file + '\n'
-        #for rule_num, rule in enumerate(self.all_rules):
         for k, v in self.all_rules.items(): 
             res += 'Rule ' + k + ':' + v + '\n'
         return res
@@ -71,13 +87,14 @@ class BattleSimulator():
     class to handle multiple simulation runs of Battles 
     between characters
     """
-    def __init__(self, c1, c2, traits, num_fights = 1000):
+    def __init__(self, c1, c2, traits, rules, num_fights = 1000):
         self.c1 = c1
         self.c2 = c2
         self.num_fights = num_fights
         self.num_c1 = 0
         self.num_c2 = 0
         self.traits = traits
+        self.rules = rules
         self.winner = 'No battles have been done'
         self.run_simulation()
     
@@ -98,7 +115,7 @@ class BattleSimulator():
             self.c2.stats['Health'] = self.c2.stats['max_health']
             
             # run the Battles
-            b = Battle(self.c1, self.c2, self.traits, print_console='No')
+            b = Battle(self.c1, self.c2, self.traits, self.rules, print_console='No')
             if b.status == self.c1.name:
                 self.num_c1 += 1
             else:
@@ -114,15 +131,14 @@ class Battle():
     """
     manages a fight between 2 rpg characters
     """
-    def __init__(self, char1, char2, traits, print_console='Yes'):
+    def __init__(self, char1, char2, traits, rules, print_console='Yes'):
         self.c1 = char1
         self.c2 = char2
         self.log = []
         self.traits = traits
-        self.status = 'Start...'
-        winner = self.fight(100, print_console)
-        self.status = winner 
-    
+        self.rules = rules
+        self.status = self.fight(100, print_console)
+        
     def __str__(self):
         res  = 'Battle Status : ' + self.status + '\n'
         res += 'Character 1 =  ' + self.c1.name + '\n'
@@ -132,7 +148,9 @@ class Battle():
     
     def fight(self, moves, print_console):
         """
-        runs a series of fights
+        runs a series of fights - TODO switch order 
+        of who attacks first, as this has an effect 
+        on win rate over 1000 fights
         """
         for i in range(1, moves):
             # player 1
@@ -180,16 +198,36 @@ class Battle():
             print(txt)
             
     def calc_move(self, c):
-        chance_hit = random.randint(0,c.stats['INT']+c.stats['AGI'])
-        amount_dmg = random.randint(2,(round(c.stats['STR']/4)+1) * (round(((c.stats['INT']/4)+(c.stats['AGI'])/4))+1))
-        #amount_dmg = round(amount_dmg /3)+1
-        #print('chance_hit  =',chance_hit  , 'amount_dmg = ',amount_dmg  )
-        if chance_hit > 6:
-            return 'Crit', amount_dmg*2
-        elif chance_hit < 3:
-            return 'Miss', 0
+        """
+        calculate the amount of damage down using the battle.rules file
+        WARNING - shitty eval functions - careful with user input.
+        TODO = max_hit = parser.parse(self.rules['hit_max']).to_pyfunc()
+        """
+        
+        # first get local variables the same as battle.rules file so parser can interpret.
+        AGI = c.stats['AGI']
+        INT = c.stats['INT']
+        STR = c.stats['STR']
+        STA = c.stats['STA']
+
+        hit_min   = eval(self.rules.all_rules['hit_min'])
+        hit_max   = eval(self.rules.all_rules['hit_max'])
+        hit_limit = eval(self.rules.all_rules['hit_limit']) 
+        if hit_max > hit_limit:
+            hit_max = hit_limit
+        chance_hit = random.randint(hit_min,hit_max)
+        
+        dmg_min   = eval(self.rules.all_rules['dmg_min'])
+        dmg_max   = eval(self.rules.all_rules['dmg_max'])
+        #print('dmg_min  =',dmg_min  , 'dmg_max = ',dmg_max  )
+        amount_dmg = random.randint(dmg_min, dmg_max)
+        
+        if chance_hit > eval(self.rules.all_rules['shot_crit_greater_than']):
+            return 'Crit', amount_dmg * eval(self.rules.all_rules['dmg_mult_crit'])
+        elif chance_hit < eval(self.rules.all_rules['shot_hit_greater_than']):
+            return 'Miss', amount_dmg * eval(self.rules.all_rules['dmg_mult_miss'])
         else:
-            return 'Hit', amount_dmg
+            return 'Hit', amount_dmg * eval(self.rules.all_rules['dmg_mult_hit'])
             
     def is_character_dead(self, c):
         """
