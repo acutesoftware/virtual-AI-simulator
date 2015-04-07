@@ -3,6 +3,8 @@
 import os
 import planet
 import view_world
+import character
+import battle
 
 fldr = os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' 
 
@@ -17,9 +19,9 @@ def main():
     print("|          Virtual AI Simulator")
     print("|---------------------------------------------------")
     print("| ")
-    print("| r = rebuild planets")
-    
-    print("| q = quit")
+    print("| r = rebuild planets        c = create character")
+    print("| s = simulation             o = create opponent")
+    print("| q = quit                   b = battle characters")
     print("| ")
     
     planets = load_planet_list()
@@ -34,6 +36,14 @@ def main():
         fname = planets[int(cmd) - 1]['name'] + '.txt'
         print('viewing planet ' + fname)
         view_world.display_map(fldr + os.sep + fname)
+    elif cmd == 'c':
+        c1 = create_character()
+    elif cmd == 'o':
+        c2 = create_character()
+    elif cmd == 'b':
+        run_simulation(c1, c2)
+    elif cmd == 's':
+        print('not implemented')
     else:
         print('invalid command ' + cmd)
     main()
@@ -84,6 +94,29 @@ def parse_planet_row(line):
     lava = float(row[7])
 
     return name, num_seeds, width, height, wind, rain, sun, lava
+    
+def create_character():
+    """
+    create a random character
+    """
+    traits = character.CharacterCollection(character.fldr)
+    c = traits.generate_random_character()
+    print(c)
+    return c
+    
+def run_simulation(c1, c2):
+    """
+    using character and planet, run the simulation
+    """
+    print('running simulation...')
+    traits = character.CharacterCollection(character.fldr)
+    c1 = traits.generate_random_character()
+    c2 = traits.generate_random_character()
+    print(c1)
+    print(c2)
+    rules = battle.BattleRules(battle.rules_file)
+    b = battle.Battle(c1, c2, traits, rules, print_console='Yes')
+    print(b.status)
     
     
 if __name__ == '__main__':
