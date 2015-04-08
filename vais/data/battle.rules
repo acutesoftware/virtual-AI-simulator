@@ -11,7 +11,7 @@ hit_limit = 10
 
 # Step 2 - calculate Damage
 dmg_min = 2
-dmg_max = round(((STR * 1.5) + (AGI * 1.02) + (INT * 1.3)) / 6 )
+dmg_max = round(((STR * 1.2) + (AGI * 1.2) + (INT * 1.2)) / 6 )
 
 # Step 3 - calculate Crit chance
 # This is based on HIT calc in step 1 above
@@ -21,4 +21,4 @@ shot_crit_greater_than = 6
 # Step 4 - calculate damage multiplier based on Crit/Hit/Miss
 dmg_mult_miss = round(amount_dmg * 0.1)
 dmg_mult_hit = round(amount_dmg * 1.0)
-dmg_mult_crit = round(amount_dmg * 1.8)
+dmg_mult_crit = round(amount_dmg * 1.5)
