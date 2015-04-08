@@ -118,6 +118,7 @@ class BattleSimulator():
             
             # run the Battles
             b = Battle(self.c1, self.c2, self.traits, self.rules, print_console='No')
+            #print(b)
             if b.status == self.c1.name:
                 self.num_c1 += 1
             else:
@@ -142,7 +143,7 @@ class Battle():
         self.status = self.fight(100, print_console)
         
     def __str__(self):
-        res  = 'Battle Status : ' + self.status + '\n'
+        res  = 'Battle Status : ' + self.status + ' Wins\n'
         res += 'Character 1 =  ' + self.c1.name + '\n'
         res += 'Character 2 =  ' + self.c2.name + '\n'
         return res
@@ -162,7 +163,7 @@ class Battle():
             self.take_damage(self.c2, dmg)
             if self.is_character_dead(self.c2):
                 #print(self.c2.name + ' has died')
-                return self.c1.name + ' Wins'
+                return self.c1.name
                 
             # player 2
             result, dmg = self.calc_move(self.c2)
@@ -170,7 +171,7 @@ class Battle():
             self.take_damage(self.c1, dmg)
             if self.is_character_dead(self.c1):
                 #print(self.c1.name + ' has died')
-                return self.c2.name + ' Wins'
+                return self.c2.name
     
     def take_damage(self, c, dmg):
         """
