@@ -13,7 +13,7 @@ def TEST():
     """
     print('creating random character')
     traits = CharacterCollection(fldr)
-    print(traits)
+    #print(traits)
     #print("traits.stats.raw_data:", traits.stats.dat)
     #print("traits.stats:", str(traits.stats))
     c = traits.generate_random_character()
@@ -100,12 +100,7 @@ class CharacterCollection():
         res = '=== DUMP OF ALL CHARACTER TRAITS ===\n'
         res += 'Classes:\n' + str(self.classes)
         res += 'Races:\n' + str(self.races)
-        res += 'STATS:\n' 
-        try:
-            for k,v in self.stats.items():
-                res += k + ' = ' + str(v) + ', '
-        except:
-            res += 'No stats defined'
+        res += 'STATS:\n' + str(self.stats) 
         res += '\nStory:\n' + str(self.stories)
         res += 'SKILLS:\n' + str(self.skills)
         res += 'INVENTORY:\n' + str(self.inventory)
