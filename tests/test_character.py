@@ -14,9 +14,9 @@ test_file = test_folder + os.sep + 'character.txt'
 # import vais.character as mod_char
 
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
-print('root_folder = ', root_folder )
+#print('root_folder = ', root_folder )
 ref_folder = root_folder + os.sep + "data" 
-print('ref_folder = ', ref_folder )
+#print('ref_folder = ', ref_folder )
 
 sys.path.append(root_folder)
 
@@ -87,6 +87,21 @@ class VaisCharacterTest(unittest.TestCase):
         self.assertEqual(traits.stories.dat[0]['name'] , 'A young scholar with a burning desire to learn')
         self.assertEqual(traits.inventory.dat[0]['name'] , 'leaf')
         
+    def test_04_character_collection(self):
+        c2 = character.Character( 'Jane', 'Elf', 'Mage', {'my_cool_stat':3,'STR':7, 'CON':8, 'STA':5, 'AGI':8, 'INT':5}, ['network engineer', 'shoot'], 'random text', ['Rogue on 360k FDD', 'sword', 'Can of coke'])
+        c2.save_to_file(test_folder + os.sep + 'character_sample.txt')
         
+        # now create a new random character, then populate that from saved data for Jane
+        traits = character.CharacterCollection(ref_folder)
+        c3 = traits.generate_random_character()
+        # confirm that the new random character is NOT the same as previous character (name not in list)
+        self.assertEqual(c3.name == 'Jane', False)
+        
+        # overide the random character with our saved version
+        c3.load_from_file(test_folder + os.sep + 'character_sample.txt')
+        self.assertEqual(c3.name == 'Jane', True)
+        
+        
+    
 if __name__ == '__main__':
     unittest.main()        
