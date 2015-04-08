@@ -206,25 +206,67 @@ class Character():
         res += '\nINVENTORY = ' + ', '.join([s for s in self.inventory])
         return res
     
-    def copy(self):
-        """ 
-        make an identical copy of the character
+    def load_from_file(self, fname):
         """
-        return Character(self.name, self.race,self.ch_class, self.stats, self.skills, self.story, self.inventory)
-        
+        OVERWRITES the current character object from stats in file
+        """
+        with open(fname, 'r') as f:
+            for line in f:
+                k,v = line.split(' = ')
+                self._parse_char_line_to_self(k,v)
+                
+    def _parse_char_line_to_self(self, k,v):
+        """
+        takes a line from a saved file split into key and values
+        and updates the appropriate self parameters of character.
+        """
+        k = k.strip(' ').strip('\n')
+        v = v.strip(' ').strip('\n')
+       # print('_parse_char_line_to_self(self, k,v): ' , k, v)
+        if k == 'CHARACTER':
+            self.name = v
+        elif k == 'Race':
+            self.race = v
+        elif k == 'Class':
+            self.ch_class = v
+        elif k == 'STATS':
+            self.stats = self._extract_stats_from_line(v)
+        elif k == 'Story':
+            self.story = v.strip(' ').strip('\n')
+        elif k == 'SKILLS':
+            self.skills = v.split(', ')
+        elif k == 'INVENTORY':
+            self.inventory = v.split(', ')
+            
+     
+    def _extract_stats_from_line(self, txt, stats_delim=' ', val_delim=':'):
+        """
+        extracts the stats from a line of text to the class params
+        STR:7 AGI:9 STA:5 INT:5 Health:21 CON:8 max_health:21
+        """
+        result = {}
+        stats_txt = txt.split(stats_delim)
+        for s in stats_txt:
+            #print('s = ', s)
+            if s.strip(' ').strip('\n') != '':
+                k,v = s.split(val_delim)
+                result[k.strip(' ')] = v.strip(' ').strip('\n')
+        return result
+    
     def save_to_file(self, fname):
         """
         saves a characters data to file
         """
         with open(fname, 'w') as f:
             f.write(str(self))
+            
+    def copy(self):
+        """ 
+        make an identical copy of the character
+        """
+        return Character(self.name, self.race,self.ch_class, self.stats, self.skills, self.story, self.inventory)
+        
      
-    def load_from_file(self, fname):
-        """
-        creates a character object from file
-        """
-        print('todo')
-        return None
      
 ############################
 #  Utility functions 
