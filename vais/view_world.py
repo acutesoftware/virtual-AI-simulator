@@ -85,10 +85,11 @@ class view_tk(Tkinter.Tk):
         self.appWidth = 1600   # canvas.width
         self.appHeight = 900
         
+        """
         self.canvas_id = self.canvas.create_text(50, 50, anchor="nw")
         self.canvas.itemconfig(self.canvas_id, text="Welcome to Divitie")
         self.canvas.insert(self.canvas_id, 18, " ")
-        
+        """
         
         
         self.canvas.pack()
