@@ -5,7 +5,7 @@ import random
 
 ## TODO - once 
 fldr = os.getcwd() + os.sep + 'data'  
-
+#print('character.py: fldr = ', fldr)
 
 def TEST():
     """
