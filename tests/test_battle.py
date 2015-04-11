@@ -14,9 +14,7 @@ test_file = test_folder + os.sep + 'battle.txt'
 # import vais.character as mod_char
 
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
-print('root_folder = ', root_folder )
 ref_folder = root_folder + os.sep + "data" 
-print('ref_folder = ', ref_folder )
 
 sys.path.append(root_folder)
 
@@ -54,22 +52,23 @@ class VaisBattleTest(unittest.TestCase):
         c2 = traits.generate_random_character()
         rules = battle.BattleRules(rules_file)
         b = battle.Battle(c1, c2, traits, rules, print_console='No')
-        print(b)
         self.assertEqual(len(str(b)) > 5, True)
-        print('\n\n')
-        print(b)
-        print('Battle Status : ' + c1.name + ' Wins')
-        print('Battle Status : ' + c2.name + ' Wins')
-        if str(b) == 'Battle Status : ' + c2.name + ' Wins' or str(b) == 'Battle Status : ' + c1.name + ' Wins':
+        if c2.name in str(b) or c1.name in str(b):
             self.assertEqual(True, True)
         else:
-            # weird bug here
-            pass
-            #self.assertEqual(True, False)
+            self.assertEqual(True, False)
         
-        
-        
-    
+    def test_05_battle_multiple(self):
+        traits = character.CharacterCollection(ref_folder)
+        c1 = traits.generate_random_character()
+        c2 = traits.generate_random_character()
+        rules = battle.BattleRules(rules_file)
+        sim = battle.BattleSimulator( c1, c2, traits, rules, 1000)
+        if sim.winner == c2.name or sim.winner == c1.name:
+            self.assertEqual(True, True)
+        else:
+            self.assertEqual(True, False)
+
 if __name__ == '__main__':
     unittest.main() 
     
