@@ -9,9 +9,25 @@ hit_min = 1
 hit_max = round(INT/2) + round(AGI/2) + 1
 hit_limit = 10
 
-# Step 2 - calculate Damage
+# Step 2 - calculate Damage - OLD equation was 
+#      dmg_max = round(((STR * 1.2) + (AGI * 1.2) + (INT * 1.2)) / 6 )
+# new rule in code : 
+#   dmg_max = round(
+#                    ((STR + dmg_STR_add) * dmg_STR_mult) 
+#                  + ((AGI + dmg_AGI_add) * dmg_AGI_mult) 
+#                  + ((INT + dmg_INT_add) * dmg_INT_mult)
+#                  ) * dmg_overall_mult 
+#             + dmg_overall_add
 dmg_min = 2
-dmg_max = round(((STR * 1.2) + (AGI * 1.2) + (INT * 1.2)) / 6 )
+#dmg_max = 20
+dmg_INT_mult = 0.9
+dmg_AGI_mult = 1.2
+dmg_STR_mult = 1.2
+dmg_INT_add = -.5
+dmg_AGI_add = 0
+dmg_STR_add = 0
+dmg_overall_mult = 0.1667
+dmg_overall_add = 0
 
 # Step 3 - calculate Crit chance
 # This is based on HIT calc in step 1 above

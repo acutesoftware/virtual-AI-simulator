@@ -222,7 +222,13 @@ class Battle():
         chance_hit = random.randint(hit_min,hit_max)
         
         dmg_min   = eval(self.rules.all_rules['dmg_min'])
-        dmg_max   = eval(self.rules.all_rules['dmg_max'])
+        #dmg_max   = eval(self.rules.all_rules['dmg_max'])
+        calc_agi = round((AGI + float(self.rules.all_rules['dmg_AGI_add'])) * float(self.rules.all_rules['dmg_AGI_mult']))
+        calc_int = round((INT + float(self.rules.all_rules['dmg_INT_add'])) * float(self.rules.all_rules['dmg_INT_mult']))
+        calc_str = round((STR + float(self.rules.all_rules['dmg_STR_add'])) * float(self.rules.all_rules['dmg_STR_mult'])) 
+        #print('TESTING CALC_MOVE : calc_agi', calc_agi, 'calc_int',calc_int ,'calc_str',calc_str )
+        dmg_max = round((calc_agi + calc_int + calc_str) * float(self.rules.all_rules['dmg_overall_mult']) + float(self.rules.all_rules['dmg_overall_add']))
+
         #print('hit_min  =',hit_min  , 'hit_max = ',hit_max  )
         #print('dmg_min  =',dmg_min  , 'dmg_max = ',dmg_max  )
         amount_dmg = random.randint(dmg_min, dmg_max)
