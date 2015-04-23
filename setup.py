@@ -9,7 +9,7 @@ setup(
     url='https://github.com/acutesoftware/virtual-AI-simulator',
     license='LICENSE.txt',
     description='VAIS runs simulations of agents and players across multiple worlds',
-    long_description=open('README.md').read(),
+    long_description=open('README.rst').read(),
     classifiers = [
     'Development Status :: 2 - Pre-Alpha',
     'Environment :: Web Environment',
