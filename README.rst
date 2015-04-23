@@ -1,12 +1,11 @@
-# VAIS - Virtual AI simulator
+=========================================
+VAIS - Virtual AI simulator
+=========================================
+
 Last updated 24th-April-2015
 VAIS Dev version 0.0.1
 
 VAIS runs simulations of agents and players across multiple worlds
-
-================
-Quick Start
-================
 
 See quick_start.py 
 
