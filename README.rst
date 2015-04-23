@@ -4,12 +4,14 @@ VAIS Dev version 0.0.1
 
 VAIS runs simulations of agents and players across multiple worlds
 
-
-##Quick Start
+================
+Quick Start
+================
 
 See quick_start.py 
 
 create a random world
+--------------------------------
 
 .. code:: python
  
@@ -19,6 +21,7 @@ create a random world
 
 
 View the world 
+--------------------------------
 
 .. code:: python
 
@@ -26,6 +29,7 @@ View the world
     view_world.display_map(os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' + os.sep + 'ExamplePlanet.txt')
 
 create a character manually
+--------------------------------
 
 .. code:: python
 
