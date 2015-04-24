@@ -2,13 +2,13 @@ from distutils.core import setup
 
 setup(
     name='vais',
-    version='0.0.3',
+    version='0.0.4',
     author='Duncan Murray',
     author_email='djmurray@acutesoftware.com.au',
     packages=['vais', 'vais.data','vais.examples','vais.npc'],
     url='https://github.com/acutesoftware/virtual-AI-simulator',
     license='LICENSE.txt',
-    description='VAIS runs simulations of agents and players across multiple worlds',
+    description='Virtual AI Simulator runs agents and players across multiple worlds',
     long_description=open('README.rst').read(),
     classifiers = [
     'Development Status :: 2 - Pre-Alpha',
