@@ -4,27 +4,15 @@ import unittest
 import os
 import sys
 import time
+import vais.battle as battle
+import vais.character as character
 
 test_folder = os.getcwd() + os.sep + 'test_results'
 test_file = test_folder + os.sep + 'battle.txt'
 
-# TODO ///////////////////////////////////////
-# - remove these lines once VAIS packaged
-# and replace with the following
-# import vais.character as mod_char
-
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
 ref_folder = root_folder + os.sep + "data" 
-
-sys.path.append(root_folder)
-
-# END TODO //////////////////////////////////
-
-import battle
-import character
-  
 rules_file = ref_folder + os.sep + 'battle.rules'
-
   
 class VaisBattleTest(unittest.TestCase):
     def setup(self):
@@ -41,7 +29,7 @@ class VaisBattleTest(unittest.TestCase):
         
     def test_03_battle_rules(self):
         rules = battle.BattleRules(rules_file)
-        self.assertEqual(len(str(rules)) , 429)
+        self.assertEqual(len(str(rules)) , 539)
 
         self.assertEqual(rules.all_rules['dmg_min'], '2')
     

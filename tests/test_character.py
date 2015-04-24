@@ -4,26 +4,14 @@ import unittest
 import os
 import sys
 import time
+import vais.character as character
 
 test_folder = os.getcwd() + os.sep + 'test_results'
 test_file = test_folder + os.sep + 'character.txt'
-
-# TODO ///////////////////////////////////////
-# - remove these lines once VAIS packaged
-# and replace with the following
-# import vais.character as mod_char
-
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
-#print('root_folder = ', root_folder )
 ref_folder = root_folder + os.sep + "data" 
-#print('ref_folder = ', ref_folder )
 
-sys.path.append(root_folder)
-
-# END TODO //////////////////////////////////
-
-import character
-                    
+                  
 class VaisCharacterTest(unittest.TestCase):
     def setup(self):
         print('running character tests')
