@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='vais',
-    version='0.0.2',
+    version='0.0.3',
     author='Duncan Murray',
     author_email='djmurray@acutesoftware.com.au',
     packages=['vais', 'vais.data','vais.examples','vais.npc'],

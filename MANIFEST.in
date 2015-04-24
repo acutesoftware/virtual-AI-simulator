@@ -1,0 +1,6 @@
+include *.rst
+include vais/data/*.rules
+include vais/data/*.csv
+include vais/data/worlds/*.csv
+include vais/data/worlds/*.txt
+
