@@ -3,7 +3,7 @@ import os
 import sys
 import random  
 import parser
-import character
+import vais.character
 
 rules_file = os.getcwd() + os.sep + 'data' + os.sep + 'battle.rules'
 
