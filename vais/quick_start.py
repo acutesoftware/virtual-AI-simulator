@@ -13,7 +13,7 @@ print(p)
 
 # view the world (or view as text via /data/worlds/ExamplePlanets.txt)
 fldr = os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' 
-view_world.display_map(os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' + os.sep + 'ExamplePlanet.txt')
+view_world.display_map(fldr + os.sep + 'ExamplePlanet.txt')
 
 
 
