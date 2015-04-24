@@ -2,8 +2,8 @@
 VAIS - Virtual AI simulator
 =========================================
 
-Last updated 24th-April-2015
-VAIS Dev version 0.0.3
+Last updated 25th-April-2015
+VAIS Dev version 0.0.4
 
 VAIS runs simulations of agents and players across multiple worlds
 
@@ -23,7 +23,7 @@ View the world
 .. code:: python
 
     fldr = os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' 
-    view_world.display_map(os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' + os.sep + 'ExamplePlanet.txt')
+    view_world.display_map(fldr + os.sep + 'ExamplePlanet.txt')
 
 create a character manually
 --------------------------------
