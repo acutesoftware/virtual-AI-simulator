@@ -12,7 +12,8 @@ create a random world
 
 .. code:: python
  
-    p = planet.Planet('ExamplePlanet', num_seeds=5, width=60, height=45, wind=0.2, rain=0.20, sun=0.2, lava=0.5)
+    # planet parameters are: num_seeds, width, height, wind, rain, sun, lava 
+    p = planet.Planet('Test Planet', 5,    60,     45,  0.2, 0.20, 0.2, 0.5)
     p.evolve(100)
     print(p)
 
@@ -29,8 +30,8 @@ create a character manually
 --------------------------------
 
 .. code:: python
-
-    c1 = character.Character( 'Jim', 'Orc', 'Mage', {'Health':20,'max_health':20,'INT':8,'STA':5,'STR':2,'AGI':5}, ['cast'], 'Example char', ['Apple', 'knife'])
+    stats = {'Health':20,'max_health':20,'INT':8,'STA':5,'STR':2,'AGI':5}
+    c1 = character.Character( 'Jim', 'Orc', 'Mage', stats, ['cast'], 'Test', ['Apple'])
     print(c1)
 
         CHARACTER = Jim
