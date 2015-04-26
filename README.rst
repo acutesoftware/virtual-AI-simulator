@@ -30,8 +30,9 @@ create a character manually
 --------------------------------
 
 .. code:: python
+
     stats = {'Health':20,'max_health':20,'INT':8,'STA':5,'STR':2,'AGI':5}
-    c1 = character.Character( 'Jim', 'Orc', 'Mage', stats, ['cast'], 'Test', ['Apple'])
+    c1 = character.Character( 'Jim', 'Orc', 'Mage', stats, ['cast'], 'Test', ['bag'])
     print(c1)
 
         CHARACTER = Jim
