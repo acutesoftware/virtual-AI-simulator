@@ -81,8 +81,13 @@ class Simulator():
         access is allowed (future implementation) 
         then execute the command on the 'agent'
         """
+        print(src, 'says ' + cmd['type']  + ' agent', agent.name, '', cmd['direction'])
         if cmd['type'] == 'move':
-            print(src, 'says move agent', agent.name, '', cmd['direction'])
+            print(agent.name, 'moves in direction', cmd['direction'])
+        elif cmd['type'] == 'run':
+            print(agent.name, 'runs in direction', cmd['direction'])
+        elif cmd['type'] == 'fight':
+            print(agent.name, 'fights')
             
         
     

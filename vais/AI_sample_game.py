@@ -32,8 +32,7 @@ class ReallySimpleGameAI():
         num_steps = 0
         while self.s.get_state() != 'Halted':
             self.s.command({'name':'walk', 'type':'move', 'direction':[x, y]}, self.a1)
-            self.s.command({'name':'walk', 'type':'move', 'direction':[-x, y]}, self.a2)
-            print('moving characters')
+            self.s.command({'name':'walk', 'type':'run', 'direction':[-x, y]}, self.a2)
             num_steps += 1
             if num_steps >= 3:
                 break

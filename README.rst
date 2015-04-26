@@ -41,7 +41,7 @@ create a character manually
         STATS     = STA:5 AGI:5 INT:8 Health:20 max_health:20 STR:2
         Story     = Example char
         SKILLS    = cast
-        INVENTORY = Apple, knife
+        INVENTORY = bag
 
 
 Create a 2nd random character and battle them
