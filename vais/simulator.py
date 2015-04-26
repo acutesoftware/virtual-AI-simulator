@@ -42,11 +42,19 @@ class Simulator():
         res += 'actions = [' + ', '.join([a for a in self.actions]) + ']\n'
         return res
     
-    def run(self, num_iterations=1000):
+    def run(self, num_iterations=-1):
         """
         Abstract method to be subclassed by calling function.
         This runs the simulation num_iterations times.
+        If the default -1 is used for num_iteractions this means
+        it is a turn based simulation which is controlled externally
+        (e.g. for a game with players, or run by the class BattleSimulator)
+        
         """
+        
+        if num_iterations == -1:    # controlled fully externally   
+            self.status = 'Waiting for Command'
+            return
         self.status = 'Running'
         print('Running Simulation... TODO = subclass this method in your calling class')
      
@@ -73,8 +81,9 @@ class Simulator():
         access is allowed (future implementation) 
         then execute the command on the 'agent'
         """
-        print('received', cmd['type'], 'command for agent', agent.name, 'from', src)
-        
+        if cmd['type'] == 'move':
+            print(src, 'says move agent', agent.name, '', cmd['direction'])
+            
         
     
     
