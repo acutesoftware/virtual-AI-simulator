@@ -35,11 +35,13 @@ class Simulator():
         self.status = 'Started'
         self.agents = agents
         self._verify_agents()
-        self.agent_locations = {}
+        self.agent_locations = []
         for num, a in enumerate(self.agents):
-            print('a.name = ', a.name)
-            self.agent_locations[a.name] = agent_locations
-            print('self.agent_locations[a.name]',self.agent_locations[a.name])
+            ag_loc = {}
+            ag_loc['name'] = a.name
+            ag_loc['x'] = agent_locations[num][0]
+            ag_loc['y'] = agent_locations[num][1]
+            self.agent_locations.append(ag_loc)
      
     def __str__(self):
         res = ' -= ' + self.name + ' =--\n'
@@ -48,8 +50,10 @@ class Simulator():
         res += 'agents  = ' + str(len(self.agents)) + ' (' + ','.join([c.name for c in self.agents]) + ')\n'
         res += 'agent_locations\n'
         for a in self.agent_locations:
-            res += '\nagent ' + str(a[0]) + str(a[1])
-        return res
+            res += '\nagent ' + a['name']
+            res += ' x=' + str(a['x']) 
+            res += ' y=' + str(a['y'])
+        return res + '\n'
     
     def _verify_agents(self):
         """
@@ -63,6 +67,25 @@ class Simulator():
             nmes.append(a.name)
         if len(nmes) != len(set(nmes)):
             raise 'Error - you need to pass unique list of agent names to simulator'
+    
+    def _get_location(self, agent_name):
+        """
+        returns x,y current location of agent by name
+        """
+        for a in self.agent_locations:
+            if a['name'] == agent_name:
+                return a['x'], a['y']
+        
+        
+    def _set_location(self, agent_name, x, y):
+        """
+        Sets the x,y location of agent by name
+        """
+        for a in self.agent_locations:
+            if a['name'] == agent_name:
+                a['x'] = x
+                a['y'] = y
+        
     
     def run(self, num_iterations=-1):
         """
@@ -115,6 +138,7 @@ class Simulator():
         """
         moves agent 'agent' in 'direction'
         """
+        x,y = self._set_location(agent, direction[0], direction[0])
     
     
 class SimAdventureGame(Simulator):
