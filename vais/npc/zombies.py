@@ -1,5 +1,5 @@
 # zombies.py
-# saved to NPC folder as example of Non Player Characters
+# temporarily saved to NPC folder as example of Non Player Characters
 # in VAIS
 params = {}
 params['name']='zombie'   # can also be used to track diseases spreading
@@ -11,12 +11,17 @@ They move by random travelling, and are attracted to noises and human smells (le
 Zombies can be killed only by headshot (hit>80%)
 """
 
-params['speed']=0.5
-params['hit']=0.2
-params['dodge']=0.0
-params['dmg']=99999
+goals = ['eat brains', 'move to sound', 'move to light']
 
+params['speed']=0.5     # they move slowly and attack slowly
+params['hit']=0.2       # zombies are terrible shots
+params['dodge']=0.0     # no dodge
+params['dmg']=99999     # massive damage (death actually) if bitten
+params['dmg_delay']=10  # you have 10 moves from bite before death
 
+params['actions'] = ['shuffle', 'lunge', 'bite']
+params['move_actions'] = ['shuffle', 'lunge']
+params['attack_actions'] = ['bite']
 
 def TEST():
     """
@@ -24,7 +29,7 @@ def TEST():
     """
     for k,v in params.items():
         if k != 'desc_long':
-            print(k.ljust(10) + ' = ' + str(v))
+            print(k.ljust(15) + ' = ' + str(v))
         
         
 TEST()
