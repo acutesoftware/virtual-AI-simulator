@@ -1,8 +1,8 @@
 # simulator.py
 import os
 import sys
-import planet
-import character
+import vais.planet
+import vais.character
 
 def TEST():
     """
@@ -68,6 +68,14 @@ class Simulator():
         if len(nmes) != len(set(nmes)):
             raise 'Error - you need to pass unique list of agent names to simulator'
     
+    def _get_agent_loc_index(self, agent_name):
+        """
+        returns x,y current location of agent by name
+        """
+        for num, a in enumerate(self.agent_locations):
+            if a['name'] == agent_name:
+                return num
+        
     def _get_location(self, agent_name):
         """
         returns x,y current location of agent by name
@@ -81,10 +89,9 @@ class Simulator():
         """
         Sets the x,y location of agent by name
         """
-        for a in self.agent_locations:
-            if a['name'] == agent_name:
-                a['x'] = x
-                a['y'] = y
+        self.agent_locations[_get_agent_loc_index(agent_name)]['x'] = x
+        self.agent_locations[_get_agent_loc_index(agent_name)]['y'] = y
+
         
     
     def run(self, num_iterations=-1):
