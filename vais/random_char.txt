@@ -1,7 +1,7 @@
-CHARACTER = Rekdom
-Race      = Halfling
-Class     = Paladin
-STATS     = max_health:22 STA:7 INT:8 Health:22 STR:4 AGI:6 CON:10 
+CHARACTER = Zatgri
+Race      = Elf
+Class     = Priest
+STATS     = STA:4 max_health:19 STR:1 Health:19 INT:10 AGI:6 CON:10 
 Story     = A young scholar with a burning desire to learn
-SKILLS    = Reed collector, Fire Bolt, Stun
-INVENTORY = 21 gold, leaf, rock, food
+SKILLS    = Carpenter, Blacksmith, Word of Destruction
+INVENTORY = 23 gold, rock, leaf, knife
