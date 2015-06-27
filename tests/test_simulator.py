@@ -46,7 +46,7 @@ class VaisSimulatorTest(unittest.TestCase):
         self.assertEqual(s.agent_locations[0]['y'], 2)  
         s.command({'name':'walk', 'type':'move', 'direction':[0,1]}, a1)
         self.assertEqual(s.agent_locations[0]['x'], 2)  
-        self.assertEqual(s.agent_locations[0]['y'], 3)  
+        self.assertEqual(s.agent_locations[0]['y'], 2)  
         
         s.command({'name':'walk', 'type':'move', 'direction':[1,1]}, a1)
         
