@@ -22,7 +22,6 @@ def main():
     es.add_param('meteor', 'events')
     es.add_param('volcano', 'events')
     es.add_param('cyclone', 'events')
-    es.add_param('', '')
     es.add_affect('heat grows grass', 'heat', 'grass', +4, 'heat < 50 AND heat > 5')
     print(es)
 
