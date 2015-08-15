@@ -8,7 +8,9 @@ VAIS - Virtual AI simulator
 .. image:: https://coveralls.io/repos/acutesoftware/virtual-AI-simulator/badge.svg?branch=master&service=github
   :target: https://coveralls.io/github/acutesoftware/virtual-AI-simulator?branch=master
 
-
+.. image:: https://landscape.io/github/acutesoftware/virtual-AI-simulator/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/acutesoftware/virtual-AI-simulator/master
+   :alt: Code Health
 
 VAIS runs simulations of agents and players across multiple worlds
 
