@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='vais',
-    version='0.0.5',
+    version='0.0.6',
     author='Duncan Murray',
     author_email='djmurray@acutesoftware.com.au',
     packages=['vais', 'vais.data','vais.examples','vais.npc'],
@@ -17,6 +17,7 @@ setup(
     classifiers = [
     'Development Status :: 2 - Pre-Alpha',
     'Environment :: Web Environment',
+    'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.4',
     'Intended Audience :: Developers',
     'Natural Language :: English',

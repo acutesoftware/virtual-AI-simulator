@@ -6,7 +6,7 @@ import sys
 import time
 import vais.character as character
 
-test_folder = os.getcwd() + os.sep + 'test_results'
+test_folder = os.getcwd()
 test_file = test_folder + os.sep + 'character.txt'
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
 ref_folder = root_folder + os.sep + "data" 
@@ -19,12 +19,7 @@ class VaisCharacterTest(unittest.TestCase):
     def test_01_create_character(self):
         c1 = character.Character( 'Bob', 'Human', 'Warrior', {'my_cool_stat':3,'STR':7, 'CON':8, 'STA':5, 'AGI':8, 'INT':5}, ['fishing', 'charge'], 'just a test char', ['Apple', 'string', 'sword', 'ring of ice'])
         
-        try:
-            os.remove(test_file)
-            time.sleep(2)
-            c1.save_to_file(test_file)
-        except:
-            pass
+        c1.save_to_file(test_file)
         self.assertEqual(os.path.exists(test_file), True)
         self.assertEqual(os.path.getsize(test_file), 220)
         self.assertEqual(len(str(c1)), 214)

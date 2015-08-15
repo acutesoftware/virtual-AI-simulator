@@ -4,10 +4,12 @@ setup.py
 vais\AI_sample_game.py
 vais\__init__.py
 vais\battle.py
+vais\build_internet.py
 vais\build_world.py
 vais\character.py
 vais\planet.py
 vais\quick_start.py
+vais\rawdata_char_gen.py
 vais\run.py
 vais\simulation_types.py
 vais\simulator.py
@@ -41,4 +43,5 @@ vais\examples\__init__.py
 vais\examples\example_noise.py
 vais\npc\__init__.py
 vais\npc\bandits.py
+vais\npc\web_users.py
 vais\npc\zombies.py
