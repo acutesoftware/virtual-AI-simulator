@@ -9,7 +9,9 @@ setup(
     url='https://github.com/acutesoftware/virtual-AI-simulator',
     install_requires=[
           'nose >= 1.0',
-          'noise >= 1.2.1'
+          'noise >= 1.2.1',
+          'aikif >= 0.1.3',
+          'rawdata >= 0.0.6'
     ],
     license='LICENSE.txt',
     description='Virtual AI Simulator runs agents and players across multiple worlds',
