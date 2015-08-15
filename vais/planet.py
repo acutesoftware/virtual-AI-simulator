@@ -1,12 +1,6 @@
 # planet.py     written by Duncan Murray
 
 import os
-import sys
-import math
-import time
-from random import randint 
-import random
-from noise import pnoise2
 import aikif.environments.worlds as my_world
 #import aikif.gui_view_world as gui
  
@@ -20,7 +14,7 @@ def TEST():
     p.evolve(years=10000000)
     print(p)
     
-class Planet():
+class Planet(object):
     """
     class to manage the simplified evolution of a planet to 
     build a virtual world. Takes basic atmospheric parameters
@@ -74,9 +68,9 @@ class Planet():
         self.add_life()
         self.world.grd.save(world_file)
         
-        print('done')
-       # time.sleep(3)
-       # gui.display_map(world_file)
+        print('TODO - run ' + str(years) + ' years')
+        # time.sleep(3)
+        # gui.display_map(world_file)
     
     def build_base(self):
         """
@@ -90,7 +84,7 @@ class Planet():
         perc_blocked = (self.lava/5)*100
         
         #print('Calculating world : sea=', perc_sea, ' land=', perc_land, ' mountain=', perc_blocked,  )
-        self.world.build_random( self.num_seeds, perc_land, perc_sea, 0.0)
+        self.world.build_random( self.num_seeds, perc_land, perc_sea, perc_blocked)
         
 
     def add_life(self):
