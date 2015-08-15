@@ -2,10 +2,9 @@
 VAIS - Virtual AI simulator
 =========================================
 
-Last updated 25th-April-2015
-VAIS Dev version 0.0.4
-
-
+.. image:: https://travis-ci.org/acutesoftware/virtual-AI-simulator.svg?branch=master
+    :target: https://travis-ci.org/acutesoftware/virtual-AI-simulator
+    
 .. image:: https://coveralls.io/repos/acutesoftware/virtual-AI-simulator/badge.svg?branch=master&service=github
   :target: https://coveralls.io/github/acutesoftware/virtual-AI-simulator?branch=master
 

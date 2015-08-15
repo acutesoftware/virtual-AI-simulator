@@ -29,8 +29,8 @@ class VaisBattleTest(unittest.TestCase):
         
     def test_03_battle_rules(self):
         rules = battle.BattleRules(rules_file)
-        self.assertEqual(len(str(rules)) >  539, True)
-
+        self.assertEqual(len(str(rules)) >  500, True)
+        #print(rules)
         self.assertEqual(rules.all_rules['dmg_min'], '2')
     
     
