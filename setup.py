@@ -13,6 +13,10 @@ setup(
           'aikif >= 0.1.3',
           'rawdata >= 0.0.6'
     ],
+    include_package_data = True,
+    package_data = {
+        'vais': ['data/*.*'],
+    },   
     license='LICENSE.txt',
     description='Virtual AI Simulator runs agents and players across multiple worlds',
     long_description=open('README.rst').read(),
