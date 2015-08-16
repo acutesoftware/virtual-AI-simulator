@@ -1,20 +1,9 @@
 # file: terrain.rules
 # author: Duncan Murray
-# updated: 4/4/2015
+# updated: 16/8/2015
 
-[ground_names]
-lava
-ice
-rock
-dirt
-grass
-plants
-bushes
-shrubs
-trees
-forest
 
-[grow_rates]
+[ground_grow_rates]
 lava: -0.5 * temp
 ice: -0.5 * temp
 rock: 0
@@ -25,15 +14,6 @@ bushes: 0.4 + rain
 shrubs: 0.4 + rain
 trees: 0.4 + rain
 forest: 0.4 + rain
-
-[animal_names]
-insects
-mice
-rabbits
-deer
-bears
-crocodiles
-wolves
 
 [animal_grow_rates]
 insects: 0.3
