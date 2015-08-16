@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 # envirosim.py
 
+import os
+import configparser
+
 def main():
     es = Params('Environment simulator', 'simulate evolution via parametric changes')
     es.add_param('orbit', 'planet')
@@ -24,7 +27,12 @@ def main():
     es.add_param('cyclone', 'events')
     es.add_affect('heat grows grass', 'heat', 'grass', +4, 'heat < 50 AND heat > 5')
     print(es)
-
+    
+    
+    config = configparser.ConfigParser()
+    config.read('data' + os.sep + 'terrain.rules')
+    #print(config['ground_grow_rates']['ice'])
+    
 class Params(object):
     """
     handles full list of all params affecting the environment
