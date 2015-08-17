@@ -1,9 +1,7 @@
 # battle.py   
 import os
-import sys
 import random  
-import parser
-import vais.character
+import vais.character as character
 
 rules_file = os.getcwd() + os.sep + 'data' + os.sep + 'battle.rules'
 
@@ -20,19 +18,18 @@ def TEST():
     b = Battle(character1, character2, traits, rules, print_console='Yes')
     print(b.status)
     
-    """
-    sim = BattleSimulator( character1, character2, traits, rules, 1000)
-    print(sim)
-    # After 1000 fights Zatsij wins!
-    # Zatsij = 525 (52%)
-    # Rekmor = 475 (48%)
+
+    # sim = BattleSimulator( character1, character2, traits, rules, 1000)
+    # print(sim)
+    # # After 1000 fights Zatsij wins!
+    # # Zatsij = 525 (52%)
+    # # Rekmor = 475 (48%)
     
-    # check - make characters the same and run simulation (should get 50%)
-    character1 = character2.copy()
-    character1.name = 'Copy'
-    sim2 = BattleSimulator( character1, character2, traits, rules, 1000)
-    print(sim2)
-    """
+    # # check - make characters the same and run simulation (should get 50%)
+    # character1 = character2.copy()
+    # character1.name = 'Copy'
+    # sim2 = BattleSimulator( character1, character2, traits, rules, 1000)
+
     # After 1000000 fights Rekmor wins!
     # Copy = 498402 (50%)
     # Rekmor = 501598 (50%)
@@ -63,7 +60,7 @@ def TEST():
         Wolgri = 3032 (30%)
         Aregri = 6968 (70%)    
     """
-class BattleRules():
+class BattleRules(object):
     """
     Manages the parsing of rules for a battle by reading the .rules file
     """
@@ -84,7 +81,7 @@ class BattleRules():
     
 
     
-class BattleSimulator():
+class BattleSimulator(object):
     """
     class to handle multiple simulation runs of Battles 
     between characters
@@ -111,7 +108,7 @@ class BattleSimulator():
         """
         runs the simulation
         """
-        for i in range(self.num_fights):
+        for _ in range(self.num_fights):
             # restore health between each fight
             self.c1.stats['Health'] = self.c1.stats['max_health']
             self.c2.stats['Health'] = self.c2.stats['max_health']
@@ -130,7 +127,7 @@ class BattleSimulator():
         else:
             self.winner = self.c2.name
     
-class Battle():
+class Battle(object):
     """
     manages a fight between 2 rpg characters
     """
@@ -155,7 +152,7 @@ class Battle():
         of who attacks first, as this has an effect 
         on win rate over 1000 fights
         """
-        for i in range(1, moves):
+        for _ in range(1, moves):
             #if i == 1 and random.randint(1,100) > 50:   # randomly choose who moves first
             # player 1
             result, dmg = self.calc_move(self.c1)
@@ -212,7 +209,7 @@ class Battle():
         AGI = c.stats['AGI']
         INT = c.stats['INT']
         STR = c.stats['STR']
-        STA = c.stats['STA']
+        #STA = c.stats['STA']
 
         hit_min   = eval(self.rules.all_rules['hit_min'])
         hit_max   = eval(self.rules.all_rules['hit_max'])
