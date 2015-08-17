@@ -1,8 +1,7 @@
 # simulator.py
 import os
-import sys
-import vais.planet
-import vais.character
+import vais.planet as planet
+import vais.character as character
 
 def TEST():
     """
@@ -21,7 +20,7 @@ def TEST():
     s.command({'name':'walk', 'type':'move', 'direction':[1,1]}, a2)
     s.command({'name':'attack', 'type':'fight', 'direction':[1,1]}, a3)
     
-class Simulator():
+class Simulator(object):
     """
     Base simulator class
     """
@@ -89,8 +88,10 @@ class Simulator():
         """
         Sets the x,y location of agent by name
         """
-        self.agent_locations[_get_agent_loc_index(agent_name)]['x'] = x
-        self.agent_locations[_get_agent_loc_index(agent_name)]['y'] = y
+        pass
+        print('TODO')
+        #self.agent_locations[_get_agent_loc_index(agent_name)]['x'] = x
+        #self.agent_locations[_get_agent_loc_index(agent_name)]['y'] = y
 
         
     
@@ -133,7 +134,7 @@ class Simulator():
         access is allowed (future implementation) 
         then execute the command on the 'agent'
         """
-        print(src, 'says ' + cmd['type']  + ' agent', agent.name, '', cmd['direction'])
+        print(src, 'says ' + cmd['type']  + ' agent', agent.name, '', cmd['direction'],' password=', password)
         if cmd['type'] == 'move':
             print(agent.name, 'moves in direction', cmd['direction'])
         elif cmd['type'] == 'run':
@@ -146,6 +147,7 @@ class Simulator():
         moves agent 'agent' in 'direction'
         """
         x,y = self._set_location(agent, direction[0], direction[0])
+        print('moving agent to x,y=', x,y)
     
     
 class SimAdventureGame(Simulator):
