@@ -11,7 +11,7 @@ test_folder = os.getcwd() + os.sep + 'test_results'
 test_file = test_folder + os.sep + 'battle.txt'
 
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
-ref_folder = root_folder + os.sep + "data" 
+ref_folder = root_folder + os.sep + 'data' 
 rules_file = ref_folder + os.sep + 'battle.rules'
   
 class VaisBattleTest(unittest.TestCase):

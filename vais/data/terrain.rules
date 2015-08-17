@@ -33,6 +33,11 @@ bears: rabbits|deer
 crocodiles: rabbits|deer
 wolves: rabbits|deer
 
+[formulas]
+01_heat_on_grass_a: grass = grass + 4 WHERE heat < 50 AND heat > 5
+02_heat_on_grass_b: grass = grass - (heat/2)*-1 WHERE heat <= 5 
+03_heat_on_grass_b: grass = grass - (heat/2) WHERE heat >= 50 
+
 
 
 
