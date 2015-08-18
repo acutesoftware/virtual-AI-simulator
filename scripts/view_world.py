@@ -12,9 +12,10 @@ except:
 from PIL import ImageTk, Image, ImageDraw
 from tkinter import Tk, Canvas, PhotoImage, mainloop, Frame
         	
-root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) ) 
+root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".."  ) 
 
 default_fname = root_folder + os.sep + "data" + os.sep + "worlds" + os.sep + "Divitie.txt"
+print(default_fname)
 
 def main():
     display_map(default_fname)

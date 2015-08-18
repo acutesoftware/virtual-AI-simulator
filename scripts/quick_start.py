@@ -1,6 +1,12 @@
 # quick_start.py
 
 import os
+import sys
+
+fldr = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + "..")
+print(fldr)
+sys.path.append(fldr )
+
 import planet
 import view_world
 import character
@@ -12,8 +18,7 @@ p.evolve(100)
 print(p)
 
 # view the world (or view as text via /data/worlds/ExamplePlanets.txt)
-fldr = os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' 
-view_world.display_map(fldr + os.sep + 'ExamplePlanet.txt')
+view_world.display_map(fldr + os.sep + 'data'  + os.sep + 'worlds'  + os.sep + 'ExamplePlanet.txt')
 
 
 
@@ -31,7 +36,7 @@ INVENTORY = Apple, knife
 """
 
 # load rules and traits data
-rules_file = os.getcwd() + os.sep + 'data' + os.sep + 'battle.rules'
+rules_file = fldr + os.sep + 'data' + os.sep + 'battle.rules'
 traits = character.CharacterCollection(character.fldr)
 rules = battle.BattleRules(rules_file)
 
