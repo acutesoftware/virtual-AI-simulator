@@ -3,23 +3,7 @@ import os
 import vais.planet as planet
 import vais.character as character
 
-def TEST():
-    """
-    testing base class
-    """
-    traits = character.CharacterCollection(os.getcwd() + os.sep + 'data')
-    a1 = traits.generate_random_character()
-    a2 = traits.generate_random_character()
-    a3 = traits.generate_random_character()
-    world = planet.Planet('SimWorld', num_seeds=5, width=20, height=15, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
-    actions = ['walk', 'run', 'fight', 'buy', 'sell', 'collect']
-    s = SimAdventureGame('Test of SimWorld', world, [a1, a2, a3], [(2,2), (3,4), (4,4)], actions)
-    print(s)
-    s.run()
-    s.command({'name':'walk', 'type':'move', 'direction':[0,1]}, a1)
-    s.command({'name':'walk', 'type':'move', 'direction':[1,1]}, a2)
-    s.command({'name':'attack', 'type':'fight', 'direction':[1,1]}, a3)
-    
+
 class Simulator(object):
     """
     Base simulator class
@@ -163,7 +147,4 @@ class SimGameOfLife(Simulator):
         
     def __str__(self):
         return 'GAME OF LIFE ' + Simulator.__str__(self)
-        
-if __name__ == '__main__':        
-    TEST()
         
