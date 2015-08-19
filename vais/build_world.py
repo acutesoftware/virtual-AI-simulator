@@ -9,14 +9,14 @@ import aikif.agents.explore.agent_explore_grid as agt
 
 temp_folder = 'C:\\temp\\'
 LOG_LEVEL = 2
-fldr = os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' 
+fldr = os.getcwd() #+ os.sep + 'data'  + os.sep + 'worlds' 
 
 def main():
     """
     generates a random world, sets terrain and runs agents in it
     """
-    width       =  180  # grid width  (takes about 5 minutes to generate 500x400 grid with 8% blockages)
-    height      =   75  # grid height
+    width       =   60  # grid width  (takes about 5 minutes to generate 500x400 grid with 8% blockages)
+    height      =   20  # grid height
     num_seeds   =    8   # number of seed points to start land generation
     perc_land   =   25   # % of world that is land
     perc_sea    =   75   # % of world that is sea
@@ -27,7 +27,7 @@ def main():
     myWorld.grd.save(fldr + os.sep + 'vais_world.txt')
     
     #Create some agents to walk the grid
-    iterations  = 99   # how many simulations to run
+    iterations  = 9   # how many simulations to run
     num_agents  =  9   # number of agents to enter the world
     target_coords = [math.floor(myWorld.grd.grid_height/2) + randint(1, math.floor(myWorld.grd.grid_height/2)) - 3, \
                      math.floor(myWorld.grd.grid_width /2) + randint(1, math.floor(myWorld.grd.grid_width/2)) - 5]
@@ -35,10 +35,10 @@ def main():
     for agt_num in range(0,num_agents):
         ag = agt.ExploreAgent( 'vais_agent' + str(agt_num),  temp_folder, False, LOG_LEVEL)
         start_y, start_x = myWorld.grd.find_safe_starting_point()
-        ag.set_world(myWorld.grd, start_y, start_x, target_coords[0], target_coords[1])
+        ag.set_world(myWorld.grd, [start_y, start_x], target_coords)
         agt_list.append(ag)
     sim = my_world.WorldSimulation(myWorld, agt_list, LOG_LEVEL)
     sim.run(iterations, 'Y', temp_folder)
     sim.world.grd.save(fldr + os.sep + 'vais_world_traversed.txt')
  
-main()
+
