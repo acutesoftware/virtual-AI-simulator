@@ -12,6 +12,10 @@ VAIS - Virtual AI simulator
    :target: https://landscape.io/github/acutesoftware/virtual-AI-simulator/master
    :alt: Code Health
 
+.. image:: https://requires.io/github/acutesoftware/virtual-AI-simulator/requirements.svg?branch=master
+     :target: https://requires.io/github/acutesoftware/virtual-AI-simulator/requirements/?branch=master
+     :alt: Requirements Status
+     
 VAIS runs simulations of agents and players across multiple worlds
 
 create a random world
