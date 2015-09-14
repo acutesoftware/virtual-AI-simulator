@@ -23,13 +23,3 @@ params['actions'] = ['shuffle', 'lunge', 'bite']
 params['move_actions'] = ['shuffle', 'lunge']
 params['attack_actions'] = ['bite']
 
-def TEST():
-    """
-    local test of parameters
-    """
-    for k,v in params.items():
-        if k != 'desc_long':
-            print(k.ljust(15) + ' = ' + str(v))
-        
-        
-TEST()
