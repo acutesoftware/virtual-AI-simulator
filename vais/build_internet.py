@@ -1,9 +1,6 @@
 # build_internet.py  
 
 import os
-import sys
-import math
-from random import randint 
 import npc.web_users 
 
 import aikif.environments.internet as mod_env
