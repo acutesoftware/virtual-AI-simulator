@@ -20,14 +20,9 @@ params['actions'] = ['shoot', 'fight', 'walk', 'sprint']
 params['move_actions'] = ['walk', 'sprint']
 params['attack_actions'] = ['shoot', 'fight']
 
-def TEST():
-    """
-    local test of parameters
-    """
-    for k,v in params.items():
-        if k != 'desc_long':
-            print(k.ljust(15) + ' = ' + str(v))
-        
-    
-if __name__ == '__main__':        
-    TEST()
+nps_pos = [100,100]    # random pos for bandit - overwritten when module used
+taget_pos = [50,50]    # random pos for target - overwritten when module used
+
+# Custom actions for NPC below
+#def action():    
+#    pass
