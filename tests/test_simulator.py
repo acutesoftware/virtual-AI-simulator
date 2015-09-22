@@ -64,6 +64,8 @@ class VaisSimulatorTest(unittest.TestCase):
         print(s)
         self.assertEqual(len(str(s)), 143)  
     
+    def test_04_sim_fail(self):
+        self.assertEqual(1, 2)  
         
 if __name__ == '__main__':
     unittest.main() 
