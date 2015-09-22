@@ -31,7 +31,6 @@ setup(
     'Topic :: Scientific/Engineering :: Artificial Intelligence',
     'Topic :: Software Development :: Libraries :: Python Modules',
     'Topic :: Games/Entertainment :: Simulation',
-    'Topic :: Software Development :: Libraries :: Application Frameworks',
     ],
 
 )

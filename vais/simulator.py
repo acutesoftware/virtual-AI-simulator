@@ -49,7 +49,9 @@ class Simulator(object):
         for a in self.agents:
             nmes.append(a.name)
         if len(nmes) != len(set(nmes)):
-            raise 'Error - you need to pass unique list of agent names to simulator'
+            #raise 'Error - you need to pass unique list of agent names to simulator'
+            print('Error - you need to pass unique list of agent names to simulator')
+            
     
     def _get_agent_loc_index(self, agent_name):
         """

@@ -15,8 +15,6 @@ install:
 - pip install coveralls
 
 script:  
-- python setup.py nosetests --with-coverage --cover-package pypiview
-- coverage run --source=vais setup.py test
 - nosetests --with-coverage
 
 after_success:
