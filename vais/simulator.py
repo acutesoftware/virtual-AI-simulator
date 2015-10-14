@@ -13,7 +13,6 @@ class Simulator(object):
         self.world = world
         self.actions = actions
         self.events = []
-        #self.log = aikif.log
         self.log = []
         self.status = 'Started'
         self.agents = agents
@@ -49,7 +48,6 @@ class Simulator(object):
         for a in self.agents:
             nmes.append(a.name)
         if len(nmes) != len(set(nmes)):
-            #raise 'Error - you need to pass unique list of agent names to simulator'
             print('Error - you need to pass unique list of agent names to simulator')
             
     
@@ -74,10 +72,11 @@ class Simulator(object):
         """
         Sets the x,y location of agent by name
         """
-        pass
-        print('TODO')
-        #self.agent_locations[_get_agent_loc_index(agent_name)]['x'] = x
-        #self.agent_locations[_get_agent_loc_index(agent_name)]['y'] = y
+        for a in self.agent_locations:
+            if a['name'] == agent_name:
+                a['x'] = x
+                a['y'] = y
+                return
 
         
     
