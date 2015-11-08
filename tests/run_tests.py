@@ -22,3 +22,6 @@ wipe_file('character_sample.txt')
 
 wipe_file('character.txt')
 wipe_file('vais_world_traversed.txt')
+wipe_file('vais_world.txt')
+
+
