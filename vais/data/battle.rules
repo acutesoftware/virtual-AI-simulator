@@ -6,8 +6,12 @@
 # Step 1 - calculate Hit chance
 # example, hit = random.randint(hit_min,hit_max)
 hit_min = 1
-hit_max = round(INT/2) + round(AGI/2) + 1
 hit_limit = 10
+hit_AGI_mult = 0.5
+hit_INT_mult = 0.5
+hit_AGI_add = 0
+hit_INT_add = 0
+hit_overall_add = 1
 
 # Step 2 - calculate Damage - OLD equation was 
 #      dmg_max = round(((STR * 1.2) + (AGI * 1.2) + (INT * 1.2)) / 6 )
@@ -29,12 +33,13 @@ dmg_STR_add = 0
 dmg_overall_mult = 0.1667
 dmg_overall_add = 0
 
+
 # Step 3 - calculate Crit chance
 # This is based on HIT calc in step 1 above
 shot_hit_greater_than = 3
 shot_crit_greater_than = 6
 
 # Step 4 - calculate damage multiplier based on Crit/Hit/Miss
-dmg_mult_miss = round(amount_dmg * 0.1)
-dmg_mult_hit = round(amount_dmg * 1.0)
-dmg_mult_crit = round(amount_dmg * 1.5)
+dmg_mult_miss = 0.1
+dmg_mult_hit = 1.0
+dmg_mult_crit = 1.5
