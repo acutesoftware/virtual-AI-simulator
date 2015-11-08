@@ -1,6 +1,7 @@
 # battle.py   
 import os
 import random  
+
 import vais.character as character
 
 rules_file = os.getcwd() + os.sep + 'data' + os.sep + 'battle.rules'
@@ -210,9 +211,20 @@ class Battle(object):
         INT = c.stats['INT']
         STR = c.stats['STR']
         #STA = c.stats['STA']
-
-        hit_min   = eval(self.rules.all_rules['hit_min'])
-        hit_max   = eval(self.rules.all_rules['hit_max'])
+        #print('calc move : self.rules.all_rules[hit_min] = ', self.rules.all_rules['hit_min'])
+        #print('calc move : self.rules.all_rules[hit_max] = ', self.rules.all_rules['hit_max'])
+        #print('calc move :  = self.rules.all_rules[hit_limit]', self.rules.all_rules['hit_limit'])
+        hit_min   = float(self.rules.all_rules['hit_min'])
+        
+        hit_AGI_mult   = float(self.rules.all_rules['hit_AGI_mult'])
+        hit_INT_mult   = float(self.rules.all_rules['hit_INT_mult'])
+        hit_AGI_add   = float(self.rules.all_rules['hit_AGI_add'])
+        hit_INT_add   = float(self.rules.all_rules['hit_INT_add'])
+        hit_overall_add   = float(self.rules.all_rules['hit_overall_add'])
+        
+        #  hit_max = round(INT/2) + round(AGI/2) + 1
+        hit_max = round(INT*(hit_INT_mult + hit_INT_add)) + round(AGI*(hit_AGI_mult + hit_AGI_add)) + hit_overall_add
+        
         hit_limit = eval(self.rules.all_rules['hit_limit']) 
         if hit_max > hit_limit:
             hit_max = hit_limit
@@ -231,11 +243,11 @@ class Battle(object):
         amount_dmg = random.randint(dmg_min, dmg_max)
         
         if chance_hit > eval(self.rules.all_rules['shot_crit_greater_than']):
-            return 'Crit', amount_dmg * eval(self.rules.all_rules['dmg_mult_crit'])
-        elif chance_hit < eval(self.rules.all_rules['shot_hit_greater_than']):
-            return 'Miss', amount_dmg * eval(self.rules.all_rules['dmg_mult_miss'])
+            return 'Crit', amount_dmg * float(self.rules.all_rules['dmg_mult_crit'])
+        elif chance_hit < float(self.rules.all_rules['shot_hit_greater_than']):
+            return 'Miss', amount_dmg * float(self.rules.all_rules['dmg_mult_miss'])
         else:
-            return 'Hit', amount_dmg * eval(self.rules.all_rules['dmg_mult_hit'])
+            return 'Hit', amount_dmg * float(self.rules.all_rules['dmg_mult_hit'])
             
     def is_character_dead(self, c):
         """
