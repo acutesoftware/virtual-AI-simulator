@@ -6,7 +6,6 @@ import sys
 
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
 ref_folder = root_folder + os.sep + "data" 
-
 sys.path.append(root_folder)
 
 import planet as planet

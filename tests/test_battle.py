@@ -4,14 +4,18 @@ import unittest
 import os
 import sys
 import time
-import vais.battle as battle
-import vais.character as character
+
+root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
+ref_folder = root_folder + os.sep + "data" 
+sys.path.append(root_folder)
+
+
+import battle
+import character
 
 test_folder = os.getcwd() + os.sep + 'test_results'
 test_file = test_folder + os.sep + 'battle.txt'
 
-root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
-ref_folder = root_folder + os.sep + 'data' 
 rules_file = ref_folder + os.sep + 'battle.rules'
   
 class VaisBattleTest(unittest.TestCase):
