@@ -129,7 +129,7 @@ class Simulator(object):
         """
         
         self._set_location(agent, direction[0], direction[0])
-        print('moving agent to x,y=', x,y, 'wrap_allowed = ', wrap_allowed)
+        print('moving agent to x,y=', direction, 'wrap_allowed = ', wrap_allowed)
     
     
 class SimAdventureGame(Simulator):
