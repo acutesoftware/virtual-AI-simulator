@@ -1,8 +1,4 @@
 # simulator.py
-import os
-import vais.planet as planet
-import vais.character as character
-
 
 class Simulator(object):
     """
@@ -132,8 +128,9 @@ class Simulator(object):
         """
         moves agent 'agent' in 'direction'
         """
-        x,y = self._set_location(agent, direction[0], direction[0])
-        print('moving agent to x,y=', x,y)
+        
+        self._set_location(agent, direction[0], direction[0])
+        print('moving agent to x,y=', x,y, 'wrap_allowed = ', wrap_allowed)
     
     
 class SimAdventureGame(Simulator):
