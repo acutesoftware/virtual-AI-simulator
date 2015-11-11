@@ -6,61 +6,6 @@ import vais.character as character
 
 rules_file = os.getcwd() + os.sep + 'data' + os.sep + 'battle.rules'
 
-def TEST():
-    traits = character.CharacterCollection(character.fldr)
-    character1 = traits.generate_random_character()
-    character2 = traits.generate_random_character()
-    print(character1)
-    print(character2)
-    rules = BattleRules(rules_file)
-    #print(rules.all_rules['dmg_max'])
-    #print(rules)
-    
-    b = Battle(character1, character2, traits, rules, print_console='Yes')
-    print(b.status)
-    
-
-    # sim = BattleSimulator( character1, character2, traits, rules, 1000)
-    # print(sim)
-    # # After 1000 fights Zatsij wins!
-    # # Zatsij = 525 (52%)
-    # # Rekmor = 475 (48%)
-    
-    # # check - make characters the same and run simulation (should get 50%)
-    # character1 = character2.copy()
-    # character1.name = 'Copy'
-    # sim2 = BattleSimulator( character1, character2, traits, rules, 1000)
-
-    # After 1000000 fights Rekmor wins!
-    # Copy = 498402 (50%)
-    # Rekmor = 501598 (50%)
-    
-    #print('PLAYER1 [end]:', character1)
-    #print('PLAYER2 [end]:', character2)
-
-    """
-        PLAYER1 [start]: CHARACTER = Wolgri
-        Race      = Troll
-        Class     = Rogue
-        STATS     = Health:23 STR:9 AGI:8 CON:8 INT:1 STA:10 max_health:23
-        Story     = A brave person looking to fight evil in the dark forests of Divitie
-        SKILLS    = Light Area, Sleep, Mining
-        INVENTORY = 24 gold, spear, leaf, stick
-        PLAYER2 [start]: CHARACTER = Aregri
-        Race      = Half-Elf
-        Class     = Rogue
-        STATS     = Health:20 STR:8 AGI:10 CON:7 INT:5 STA:5 max_health:20
-        Story     = A careful thinker who wants to make the land a safer place
-        SKILLS    = Lightning Bolt, Sleep, Sleep
-        INVENTORY = 22 gold, rock, spear, sword
-        Wolgri [100%] miss Aregri [100%]
-        Aregri [100%] CRIT Wolgri [100%] for 18
-        Wolgri  [22%] hits Aregri [100%] for 7
-        Aregri  [65%] CRIT Wolgri  [22%] for 6
-        After 10000 fights - results are
-        Wolgri = 3032 (30%)
-        Aregri = 6968 (70%)    
-    """
 class BattleRules(object):
     """
     Manages the parsing of rules for a battle by reading the .rules file
@@ -258,7 +203,5 @@ class Battle(object):
         else:
             return False
 
-if __name__ == '__main__':
-    TEST()    
-             
+
             
