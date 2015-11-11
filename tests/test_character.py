@@ -11,7 +11,7 @@ test_file = test_folder + os.sep + 'character.txt'
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
 ref_folder = root_folder + os.sep + "data" 
 
-                  
+
 class VaisCharacterTest(unittest.TestCase):
     def setup(self):
         print('running character tests')
