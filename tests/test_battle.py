@@ -60,6 +60,9 @@ class VaisBattleTest(unittest.TestCase):
             self.assertEqual(True, True)
         else:
             self.assertEqual(True, False)
+        #print(sim)
+        self.assertEqual(str(sim)[0:17], 'After 1000 fights')
+        
 
 if __name__ == '__main__':
     unittest.main() 
