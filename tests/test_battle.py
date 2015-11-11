@@ -50,6 +50,17 @@ class VaisBattleTest(unittest.TestCase):
         else:
             self.assertEqual(True, False)
         
+        
+        b2 = battle.Battle(c1, c2, traits, rules, print_console='Yes')
+        self.assertEqual(len(str(b2)) > 5, True)
+        if c2.name in str(b2) or c1.name in str(b2):
+            self.assertEqual(True, True)
+        else:
+            self.assertEqual(True, False)
+        
+        
+        
+        
     def test_05_battle_multiple(self):
         traits = character.CharacterCollection(ref_folder)
         c1 = traits.generate_random_character()
