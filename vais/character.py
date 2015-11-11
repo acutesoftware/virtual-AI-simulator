@@ -24,7 +24,7 @@ class RefFile(object):
     def __str__(self):
         res = ' === ' + self.name + ' Reference File ====\n'
         res += str(len(self.dat)) + ' lines = ' 
-        for row in enumerate(self.dat):
+        for row in self.dat:
             if 'name' in self.hdrs:
                 res += row['name'] + ','
             #for colnum, col in enumerate(row):
