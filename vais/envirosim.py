@@ -40,6 +40,7 @@ class Params(object):
     def __init__(self, name, desc, derived_from='root'):
         self.name = name
         self.desc = desc
+        self.derived_from = derived_from
         self.params = []
         self.affects = []
 
@@ -48,11 +49,12 @@ class Params(object):
         res += self.name + '\n'
         res += self.desc+ '\n'
         res += '---------------------------------------------------\n'
-        
+        res += 'derived from : ' + self.derived_from + '\n'
         for p in self.params:
             res += str(p)
         for f in self.affects:
             res += str(f)
+        
         return res
     
     def add_param(self, nme, dsc):
@@ -90,7 +92,7 @@ class Param(object):
     """
     handles the list of things that have an effect on the environment
     """
-    def __init__(self, name, desc, derived_from='root'):
+    def __init__(self, name, desc):
         self.name = name
         self.desc = desc
 
