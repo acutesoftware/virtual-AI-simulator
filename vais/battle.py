@@ -225,12 +225,12 @@ class Battle(object):
         #  hit_max = round(INT/2) + round(AGI/2) + 1
         hit_max = round(INT*(hit_INT_mult + hit_INT_add)) + round(AGI*(hit_AGI_mult + hit_AGI_add)) + hit_overall_add
         
-        hit_limit = eval(self.rules.all_rules['hit_limit']) 
+        hit_limit = float(self.rules.all_rules['hit_limit']) 
         if hit_max > hit_limit:
             hit_max = hit_limit
         chance_hit = random.randint(hit_min,hit_max)
         
-        dmg_min   = eval(self.rules.all_rules['dmg_min'])
+        dmg_min   = float(self.rules.all_rules['dmg_min'])
         #dmg_max   = eval(self.rules.all_rules['dmg_max'])
         calc_agi = round((AGI + float(self.rules.all_rules['dmg_AGI_add'])) * float(self.rules.all_rules['dmg_AGI_mult']))
         calc_int = round((INT + float(self.rules.all_rules['dmg_INT_add'])) * float(self.rules.all_rules['dmg_INT_mult']))
@@ -242,7 +242,7 @@ class Battle(object):
         #print('dmg_min  =',dmg_min  , 'dmg_max = ',dmg_max  )
         amount_dmg = random.randint(dmg_min, dmg_max)
         
-        if chance_hit > eval(self.rules.all_rules['shot_crit_greater_than']):
+        if chance_hit > float(self.rules.all_rules['shot_crit_greater_than']):
             return 'Crit', amount_dmg * float(self.rules.all_rules['dmg_mult_crit'])
         elif chance_hit < float(self.rules.all_rules['shot_hit_greater_than']):
             return 'Miss', amount_dmg * float(self.rules.all_rules['dmg_mult_miss'])
