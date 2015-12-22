@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # test_character.py  written by Duncan Murray 5/4/2015
 
 import unittest
