@@ -6,14 +6,6 @@ import aikif.environments.worlds as my_world
  
 fldr = os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' 
 
-def TEST():
-    """
-    testing planet evolution to build a virtual world
-    """
-    p = Planet('Divitie', num_seeds=5, width=200, height=150, wind=0.2, rain=0.20, sun=0.2, lava=0.5)
-    p.evolve(years=10000000)
-    print(p)
-    
 class Planet(object):
     """
     class to manage the simplified evolution of a planet to 
@@ -108,8 +100,3 @@ class Planet(object):
                     if n < 1 and random.randint(1,10) > 7:
                         self.world.grd.set_tile(y, x, 'A')
         
-        
- 
-if __name__ == '__main__':
-    TEST()    
-    
