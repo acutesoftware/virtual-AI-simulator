@@ -1,0 +1,7 @@
+# coin-toss.rule
+
+[game]
+options=[heads, tails]
+heads=0.5
+tails=0.5
+choice=random
