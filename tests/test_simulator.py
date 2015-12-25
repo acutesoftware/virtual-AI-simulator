@@ -1,4 +1,6 @@
-# test_simulator.py  written by Duncan Murray 28/4/2015
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# test_simulator.py
 
 import unittest
 import os
@@ -16,8 +18,6 @@ import simulator as simulator
 
 test_folder = os.getcwd() + os.sep + 'test_results'
 test_file = test_folder + os.sep + 'battle.txt'
-
-#rules_file = ref_folder + os.sep + 'battle.rules'
   
 class VaisSimulatorTest(unittest.TestCase):
     def setup(self):
