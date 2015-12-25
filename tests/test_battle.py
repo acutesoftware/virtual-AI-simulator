@@ -4,14 +4,18 @@ import unittest
 import os
 import sys
 import time
-import vais.battle as battle
-import vais.character as character
+
+root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
+ref_folder = root_folder + os.sep + "data" 
+sys.path.append(root_folder)
+
+
+import battle
+import character
 
 test_folder = os.getcwd() + os.sep + 'test_results'
 test_file = test_folder + os.sep + 'battle.txt'
 
-root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + 'vais') 
-ref_folder = root_folder + os.sep + 'data' 
 rules_file = ref_folder + os.sep + 'battle.rules'
   
 class VaisBattleTest(unittest.TestCase):
@@ -46,6 +50,17 @@ class VaisBattleTest(unittest.TestCase):
         else:
             self.assertEqual(True, False)
         
+        
+        b2 = battle.Battle(c1, c2, traits, rules, print_console='Yes')
+        self.assertEqual(len(str(b2)) > 5, True)
+        if c2.name in str(b2) or c1.name in str(b2):
+            self.assertEqual(True, True)
+        else:
+            self.assertEqual(True, False)
+        
+        
+        
+        
     def test_05_battle_multiple(self):
         traits = character.CharacterCollection(ref_folder)
         c1 = traits.generate_random_character()
@@ -56,6 +71,9 @@ class VaisBattleTest(unittest.TestCase):
             self.assertEqual(True, True)
         else:
             self.assertEqual(True, False)
+        #print(sim)
+        self.assertEqual(str(sim)[0:17], 'After 1000 fights')
+        
 
 if __name__ == '__main__':
     unittest.main() 

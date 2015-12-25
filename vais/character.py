@@ -7,23 +7,12 @@ import random
 fldr = os.getcwd() + os.sep + 'data'  
 #print('character.py: fldr = ', fldr)
 
-def TEST():
-    """
-    Module to handle character creation
-    """
-    print('creating random character')
-    traits = CharacterCollection(fldr)
-    #print(traits)
-    #print("traits.stats.raw_data:", traits.stats.dat)
-    #print("traits.stats:", str(traits.stats))
-    c = traits.generate_random_character()
-    print(c)
-    
-class RefFile():
+
+class RefFile(object):
     """
     Class to handle a CSV type reference file for 
     stats, races, etc - generally has a header and
-    any column can have mulitple values if enclosed
+    any column can have multiple values if enclosed
     by [] where values parsed by |
     """
     def __init__(self, fldr, fname):
@@ -32,18 +21,12 @@ class RefFile():
         self.hdrs = []
         self.dat = self.parse_to_dict() # read CSV file and parse into dictionary
 
-    #def __iter__(self):
-    #    return iter(self.dat)
-            
     def __str__(self):
         res = ' === ' + self.name + ' Reference File ====\n'
         res += str(len(self.dat)) + ' lines = ' 
-        for rownum, row in enumerate(self.dat):
+        for row in self.dat:
             if 'name' in self.hdrs:
                 res += row['name'] + ','
-            else:
-                #print("Headers for " + self.fname + " = " , self.hdrs)
-                pass
             #for colnum, col in enumerate(row):
             #    print(str(rownum), str(colnum), col)
         return res
@@ -61,11 +44,12 @@ class RefFile():
                 cols = line.split(',')
                 if len(cols) == len(self.hdrs):
                     #print(cols)
-                    dict = {}
+                    d = {}
                     for ndx, col_header in enumerate(self.hdrs):
-                        #print("i[ndx] = ", cols[ndx].strip('\n').strip())
-                        dict[self.hdrs[ndx].strip('\n').strip()] = cols[ndx].strip('\n').strip()
-                    lst.append(dict)
+                        #d[self.hdrs[ndx].strip('\n').strip()] = cols[ndx].strip('\n').strip()
+                        d[col_header.strip('\n').strip()] = cols[ndx].strip('\n').strip()
+                        
+                    lst.append(d)
                 else:
                     print("Error parsing " + self.fname + " line : " + line)
         return lst
@@ -77,7 +61,7 @@ class RefFile():
         i = random.randint(0,len(self.dat)-1)
         return self.dat[i]['name']
     
-class CharacterCollection():
+class CharacterCollection(object):
     """
     Class to handle all the character traits
     """
@@ -127,9 +111,9 @@ class CharacterCollection():
         inventory = [str(random.randint(21,29)) + ' gold']
         
         # pick random stuff here 
-        for i in range(3):
+        for _ in range(3):
             inventory.append(self.inventory.get_random_choice())
-        for i in range(3):
+        for _ in range(3):
             skills.append(self.skills.get_random_choice())
         return Character(name, race, ch_class, stats, skills, story, inventory)
 
@@ -148,7 +132,6 @@ class CharacterCollection():
             res[s['stat']] = 0
         
         cur_stat = 0
-        stat_name = ''
         for stat in stats:
             for ndx, i in enumerate(self.classes.dat):
                 if i['name'] == ch_class:
@@ -172,7 +155,7 @@ class CharacterCollection():
         b = random.choice(['mar','dor','mor','dar','dom','kaj','sij','lim','gri','put','eat','rey'])
         return a + b
     
-class Character():
+class Character(object):
     """
     character class
     """
@@ -287,11 +270,8 @@ def read_file_1st_col_only(fname):
     """
     lst = []
     with open(fname, 'r') as f:
-        hdr = f.readline()
+        _ = f.readline()   # read the header and ignore it
         for line in f:
             lst.append(line.split(',')[0])
     return lst
         
-if __name__ == '__main__':
-    TEST()    
- 

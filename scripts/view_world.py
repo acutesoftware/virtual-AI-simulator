@@ -2,7 +2,6 @@
 import os
 import sys
 import math
-#import user_commands as mod_cmd
 
 try:
 	import Tkinter as Tkinter
@@ -14,7 +13,7 @@ from tkinter import Tk, Canvas, PhotoImage, mainloop, Frame
         	
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".."  ) 
 
-default_fname = root_folder + os.sep + "data" + os.sep + "worlds" + os.sep + "Divitie.txt"
+default_fname = root_folder + os.sep + "vais" + os.sep + "data" + os.sep + "worlds" + os.sep + "Divitie.txt"
 print(default_fname)
 
 def main():
@@ -41,7 +40,8 @@ def display_map(fname):
     app.mainloop()
     
 def callback(event):
-    mod_cmd.mouse_click(event.x, event.y)
+    #mod_cmd.mouse_click(event.x, event.y)
+    print(event)
 
 def key(event):
     x = 60
