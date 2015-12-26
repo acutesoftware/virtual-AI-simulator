@@ -1,0 +1,60 @@
+# christmas-dinner.rules
+# author: Duncan Murray
+# updated: 25/12/2015
+
+
+[guests]
+Jane
+Dave
+Tony
+Jill
+Alex
+Emma
+Abby
+Dale
+Jean
+
+
+[friends]
+Jane=[Dave,Jill]
+Emma=[Tony,Jill]
+Dale=[Dave,Abby]
+
+[foes]
+Tony=[Dave]
+Jane=[Emma, Tony]
+Jean=[Abby, Jane]
+
+[tables]
+main-table=6
+side-table1=4
+side-table2=4
+
+
+[dishes]
+ham=1.0
+turkey=1.1
+potatoes=0.9
+salad=0.8
+pudding=1.0
+
+[likes]
+Jill=ham
+Dave=[ham, turkey, potatoes, salad, pudding]
+
+[hates]
+Tony=ham
+Jane=[salad, pudding]
+Abby=turkey
+
+
+[goal-seating]
+# seat people together who like each other
+?
+
+[goal-food]
+# plan how much food to prepare based on likes and hates
+?
+
+
+
