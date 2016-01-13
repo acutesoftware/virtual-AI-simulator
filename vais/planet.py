@@ -2,6 +2,7 @@
 
 import os
 import aikif.environments.worlds as my_world
+import worlds as my_world
 #import aikif.gui_view_world as gui
  
 fldr = os.getcwd() + os.sep + 'data'  + os.sep + 'worlds' 
