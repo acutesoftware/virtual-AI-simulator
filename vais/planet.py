@@ -74,7 +74,7 @@ class Planet(object):
         
         perc_land = (self.lava + (self.wind/10) + (self.rain/20) + (self.sun/10))*100
         perc_sea = (100 - perc_land)
-        perc_blocked = (self.lava/5)*100
+        perc_blocked = (self.lava/10)*100
         
         #print('Calculating world : sea=', perc_sea, ' land=', perc_land, ' mountain=', perc_blocked,  )
         self.world.build_random( self.num_seeds, perc_land, perc_sea, perc_blocked)
