@@ -95,6 +95,9 @@ class view_tk(Tkinter.Tk):
         
         self.canvas.pack()
         
+        #self.img.save('map.jpg')
+        # NOTE - to save canvas image you need to use PIL Image and ImageDraw
+        
     def TEST_sin(self):    
         for x in range(4 * self.appWidth):
             y = int(self.appHeight/2 + self.appHeight/4 * math.sin(x/80.0))
