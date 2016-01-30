@@ -15,7 +15,7 @@ import character
 import battle
 
 # create a random world
-p = planet.Planet('quick_planet', num_seeds=5, width=100, height=300, wind=0.2, rain=0.20, sun=0.2, lava=0.2)
+p = planet.Planet('quick_planet', num_seeds=5, width=100, height=75, wind=0.2, rain=0.25, sun=0.3, lava=0.1)
 p.evolve(100)
 print(p)
 p.world.grd.save(fldr + os.sep + 'data'  + os.sep + 'worlds'  + os.sep + 'quick_planet.txt')
