@@ -3,7 +3,9 @@
 import os
 import sys
 
-fldr = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + "..")
+root_fldr = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + "..")
+fldr = root_fldr + os.sep + "vais"
+op_fldr = root_fldr + os.sep + "tests"
 print(fldr)
 sys.path.append(fldr )
 
@@ -13,12 +15,12 @@ import character
 import battle
 
 # create a random world
-p = planet.Planet('ExamplePlanet', num_seeds=5, width=60, height=45, wind=0.2, rain=0.20, sun=0.2, lava=0.5)
+p = planet.Planet('quick_planet', num_seeds=5, width=100, height=300, wind=0.2, rain=0.20, sun=0.2, lava=0.2)
 p.evolve(100)
 print(p)
-
+p.world.grd.save(fldr + os.sep + 'data'  + os.sep + 'worlds'  + os.sep + 'quick_planet.txt')
 # view the world (or view as text via /data/worlds/ExamplePlanets.txt)
-view_world.display_map(fldr + os.sep + 'data'  + os.sep + 'worlds'  + os.sep + 'ExamplePlanet.txt')
+view_world.display_map(fldr + os.sep + 'data'  + os.sep + 'worlds'  + os.sep + 'quick_planet.txt')
 
 
 
@@ -37,12 +39,12 @@ INVENTORY = Apple, knife
 
 # load rules and traits data
 rules_file = fldr + os.sep + 'data' + os.sep + 'battle.rules'
-traits = character.CharacterCollection(character.fldr)
+traits = character.CharacterCollection(os.path.join(fldr,'data'))
 rules = battle.BattleRules(rules_file)
 
 # create a random character 
 c2 = traits.generate_random_character()
-c2.save_to_file('random_char.txt')
+c2.save_to_file(os.path.join(op_fldr, 'random_char.txt'))
 print(c2)
 """
 CHARACTER = Rekkaj
