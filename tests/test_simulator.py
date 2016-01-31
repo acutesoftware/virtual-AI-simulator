@@ -87,10 +87,11 @@ class VaisSimulatorTest(unittest.TestCase):
     
         sim = worlds.WorldSimulation(myWorld, agt_list, 1)
         sim.run(9, 'Y', log_folder + os.sep)
+        self.assertTrue(len(str(sim)) > 10)  
+        
     
     
-    
-    def test_11_SimGameOfLife(self):
+    def test_11_game_of_life(self):
         traits = character.CharacterCollection(ref_folder)
         a1 = traits.generate_random_character()
         world = planet.Planet('SimWorld', num_seeds=5, width=20, height=15, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
@@ -98,11 +99,11 @@ class VaisSimulatorTest(unittest.TestCase):
         s = simulator.SimAdventureGame('Test of Game of Life', world, [a1], [(2,2)], actions)
         s.run()
         print(s)
-        self.assertEqual(len(str(s)), 147)  
+        self.assertTrue(len(str(s)) > 10)  
         
         
     
-    def test_21_SimAdventureGame(self):
+    def test_21_sim_adventure_game(self):
         traits = character.CharacterCollection(ref_folder)
         a1 = traits.generate_random_character()
         world = planet.Planet('SimWorld', num_seeds=5, width=20, height=15, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
