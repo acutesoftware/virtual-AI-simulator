@@ -242,7 +242,7 @@ class WorldSimulation(object):
         print("--------------------------------------------------")
         print("Starting Simulation - target = ", self.agent_list[0].target_y, self.agent_list[0].target_x)
         self.world.grd.set_tile(self.agent_list[0].target_y , self.agent_list[0].target_x , 'T')
-        #self.highlight_cell_surroundings(self.agent_list[0].target_y, self.agent_list[0].target_x)
+        self.highlight_cell_surroundings(self.agent_list[0].target_y, self.agent_list[0].target_x)
         self.start_all_agents()
         # save the agents results here
         try:
@@ -284,6 +284,10 @@ class WorldSimulation(object):
         to see on a grid. Currently assumes the target is within
         the boundary by 1 on all sides
         """
+        #print('SELF_WORLD', self.world)
+        #print('target_y, target_x, self.world.grd.grid_height, self.world.grd.grid_width ', target_y, target_x, self.#world.grd.grid_height, self.world.grd.grid_width )
+        #exit(0)
+        
         if target_y < 1:
             print("target too close to top")
         if target_y > self.world.grd.grid_height - 1:  
