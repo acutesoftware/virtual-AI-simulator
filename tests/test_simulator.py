@@ -88,7 +88,17 @@ class VaisSimulatorTest(unittest.TestCase):
         sim = worlds.WorldSimulation(myWorld, agt_list, 1)
         sim.run(9, 'Y', log_folder + os.sep)
         self.assertTrue(len(str(sim)) > 10)  
+        #print(sim.agent_list[0].agent_locations)
+        print(sim.agent_list[0])
         
+        self.assertFalse(agt_list[0].current_x == 4545) 
+        self.assertFalse(agt_list[0].current_y == 9895) 
+        
+        agt_list[0].current_x = 4545
+        agt_list[0].current_y = 9895
+        
+        self.assertEqual(agt_list[0].current_x, 4545) 
+        self.assertEqual(agt_list[0].current_y, 9895) 
     
     
     def test_11_game_of_life(self):
