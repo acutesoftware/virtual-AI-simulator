@@ -26,15 +26,23 @@ class VaisSimulatorTest(unittest.TestCase):
         print('running simulator tests')
         
     def test_01_instantiate_sim(self):
+    
+        # make 3 agents
+        a1 = mod_agt.Agent(name='a1', fldr=os.getcwd())
+        a2 = mod_agt.Agent(name='a2', fldr=os.getcwd())
+        a3 = mod_agt.Agent(name='a3', fldr=os.getcwd())
+        # create 3 characters from the Character generator and assign to agents
         traits = character.CharacterCollection(ref_folder)
-        a1 = traits.generate_random_character()
-        a2 = traits.generate_random_character()
-        a3 = traits.generate_random_character()
+        a1.characteristics = traits.generate_random_character()
+        a2.characteristics = traits.generate_random_character()
+        a3.characteristics = traits.generate_random_character()
+
+        
         world = planet.Planet('SimWorld', num_seeds=5, width=20, height=15, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
         actions = ['walk', 'run', 'fight', 'buy', 'sell', 'collect']
-        s = simulator.SimAdventureGame('Test of SimWorld', world, [a1, a2, a3], [(2,2), (3,4), (4,4)], actions)
+        s = simulator.SimAdventureGame('Test of SimWorld', world, [a1, a2, a3],  actions)
         s.run()
-        self.assertEqual(len(str(s)), 189)  
+        self.assertEqual(len(str(s)), 354)  
         
 
     def test_02_move_character(self):
@@ -42,21 +50,15 @@ class VaisSimulatorTest(unittest.TestCase):
         add a single character to a world and move them around
         """
         traits = character.CharacterCollection(ref_folder)
-        a1 = traits.generate_random_character()
-        a1.name = 'fred'
+        a1 = mod_agt.Agent(name='a2', fldr=os.getcwd())
+        a1.characteristics = traits.generate_random_character()
         world = planet.Planet('SimWorld', num_seeds=5, width=20, height=15, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
         actions = ['walk']
-        s = simulator.SimAdventureGame('Test of SimWorld', world, [a1], [{'name':'fred', 'x':2,'y':2}], actions)
+        s = simulator.SimAdventureGame('Test of SimWorld', world, [a1], actions)
         s.run()
-        self.assertEqual(len(str(s)), 153)  
+        self.assertEqual(len(str(s)), 184)  
         
-        #print('s.agent_locations = ', s.agent_locations)
-        self.assertEqual(s.agent_locations[0]['x'], 2)  
-        self.assertEqual(s.agent_locations[0]['y'], 2)  
-        s.command({'name':'walk', 'type':'move', 'direction':[0,1]}, a1)
-        self.assertEqual(s.agent_locations[0]['x'], 2)  
-        self.assertEqual(s.agent_locations[0]['y'], 2)  # error, this should be 3 but location doesnt change
-        
+         
         s.command({'name':'walk', 'type':'move', 'direction':[1,1]}, a1)
         s.command({'name':'run', 'type':'run', 'direction':[2,1]}, a1)
         s.command({'name':'fight', 'type':'fight', 'direction':[2,1]}, a1)
@@ -70,15 +72,17 @@ class VaisSimulatorTest(unittest.TestCase):
         check that a failed verify agent works
         simulator.Simulator('BadSim', name, world, agents, agent_locations, actions)
         """
-        name = 'BadSim'
         world = worlds.World( 40, 40, ['.','X','#'])
         agt1 = mod_agt.Agent(name='agt_9001', fldr=os.getcwd())
         agt2 = mod_agt.Agent(name='agt_9002', fldr=os.getcwd())
         agents = [agt1,agt2]
-        agent_locations = [{'name':'agt_9001', 'x':3, 'y':5},{'name':'agt_9002', 'x':6, 'y':3}]
+
+        agt1.set_coords({'x':2, 'y':1, 'z':0, 't':0})
+        agt2.set_coords({'x':3, 'y':4, 'z':0, 't':0})
+        
         actions = ['walk']
         
-        s04 = simulator.Simulator(name, world, agents, agent_locations, actions)
+        s04 = simulator.Simulator('sim04', world, agents, actions)
         self.assertTrue(s04._verify_agents())
         
         # now add a duplicate agent name
@@ -131,10 +135,11 @@ class VaisSimulatorTest(unittest.TestCase):
     
     def test_11_game_of_life(self):
         traits = character.CharacterCollection(ref_folder)
-        a1 = traits.generate_random_character()
+        a1 = mod_agt.Agent(name='Life', fldr=os.getcwd())
+        a1.characteristics = traits.generate_random_character()  # No, this should not be a adventure character
         world = planet.Planet('SimWorld', num_seeds=5, width=20, height=15, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
         actions = ['walk']
-        s = simulator.SimAdventureGame('Test of Game of Life', world, [a1], [(2,2)], actions)
+        s = simulator.SimAdventureGame('Test of Game of Life', world, [a1], actions)
         s.run()
         #print(s)
         self.assertTrue(len(str(s)) > 10)  
@@ -143,13 +148,14 @@ class VaisSimulatorTest(unittest.TestCase):
     
     def test_21_sim_adventure_game(self):
         traits = character.CharacterCollection(ref_folder)
-        a1 = traits.generate_random_character()
+        a21 = mod_agt.Agent(name='a1', fldr=os.getcwd())
+        a21.characteristics = traits.generate_random_character()
         world = planet.Planet('SimWorld', num_seeds=5, width=20, height=15, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
         actions = ['walk']
-        s = simulator.SimAdventureGame('Test of SimAdventureGame', world, [a1], [(2,2)], actions)
+        s = simulator.SimAdventureGame('Test of SimAdventureGame', world, [a21], actions)
         s.run()
         #print(s)
-        self.assertEqual(len(str(s)), 137)  
+        self.assertEqual(len(str(s)), 192)  
         
     
 if __name__ == '__main__':
