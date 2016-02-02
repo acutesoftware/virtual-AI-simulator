@@ -1,16 +1,16 @@
 # view_world.py     written by Duncan Murray 3/4/2015
 import os
-import sys
 import math
 
 try:
-	import Tkinter as Tkinter
-except:
-	import tkinter as Tkinter
+    import Tkinter as Tkinter
+except Exception as ex:
+    print('loading tkinter instead of Tkinter\n' + str(ex))
+    import tkinter as Tkinter
 
-from PIL import ImageTk, Image, ImageDraw
-from tkinter import Tk, Canvas, PhotoImage, mainloop, Frame
-        	
+from PIL import Image, ImageDraw
+from tkinter import Canvas, PhotoImage, mainloop, Frame
+            
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".."  ) 
 
 default_fname = root_folder + os.sep + "vais" + os.sep + "data" + os.sep + "worlds" + os.sep + "Divitie.txt"
@@ -46,7 +46,7 @@ def callback(event):
 def key(event):
     x = 60
     y = 22
-    mod_cmd.key_pressed(event.char, x, y) 
+    #mod_cmd.key_pressed(event.char, x, y) 
     
 
 class view_tk(Tkinter.Tk):
