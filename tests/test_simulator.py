@@ -43,18 +43,19 @@ class VaisSimulatorTest(unittest.TestCase):
         """
         traits = character.CharacterCollection(ref_folder)
         a1 = traits.generate_random_character()
+        a1.name = 'fred'
         world = planet.Planet('SimWorld', num_seeds=5, width=20, height=15, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
         actions = ['walk']
-        s = simulator.SimAdventureGame('Test of SimWorld', world, [a1], [(2,2)], actions)
+        s = simulator.SimAdventureGame('Test of SimWorld', world, [a1], [{'name':'fred', 'x':2,'y':2}], actions)
         s.run()
-        self.assertEqual(len(str(s)), 129)  
+        self.assertEqual(len(str(s)), 153)  
         
         #print('s.agent_locations = ', s.agent_locations)
-        self.assertEqual(s.agent_locations[0][0], 2)  
-        self.assertEqual(s.agent_locations[0][1], 2)  
+        self.assertEqual(s.agent_locations[0]['x'], 2)  
+        self.assertEqual(s.agent_locations[0]['y'], 2)  
         s.command({'name':'walk', 'type':'move', 'direction':[0,1]}, a1)
-        self.assertEqual(s.agent_locations[0][0], 2)  
-        self.assertEqual(s.agent_locations[0][1], 2)  
+        self.assertEqual(s.agent_locations[0]['x'], 2)  
+        self.assertEqual(s.agent_locations[0]['y'], 2)  # error, this should be 3 but location doesnt change
         
         s.command({'name':'walk', 'type':'move', 'direction':[1,1]}, a1)
         s.command({'name':'run', 'type':'run', 'direction':[2,1]}, a1)

@@ -124,6 +124,8 @@ class Simulator(object):
         print(src, 'says ' + cmd['type']  + ' agent', agent.name, '', cmd['direction'],' password=', password)
         if cmd['type'] == 'move':
             print(agent.name, 'moves in direction', cmd['direction'])
+            x,y = self._get_location(agent.name)
+            self._set_location(agent.name, x + cmd['direction'][0], y + cmd['direction'][0] )
         elif cmd['type'] == 'run':
             print(agent.name, 'runs in direction', cmd['direction'])
         elif cmd['type'] == 'fight':
