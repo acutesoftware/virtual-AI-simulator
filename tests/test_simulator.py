@@ -10,6 +10,8 @@ root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.se
 ref_folder = root_folder + os.sep + "data" 
 sys.path.append(root_folder)
 
+import aikif.agents.agent as mod_agt
+
 import planet as planet
 import battle as battle
 import character as character
@@ -32,7 +34,7 @@ class VaisSimulatorTest(unittest.TestCase):
         actions = ['walk', 'run', 'fight', 'buy', 'sell', 'collect']
         s = simulator.SimAdventureGame('Test of SimWorld', world, [a1, a2, a3], [(2,2), (3,4), (4,4)], actions)
         s.run()
-        self.assertEqual(len(str(s)), 231)  
+        self.assertEqual(len(str(s)), 189)  
         
 
     def test_02_move_character(self):
@@ -45,12 +47,14 @@ class VaisSimulatorTest(unittest.TestCase):
         actions = ['walk']
         s = simulator.SimAdventureGame('Test of SimWorld', world, [a1], [(2,2)], actions)
         s.run()
-        self.assertEqual(len(str(s)), 143)  
-        self.assertEqual(s.agent_locations[0]['x'], 2)  
-        self.assertEqual(s.agent_locations[0]['y'], 2)  
+        self.assertEqual(len(str(s)), 129)  
+        
+        #print('s.agent_locations = ', s.agent_locations)
+        self.assertEqual(s.agent_locations[0][0], 2)  
+        self.assertEqual(s.agent_locations[0][1], 2)  
         s.command({'name':'walk', 'type':'move', 'direction':[0,1]}, a1)
-        self.assertEqual(s.agent_locations[0]['x'], 2)  
-        self.assertEqual(s.agent_locations[0]['y'], 2)  
+        self.assertEqual(s.agent_locations[0][0], 2)  
+        self.assertEqual(s.agent_locations[0][1], 2)  
         
         s.command({'name':'walk', 'type':'move', 'direction':[1,1]}, a1)
         s.command({'name':'run', 'type':'run', 'direction':[2,1]}, a1)
@@ -59,6 +63,29 @@ class VaisSimulatorTest(unittest.TestCase):
         
     def test_03_sim_fail(self):
         self.assertNotEqual(1, 2)  
+    
+    def test_04_verify_agents(self):
+        """
+        check that a failed verify agent works
+        simulator.Simulator('BadSim', name, world, agents, agent_locations, actions)
+        """
+        name = 'BadSim'
+        world = worlds.World( 40, 40, ['.','X','#'])
+        agt1 = mod_agt.Agent(name='agt_9001', fldr=os.getcwd())
+        agt2 = mod_agt.Agent(name='agt_9002', fldr=os.getcwd())
+        agents = [agt1,agt2]
+        agent_locations = [{'name':'agt_9001', 'x':3, 'y':5},{'name':'agt_9002', 'x':6, 'y':3}]
+        actions = ['walk']
+        
+        s04 = simulator.Simulator(name, world, agents, agent_locations, actions)
+        self.assertTrue(s04._verify_agents())
+        
+        # now add a duplicate agent name
+        agents.append(agt1)
+        print('DUPLICATE AGENT LIST = ', [str(a) for a in agents])
+        self.assertFalse(s04._verify_agents())
+        
+        
     
     def test_05_run_aikif_agent(self):
         """
@@ -89,7 +116,7 @@ class VaisSimulatorTest(unittest.TestCase):
         sim.run(9, 'Y', log_folder + os.sep)
         self.assertTrue(len(str(sim)) > 10)  
         #print(sim.agent_list[0].agent_locations)
-        print(sim.agent_list[0])
+        #print(sim.agent_list[0])
         
         self.assertFalse(agt_list[0].current_x == 4545) 
         self.assertFalse(agt_list[0].current_y == 9895) 
@@ -108,7 +135,7 @@ class VaisSimulatorTest(unittest.TestCase):
         actions = ['walk']
         s = simulator.SimAdventureGame('Test of Game of Life', world, [a1], [(2,2)], actions)
         s.run()
-        print(s)
+        #print(s)
         self.assertTrue(len(str(s)) > 10)  
         
         
@@ -120,8 +147,8 @@ class VaisSimulatorTest(unittest.TestCase):
         actions = ['walk']
         s = simulator.SimAdventureGame('Test of SimAdventureGame', world, [a1], [(2,2)], actions)
         s.run()
-        print(s)
-        self.assertEqual(len(str(s)), 151)  
+        #print(s)
+        self.assertEqual(len(str(s)), 137)  
         
     
 if __name__ == '__main__':
