@@ -54,32 +54,7 @@ class Simulator(object):
             
     
 
-        
-    def _get_location(self, agent_name):
-        """
-        returns x,y current location of agent by name
-        """
-        print('TODO')
-        
-        """        for a in self.agent_locations:
-            if a['name'] == agent_name:
-                return a['x'], a['y']
-        """
-        
-    def _set_location(self, agent_name, x, y):
-        """
-        Sets the x,y location of agent by name
-        """
-        print('TODO')
-        
-        """
-        for a in self.agent_locations:
-            if a['name'] == agent_name:
-                a['x'] = x
-                a['y'] = y
-                return
-        """
-        
+
     
     def run(self, num_iterations=-1):
         """

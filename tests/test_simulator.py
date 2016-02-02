@@ -103,7 +103,7 @@ class VaisSimulatorTest(unittest.TestCase):
 
         log_folder = os.path.join( os.getcwd(), 'test_results')
         
-        myWorld = worlds.World( 40, 40, ['.','X','#'])
+        myWorld = worlds.World( 70, 20, ['.','X','#'])
         myWorld.build_random( 5, 60, 30, 10)
         target_coords = [math.floor(myWorld.grd.grid_height/2) + randint(1, math.floor(myWorld.grd.grid_height/2)) - 3, \
              math.floor(myWorld.grd.grid_width /2) + randint(1, math.floor(myWorld.grd.grid_width/2)) - 5]
