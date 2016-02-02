@@ -52,7 +52,9 @@ class VaisSimulatorTest(unittest.TestCase):
         traits = character.CharacterCollection(ref_folder)
         a1 = mod_agt.Agent(name='a2', fldr=os.getcwd())
         a1.characteristics = traits.generate_random_character()
-        world = planet.Planet('SimWorld', num_seeds=5, width=20, height=15, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
+        world = planet.Planet('SimWorld', num_seeds=5, width=70, height=10, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
+        #world.build_random( 2, 30, 40, 1)
+        
         actions = ['walk']
         s = simulator.SimAdventureGame('Test of SimWorld', world, [a1], actions)
         s.run()
@@ -72,7 +74,8 @@ class VaisSimulatorTest(unittest.TestCase):
         check that a failed verify agent works
         simulator.Simulator('BadSim', name, world, agents, agent_locations, actions)
         """
-        world = worlds.World( 40, 40, ['.','X','#'])
+        world = worlds.World( 40, 20, ['.','X','#'])
+        world.build_random( 8, 40, 70, 30)
         agt1 = mod_agt.Agent(name='agt_9001', fldr=os.getcwd())
         agt2 = mod_agt.Agent(name='agt_9002', fldr=os.getcwd())
         agents = [agt1,agt2]
@@ -141,7 +144,7 @@ class VaisSimulatorTest(unittest.TestCase):
         actions = ['walk']
         s = simulator.SimAdventureGame('Test of Game of Life', world, [a1], actions)
         s.run()
-        #print(s)
+        print(s)
         self.assertTrue(len(str(s)) > 10)  
         
         
@@ -154,7 +157,7 @@ class VaisSimulatorTest(unittest.TestCase):
         actions = ['walk']
         s = simulator.SimAdventureGame('Test of SimAdventureGame', world, [a21], actions)
         s.run()
-        #print(s)
+        print(s)
         self.assertEqual(len(str(s)), 192)  
         
     
