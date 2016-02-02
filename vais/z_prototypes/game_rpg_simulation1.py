@@ -1,10 +1,7 @@
 # game_rpg_simulation.py    written by Duncan Murray 30/3/2015
 
-import sys
 import os
 import random
-import aikif.cls_log as mod_log
-import aikif.project as mod_prj
 
 
 def main():
@@ -20,8 +17,7 @@ def main():
         locations
     
     """
-    p = mod_prj.Project('RPG Simulation', 'Game', 'Testing character simulation in game', os.getcwd())
-    
+     
     character1 = Character('Albogh', str=4,int=7,sta=50)
     character2 = Character('Zoltor', str=6,int=6,sta=70)
     print('PLAYER1 [start]:', character1)
