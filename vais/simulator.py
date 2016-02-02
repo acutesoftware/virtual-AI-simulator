@@ -13,13 +13,14 @@ class Simulator(object):
         self.status = 'Started'
         self.agents = agents
         self._verify_agents()
-        self.agent_locations = []
-        for num, a in enumerate(self.agents):
-            ag_loc = {}
-            ag_loc['name'] = a.name
-            ag_loc['x'] = agent_locations[num][0]
-            ag_loc['y'] = agent_locations[num][1]
-            self.agent_locations.append(ag_loc)
+        self.agent_locations = agent_locations #[]
+        #for num, a in enumerate(self.agents):
+        #    print('Sim __init__, agent num:', num, ' = ', a)
+        #    ag_loc = {}
+        #    ag_loc['name'] = a.name
+        #    ag_loc['x'] = agent_locations[num][0]
+        #    ag_loc['y'] = agent_locations[num][1]
+        #    self.agent_locations.append(ag_loc)
      
     def __str__(self):
         res = ' -= ' + self.name + ' =--\n'
@@ -28,9 +29,11 @@ class Simulator(object):
         res += 'agents  = ' + str(len(self.agents)) + ' (' + ','.join([c.name for c in self.agents]) + ')\n'
         res += 'agent_locations\n'
         for a in self.agent_locations:
-            res += '\nagent ' + a['name']
-            res += ' x=' + str(a['x']) 
-            res += ' y=' + str(a['y'])
+            res += str(a) + '\n'
+            #res += '\nagent ' + a['name']
+            #res += ' x=' + str(a['x']) 
+            #res += ' y=' + str(a['y'])
+        #print('str = ', res)
         return res + '\n'
     
     def _verify_agents(self):
@@ -39,12 +42,15 @@ class Simulator(object):
         1. checking for unique names
         2. TODO - other checks if needed
         """
-        print('verifying...')
+        #print('verifying...')
         nmes = []
         for a in self.agents:
+            #print('a = ', a)
             nmes.append(a.name)
-        if len(nmes) != len(set(nmes)):
-            print('Error - you need to pass unique list of agent names to simulator')
+        if len(nmes) == len(set(nmes)):
+            return True
+        print('Error - you need to pass unique list of agent names to simulator')
+        return False
             
     
     def _get_agent_loc_index(self, agent_name):
