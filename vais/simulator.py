@@ -4,7 +4,7 @@ class Simulator(object):
     """
     Base simulator class
     """
-    def __init__(self, name, world, agents, agent_locations, actions):
+    def __init__(self, name, world, agents, actions):
         self.name = name
         self.world = world
         self.actions = actions
@@ -13,7 +13,7 @@ class Simulator(object):
         self.status = 'Started'
         self.agents = agents
         self._verify_agents()
-        self.agent_locations = agent_locations #[]
+        #self.agent_locations = agent_locations #[]
         #for num, a in enumerate(self.agents):
         #    print('Sim __init__, agent num:', num, ' = ', a)
         #    ag_loc = {}
@@ -28,12 +28,12 @@ class Simulator(object):
         res += 'actions = [' + ', '.join([a for a in self.actions]) + ']\n'
         res += 'agents  = ' + str(len(self.agents)) + ' (' + ','.join([c.name for c in self.agents]) + ')\n'
         res += 'agent_locations\n'
-        for a in self.agent_locations:
-            res += str(a) + '\n'
-            #res += '\nagent ' + a['name']
-            #res += ' x=' + str(a['x']) 
-            #res += ' y=' + str(a['y'])
-        #print('str = ', res)
+        for a in self.agents:
+            res += 'Agent: ' + a.name + '\n'
+            print('agent a = ', str(a))
+            print('coords = ', a.coords)
+            for c,v in a.coords.items():
+                res += '  coord ' + str(c) + ' = ' + str(v) + '\n'
         return res + '\n'
     
     def _verify_agents(self):
@@ -53,33 +53,32 @@ class Simulator(object):
         return False
             
     
-    def _get_agent_loc_index(self, agent_name):
-        """
-        returns x,y current location of agent by name
-        """
-        for num, a in enumerate(self.agent_locations):
-            if a['name'] == agent_name:
-                return num
+
         
     def _get_location(self, agent_name):
         """
         returns x,y current location of agent by name
         """
-        for a in self.agent_locations:
+        print('TODO')
+        
+        """        for a in self.agent_locations:
             if a['name'] == agent_name:
                 return a['x'], a['y']
-        
+        """
         
     def _set_location(self, agent_name, x, y):
         """
         Sets the x,y location of agent by name
+        """
+        print('TODO')
+        
         """
         for a in self.agent_locations:
             if a['name'] == agent_name:
                 a['x'] = x
                 a['y'] = y
                 return
-
+        """
         
     
     def run(self, num_iterations=-1):
@@ -124,8 +123,8 @@ class Simulator(object):
         print(src, 'says ' + cmd['type']  + ' agent', agent.name, '', cmd['direction'],' password=', password)
         if cmd['type'] == 'move':
             print(agent.name, 'moves in direction', cmd['direction'])
-            x,y = self._get_location(agent.name)
-            self._set_location(agent.name, x + cmd['direction'][0], y + cmd['direction'][0] )
+            #x,y = self._get_location(agent.name)
+            #self._set_location(agent.name, x + cmd['direction'][0], y + cmd['direction'][0] )
         elif cmd['type'] == 'run':
             print(agent.name, 'runs in direction', cmd['direction'])
         elif cmd['type'] == 'fight':
@@ -136,20 +135,21 @@ class Simulator(object):
         moves agent 'agent' in 'direction'
         """
         
-        self._set_location(agent, direction[0], direction[0])
+        #self._set_location(agent, direction[0], direction[0])
+        print ('TODO')
         print('moving agent to x,y=', direction, 'wrap_allowed = ', wrap_allowed)
     
     
 class SimAdventureGame(Simulator):
-    def __init__(self, name, world, agents, agent_locations, actions):
-        Simulator.__init__(self, name, world, agents, agent_locations, actions)
+    def __init__(self, name, world, agents, actions):
+        Simulator.__init__(self, name, world, agents, actions)
         
     def __str__(self):
         return 'Adventure Game ' + Simulator.__str__(self)
     
 class SimGameOfLife(Simulator):
-    def __init__(self, name, world, agents, agent_locations, actions):
-        Simulator.__init__(self, name, world, agents, agent_locations, actions)
+    def __init__(self, name, world, agents, actions):
+        Simulator.__init__(self, name, world, agents, actions)
         
     def __str__(self):
         return 'GAME OF LIFE ' + Simulator.__str__(self)
