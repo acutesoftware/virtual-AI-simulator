@@ -1,4 +1,6 @@
-# character.py  written by Duncan Murray 3/4/2015
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# character.py
 
 import os
 import random

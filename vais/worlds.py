@@ -1,4 +1,6 @@
-# worlds.py     written by Duncan Murray 9/7/2014
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# worlds.py
 
 from random import randint
 import math

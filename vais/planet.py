@@ -1,4 +1,6 @@
-# planet.py     written by Duncan Murray
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# planet.py
 
 import os
 import worlds as my_world
