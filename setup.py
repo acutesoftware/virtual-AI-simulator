@@ -10,7 +10,7 @@ setup(
     install_requires=[
           'nose >= 1.0',
           'noise >= 1.2.1',
-          'aikif >= 0.1.3',
+          'aikif >= 0.1.9',
           'rawdata >= 0.0.6'
     ],
     include_package_data = True,
