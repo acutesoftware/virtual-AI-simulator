@@ -90,7 +90,7 @@ class VaisSimulatorTest(unittest.TestCase):
         
         # now add a duplicate agent name
         agents.append(agt1)
-        print('DUPLICATE AGENT LIST = ', [str(a) for a in agents])
+        #print('DUPLICATE AGENT LIST = ', [str(a) for a in agents])
         self.assertFalse(s04._verify_agents())
         
         
@@ -136,6 +136,8 @@ class VaisSimulatorTest(unittest.TestCase):
         self.assertEqual(agt_list[0].current_y, 9895) 
     
     
+
+    
     def test_11_game_of_life(self):
         traits = character.CharacterCollection(ref_folder)
         a1 = mod_agt.Agent(name='Life', fldr=os.getcwd())
@@ -143,9 +145,19 @@ class VaisSimulatorTest(unittest.TestCase):
         world = planet.Planet('SimWorld', num_seeds=5, width=20, height=15, wind=0.3, rain=0.10, sun=0.3, lava=0.4)
         actions = ['walk']
         s = simulator.SimAdventureGame('Test of Game of Life', world, [a1], actions)
+        
         s.run()
-        print(s)
+        #print(s)
+
         self.assertTrue(len(str(s)) > 10)  
+        
+        tst_world, tst_status, tst_log = s.get_state()
+        print('game of life state tst_world= ', tst_world)
+        print('game of life state tst_status= ', tst_status)
+        print('game of life state tst_log= ', tst_log)
+        self.assertTrue(len(str(tst_world)) > 10)
+        self.assertEqual(tst_status, 'Waiting for Command')
+        self.assertEqual(tst_log, [])
         
         
     
