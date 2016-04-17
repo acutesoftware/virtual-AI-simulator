@@ -4,7 +4,8 @@ import os
 import planet
 import simulator
 import character
-    
+import aikif.agents.agent as agt
+
 class ReallySimpleGameAI():
     """
     simple example of an AI which walks characters
@@ -13,8 +14,10 @@ class ReallySimpleGameAI():
     def __init__(self):
         p = planet.Planet('SimpleAIWorld', 5, 20, 10, 0.2, 0.2, 0.2, 0.5)
         traits = character.CharacterCollection(os.getcwd() + os.sep + 'data')
-        self.a1 = traits.generate_random_character()
-        self.a2 = traits.generate_random_character()
+        #self.a1 = traits.generate_random_character()
+        self.a1 = agt.Agent('Jack')
+        self.a2 = agt.Agent('Jill')
+        print('type(self.a1) = ', type(self.a1))
         actions = ['walk', 'fight']
         self.s = simulator.Simulator('Test of SimWorld', p, [self.a1, self.a2], actions)
         self.s.run()  # with no params, it defaults to turn based mode
