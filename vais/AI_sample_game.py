@@ -17,7 +17,7 @@ class ReallySimpleGameAI():
         #self.a1 = traits.generate_random_character()
         self.a1 = agt.Agent('Jack')
         self.a2 = agt.Agent('Jill')
-        print('type(self.a1) = ', type(self.a1))
+        #print('type(self.a1) = ', type(self.a1))
         actions = ['walk', 'fight']
         self.s = simulator.Simulator('Test of SimWorld', p, [self.a1, self.a2], actions)
         self.s.run()  # with no params, it defaults to turn based mode
@@ -35,13 +35,16 @@ class ReallySimpleGameAI():
         num_steps = 0
         while self.s.get_state() != 'Halted':
             self.s.command({'name':'walk', 'type':'move', 'direction':[x, y]}, self.a1)
-            self.s.command({'name':'walk', 'type':'run', 'direction':[-x, y]}, self.a2)
+            self.s.command({'name':'walk', 'type':'run', 'direction':[x, y+1]}, self.a2)
             num_steps += 1
             if num_steps >= 3:
                 break
-        print('finished')
+        for a in self.s.agents:
+            print(a.name, 'finished at position ', a.coords['x'], a.coords['y'])
         
-if __name__ == '__main__':        
-    ReallySimpleGameAI().run()
+        
+if __name__ == '__main__':
+    my_game = ReallySimpleGameAI()
+    my_game.run()
 
  
