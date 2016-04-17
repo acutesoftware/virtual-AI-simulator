@@ -46,8 +46,8 @@ class Simulator(object):
         """
         #print('verifying...')
         nmes = []
-        for a in self.agents:
-            #print('a = ', a)
+        for agt_num, a in enumerate(self.agents):
+            #print('agent#', agt_num, 'is type', type(a))
             nmes.append(a.name)
         if len(nmes) == len(set(nmes)):
             return True
@@ -72,8 +72,7 @@ class Simulator(object):
             self.status = 'Waiting for Command'
             return
         self.status = 'Running'
-        print('Running Simulation... TODO = subclass this method in your calling class')
-     
+        
     def stop(self):
         self.status = 'Halted'
     
@@ -99,9 +98,7 @@ class Simulator(object):
         """
         print(src, 'says ' + cmd['type']  + ' agent', agent.name, '', cmd['direction'],' password=', password)
         if cmd['type'] == 'move':
-            print(agent.name, 'moves in direction', cmd['direction'])
-            #x,y = self._get_location(agent.name)
-            #self._set_location(agent.name, x + cmd['direction'][0], y + cmd['direction'][0] )
+            self._move_agent(agent, cmd['direction'], False)
         elif cmd['type'] == 'run':
             print(agent.name, 'runs in direction', cmd['direction'])
         elif cmd['type'] == 'fight':
@@ -111,11 +108,12 @@ class Simulator(object):
         """
         moves agent 'agent' in 'direction'
         """
+        x,y = agent.coords['x'], agent.coords['y']
+        print('moving agent ', agent.name, 'to x,y=', direction, 'wrap_allowed = ', wrap_allowed)
+        agent.coords['x'] = x + direction[0]
+        agent.coords['y'] = y + direction[1]
+        #print('agent after move = ', str(agent))
         
-        #self._set_location(agent, direction[0], direction[0])
-        print ('TODO')
-        print('moving agent to x,y=', direction, 'wrap_allowed = ', wrap_allowed)
-    
     
 class SimAdventureGame(Simulator):
     def __init__(self, name, world, agents, actions):
