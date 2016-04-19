@@ -24,4 +24,7 @@ wipe_file('character.txt')
 wipe_file('vais_world_traversed.txt')
 wipe_file('vais_world.txt')
 wipe_file('random_char.txt')
+wipe_file('agent.txt')
+wipe_file('test_world.txt')
+wipe_file('test_world_traversed.txt')
 
