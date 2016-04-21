@@ -20,6 +20,7 @@ print ('WIPING ALL TEST RESULTS - PRESS CTRL C TO STOP')
 time.sleep(10)
 wipe_file('character_sample.txt')
 
+wipe_file('_sessions.txt')
 wipe_file('character.txt')
 wipe_file('vais_world_traversed.txt')
 wipe_file('vais_world.txt')
