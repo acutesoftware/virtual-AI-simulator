@@ -9,27 +9,37 @@
 
 from pprint import pprint
 
-def main():
-    print('calc_building_design')
-    w = int(input('enter building width : '))
-    l = int(input('enter building length : '))
-    
+fn = {'1':[' 1 = basic structure', 'calc_structure()'],
+      'x':[' x = exit', 'exit()'],
+      }
+  
 
-    res = calc_structure(width=w, length=l, height=2.4, prevailing_wind=3.2)
-    pprint(res)
+def main():
+    print(' --- calc_building_design --- ')
+    for k,v in fn.items():
+        print(v[0])
+    a = input('enter selection : ')
+    eval(fn[a][1])
     
-def calc_structure(width, length, height, prevailing_wind=2.8 ):   
+    
+def calc_structure( ):   
     """
     calculate various aspects of the structure 
     (WARNING - these are not complete engineering specs, 
      rather guideline as exercise for this software)
     """
-    area = width * length
-    perim =  2 * width + 2 * length
-    roof_cladding = area
-    wall_cladding = perim * height
+    height=2.4
+    prevailing_wind=2.8
+    width = int(input('enter building width : '))
+    length = int(input('enter building length : '))
+    res = {}
     
-    return ({'area':area, 'perim':perim, 'roof_cladding':roof_cladding, 'wall_cladding':wall_cladding})
+    res['area'] = width * length
+    res['perim'] =  2 * width + 2 * length
+    res['roof_cladding'] = res['area']
+    res['wall_cladding'] = res['perim'] * height
+    pprint(res)
+    return res
     
 if __name__ == '__main__':
     main()
