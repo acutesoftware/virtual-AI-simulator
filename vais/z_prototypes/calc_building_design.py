@@ -9,9 +9,10 @@
 
 from pprint import pprint
 
-fn = {'1':[' 1 = basic structure', 'calc_structure()'],
+fn = {'1':[' 1 = basic structure', 'calc_basics()'],
       'x':[' x = exit', 'exit()'],
-      }
+      '2':[' 2 = Rafter deflection', 'bld_rafter_deflection()' ],
+     }
   
 
 def main():
@@ -22,11 +23,9 @@ def main():
     eval(fn[a][1])
     
     
-def calc_structure( ):   
+def calc_basics( ):   
     """
     calculate various aspects of the structure 
-    (WARNING - these are not complete engineering specs, 
-     rather guideline as exercise for this software)
     """
     height=2.4
     prevailing_wind=2.8
@@ -40,6 +39,27 @@ def calc_structure( ):
     res['wall_cladding'] = res['perim'] * height
     pprint(res)
     return res
+ 
+
+def bld_rafter_deflection():
+    """
+    calculate rafter deflections
+    """
+    l = float(input('enter rafter length : '))
+    f = float(input('enter Force or weight applied to roof : '))
+#    E = float(input('enter modulus of elasticity x10**5 (Steel beam example=2.1) : '))
+#    I = float(input('enter members "moment of intertia x10**6" (for Steel beam 410UB53.7=188 ) :'))
+    E = 2.1
+    I = 188
+    res = {}
     
+    res['max deflection - centre load'] = (f * (l ** 3)) / 48 * (E * 10**5) * (I * 10**6)
+    res['max deflection - distrib load'] = (5 * f * (l ** 4)) / 384 * (E * 10**5) * (I * 10**6)
+    
+    pprint(res)
+    return res
+ 
+
+ 
 if __name__ == '__main__':
     main()
