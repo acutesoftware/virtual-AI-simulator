@@ -9,16 +9,19 @@
 
 from pprint import pprint
 
-fn = {'1':[' 1 = basic structure', 'calc_basics()'],
-      'x':[' x = exit', 'exit()'],
-      '2':[' 2 = Rafter deflection', 'bld_rafter_deflection()' ],
+fn = {  'x':[' x = exit', 'exit()'],
+        '1':[' 1 = basic structure', 'calc_basics()'],
+        '2':[' 2 = Rafter deflection', 'bld_rafter_deflection()' ],
      }
   
 
 def main():
     print(' --- calc_building_design --- ')
+    menu = []
     for k,v in fn.items():
-        print(v[0])
+        menu.append(v[0])
+    for menuitem in sorted(menu):
+        print(menuitem)
     a = input('enter selection : ')
     eval(fn[a][1])
     
