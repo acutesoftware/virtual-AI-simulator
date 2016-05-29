@@ -26,14 +26,16 @@ def main():
     eval(fn[a][1])
     
     
-def calc_basics( ):   
+def calc_basics(width=-1, height=-1):   
     """
     calculate various aspects of the structure 
     """
     height=2.4
     prevailing_wind=2.8
-    width = int(input('enter building width : '))
-    length = int(input('enter building length : '))
+    if width == -1:
+        width = int(input('enter building width : '))
+    if length == -1:
+        length = int(input('enter building length : '))
     res = {}
     
     res['area'] = width * length
