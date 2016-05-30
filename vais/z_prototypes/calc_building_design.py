@@ -26,12 +26,10 @@ def main():
     eval(fn[a][1])
     
     
-def calc_basics(width=-1, height=-1):   
+def calc_basics(width=-1, length=-1, height=2.4, prevailing_wind=2.8):   
     """
     calculate various aspects of the structure 
     """
-    height=2.4
-    prevailing_wind=2.8
     if width == -1:
         width = int(input('enter building width : '))
     if length == -1:
