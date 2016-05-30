@@ -46,24 +46,33 @@ def calc_basics(width=-1, height=-1):
     return res
  
 
-def bld_rafter_deflection():
+def bld_rafter_deflection(length=-9, force=-9, E_mod_elasticity=-9, I_moment_of_intertia=-9):
     """
-    calculate rafter deflections
+    calculate rafter deflections - see test_calc_building_design.py for 
+    Sample values for equations below from Structures II course
     """
-    l = float(input('enter rafter length : '))
-    f = float(input('enter Force or weight applied to roof : '))
-#    E = float(input('enter modulus of elasticity x10**5 (Steel beam example=2.1) : '))
-#    I = float(input('enter members "moment of intertia x10**6" (for Steel beam 410UB53.7=188 ) :'))
-    E = 2.1
-    I = 188
+    
+    
+    if length == -9:
+        length = float(input('enter rafter length : '))
+        
+    if force == -9:
+        force = float(input('enter Force or weight applied to roof : '))
+    
+    if E_mod_elasticity == -9:
+        E_mod_elasticity = float(input('enter modulus of elasticity x10**5 (Steel beam example=2.1) : '))
+    
+    if I_moment_of_intertia == -9:
+        I_moment_of_intertia = float(input('enter members "moment of intertia x10**6" (for Steel beam 410UB53.7=188 ) :'))
+        
     res = {}
     
-    res['max deflection - centre load'] = (f * (l ** 3)) / 48 * (E * 10**5) * (I * 10**6)
-    res['max deflection - distrib load'] = (5 * f * (l ** 4)) / 384 * (E * 10**5) * (I * 10**6)
+    res['max deflection - centre load'] =  (1 * force * (length ** 3)) / (48  * (E_mod_elasticity * 10**5) * (I_moment_of_intertia * 10**6))
+    res['max deflection - distrib load'] = (5 * force * (length ** 4)) / (384 * (E_mod_elasticity * 10**5) * (I_moment_of_intertia * 10**6))
     
     pprint(res)
     return res
- 
+
 
  
 if __name__ == '__main__':
