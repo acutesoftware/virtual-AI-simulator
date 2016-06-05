@@ -31,7 +31,21 @@ def method1():
         for word in words_to_find:
             if word in garbage:
                 logger.info('found ' + word + ' in ' + str(start_seed))
-        
+
+
+
+def method2():
+    for start_seed in range(1, 9999999):
+        random.seed(start_seed)
+        if start_seed % 1000 == 0:
+            logger.debug('seed = ' + str(start_seed))
+            sys.stdout.write('.') 
+            sys.stdout.flush()
+        garbage = ''.join([chr(random.randint(32,122)) for x in range(10)])
+        for word in words_to_find:
+            if word[0:len(word)] ==  garbage[0:len(word)]:
+                logger.info('Starts with ' + word + ' in ' + str(start_seed))
+                
   
 def get_found_locations():
     """
@@ -55,7 +69,11 @@ def get_found_locations():
     random.seed(1572)
     print(''.join([chr(random.randint(32,122)) for x in range(100000)])[73834:73838])
     
+    random.seed(561240)
+    print(''.join([chr(random.randint(32,122)) for x in range(3)]))  # WTF
     
+    random.seed(706075)
+    print(''.join([chr(random.randint(32,122)) for x in range(3)]))  # LOL
     
     
     
