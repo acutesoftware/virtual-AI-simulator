@@ -12,6 +12,10 @@ VAIS - Virtual AI simulator
    :target: https://landscape.io/github/acutesoftware/virtual-AI-simulator/master
    :alt: Code Health
 
+.. image:: https://codeclimate.com/github/acutesoftware/virtual-AI-simulator/badges/gpa.svg
+   :target: https://codeclimate.com/github/acutesoftware/virtual-AI-simulator
+   :alt: Code Climate
+
 .. image:: https://requires.io/github/acutesoftware/virtual-AI-simulator/requirements.svg?branch=master
      :target: https://requires.io/github/acutesoftware/virtual-AI-simulator/requirements/?branch=master
      :alt: Requirements Status
