@@ -95,7 +95,28 @@ class World(object):
         self.add_blocks(perc_blocked)
         self.refresh_stats()
 
-         
+    def pick_random_target(self):
+        """
+        returns coords of a randomly generated starting position
+        mostly over to the right hand side of the world
+        """
+        start_x = math.floor(self.grd.grid_height/2)
+        start_y = math.floor(self.grd.grid_width /2)
+        min_dist_from_x = 3
+        min_dist_from_y = 5
+        move_random_x = randint(1, math.floor(self.grd.grid_height/2))
+        move_random_y = randint(1, math.floor(self.grd.grid_width/2))
+        x = start_x + move_random_x - min_dist_from_x
+        y = start_y + move_random_y - min_dist_from_y
+        return [x,y]
+
+
+        
+        
+        
+        
+        
+        
     def add_new_seed(self):
         y = randint(0,self.grd.grid_height-1)
         x = randint(0,self.grd.grid_width-1)
