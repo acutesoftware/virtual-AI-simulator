@@ -43,8 +43,7 @@ def build_world(height, width):
 
 def create_random_agents(myWorld, num_agents):    
     #Create some agents to walk the grid
-    target_coords = [math.floor(myWorld.grd.grid_height/2) + randint(1, math.floor(myWorld.grd.grid_height/2)) - 3, \
-                     math.floor(myWorld.grd.grid_width /2) + randint(1, math.floor(myWorld.grd.grid_width/2)) - 5]
+    target_coords = myWorld.pick_random_target()
     agt_list = []
     for agt_num in range(0,num_agents):
         ag = agt.ExploreAgent( 'exploring_agent' + str(agt_num),  log_folder, False,1)
