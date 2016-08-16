@@ -16,8 +16,8 @@ words_to_find = ['MATHS', 'HELP', 'maths', 'ROCKS', 'Maths', 'Rules', 'LOL', 'WT
 
 def main():
     #method1()
-    #method2()
-    get_found_locations()
+    method2()
+    #get_found_locations()
     
 
 def method1():
