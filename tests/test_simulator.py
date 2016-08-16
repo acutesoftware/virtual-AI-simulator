@@ -107,9 +107,12 @@ class VaisSimulatorTest(unittest.TestCase):
         log_folder = os.path.join( os.getcwd(), 'test_results')
         
         myWorld = worlds.World( 70, 20, ['.','X','#'])
-        myWorld.build_random( 5, 60, 30, 10)
-        target_coords = [math.floor(myWorld.grd.grid_height/2) + randint(1, math.floor(myWorld.grd.grid_height/2)) - 3, \
-             math.floor(myWorld.grd.grid_width /2) + randint(1, math.floor(myWorld.grd.grid_width/2)) - 5]
+        #myWorld.build_random( 5, 60, 30, 10)
+        #target_coords = [math.floor(myWorld.grd.grid_height/2) + randint(1, math.floor(myWorld.grd.grid_height/2)) - 3, \
+        #     math.floor(myWorld.grd.grid_width /2) + randint(1, math.floor(myWorld.grd.grid_width/2)) - 5]
+             
+        target_coords = myWorld.pick_random_target()
+             
         agt_list = []
         for agt_num in range(0,4):
 
