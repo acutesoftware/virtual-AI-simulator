@@ -45,7 +45,6 @@ def main():
     """
     s = rawdata.content.DataFiles()
     all_ingredients = list(s.get_collist_by_name(data_files[1]['file'], data_files[1]['col'])[0])
-    print(all_ingredients[0])
     #find_best_ingredients(ingredients_on_hand, dinner_guests)
     find_best_ingredients(all_ingredients, dinner_guests)
 
@@ -59,16 +58,19 @@ def find_best_ingredients(ingredients, guests):
             ingredient_ranking[i] = 0
             
         for g in guests:
-            if i in g['likes']:
-                ingredient_ranking[i] += 1
-            if i in g['hates']:
-                ingredient_ranking[i] -= 5
+            for sub_i in g['likes']:
+                if i.lower() in sub_i.lower():
+                    ingredient_ranking[i] += 1
+            for sub_i in g['hates']:
+                if i.lower() in sub_i.lower():
+                    ingredient_ranking[i] -= 5
                 
     #print(ingredient_ranking)        
-
+    #print(ingredients)        
+    #print(sorted(ingredient_ranking.items(), key=lambda x: x[1]))
  
-    for k,v in ingredient_ranking.items():
-        if v > 0:
+    for k,v in sorted(ingredient_ranking.items(), key=lambda x: x[1]):
+        if v != 0:
             print(k,v)
  
 main()    
