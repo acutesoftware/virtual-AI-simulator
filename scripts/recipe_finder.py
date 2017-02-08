@@ -24,7 +24,7 @@ dinner_guests = [
     {'name':'Stuart', 'likes':['steak','indian'], 'hates':['roast chicken','asparagus','tomatoe','prawns', 'fish']},
  ] 
  
-ingredients_on_hand = ['steak','tofu','rice','pasta','chicken','asparagus','tomatoe','basil','chillie'] 
+ingredients_on_hand = ['Steak','Tofu','Rice','Pasta','Chicken','Asparagus','Tomatoe','Cheese'] 
  
 
  
@@ -46,8 +46,16 @@ def main():
     s = rawdata.content.DataFiles()
     all_ingredients = list(s.get_collist_by_name(data_files[1]['file'], data_files[1]['col'])[0])
     #find_best_ingredients(ingredients_on_hand, dinner_guests)
-    find_best_ingredients(all_ingredients, dinner_guests)
+    best_ingred, worst_ingred = find_best_ingredients(all_ingredients, dinner_guests)
 
+    print('best ingred  = ', best_ingred)
+    print('worst ingred = ', worst_ingred)
+    
+    for have in ingredients_on_hand:
+        if have in best_ingred:
+            print('Use this = ', have)
+    
+    
 def find_best_ingredients(ingredients, guests):
     """
     
@@ -68,9 +76,15 @@ def find_best_ingredients(ingredients, guests):
     #print(ingredient_ranking)        
     #print(ingredients)        
     #print(sorted(ingredient_ranking.items(), key=lambda x: x[1]))
- 
+    best = []
+    avoid = []
     for k,v in sorted(ingredient_ranking.items(), key=lambda x: x[1]):
-        if v != 0:
-            print(k,v)
+        #if v != 0:
+        #    print(k,v)
+        if v < 0:
+            avoid.insert(0, k)  # to get a list of best ordered by value
+        if v > 0:
+            best.insert(0, k)  # to get a list of best ordered by value
+    return best, avoid
  
 main()    
