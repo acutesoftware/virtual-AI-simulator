@@ -34,13 +34,12 @@ def main():
     script to find a list of recipes for a group of people 
     with specific likes and dislikes.
     
-    for f in data_files:
-        print('name = ', f['name'], 'file = ', f['file'])
-        data_list = s.get_collist_by_name(f['file'], f['col'])
-        print(list(data_list[0])[0:5])
- 
-    
-    print(dinner_guests)
+    Output of script
+
+        best ingred  =  ['Tea', 'Tofu', 'Cheese', 'Cucumber', 'Salad', 'Chocolate']
+        worst ingred =  ['Fish', 'Lamb', 'Pie', 'Asparagus', 'Chicken', 'Turnips']
+        Use this =  Tofu
+        Use this =  Cheese    
      
     """
     s = rawdata.content.DataFiles()
