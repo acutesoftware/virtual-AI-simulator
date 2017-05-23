@@ -2,7 +2,7 @@
 import os
 import random  
 
-import vais.character as character
+import character
 
 rules_file = os.getcwd() + os.sep + 'data' + os.sep + 'battle.rules'
 
