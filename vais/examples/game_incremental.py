@@ -16,15 +16,17 @@ ref_folder = root_folder + os.sep + "data"
 my_char = {"name":"player1", "energy":100, "max_energy":100,
             "skills": [
                 {"name":"mining", "level":1},
+                {"name":"herb", "level":1},
             ],
             "experiance": [
-                {"level":1},
-                {"mining":1},
+                {"name":"level", "val":1},
+                {"name":"mining", "val":1},
+                {"name":"herb", "val":1},
             ],
             "inventory": [
-                {"stone":0},
-                {"gold":10},
-                {"herb":0}
+                {"name":"stone", "val":0},
+                {"name":"gold", "val":10},
+                {"name":"herb", "val":0},
             ]
             }
 
@@ -36,10 +38,22 @@ materials = [
 ]
 
 actions = [
-{"name":"walk", "cost_energy":0.01, "cost_gold":0, "reward_chance":0.8,"reward_item":"herb"},
+{"name":"walk", "cost_energy":0.01, "cost_gold":0, "reward_chance":0.08,"reward_item":"herb"},
 {"name":"run", "cost_energy":0.05, "cost_gold":0, "reward_chance":0.0002,"reward_item":"herb"},
 {"name":"rest", "cost_energy":-1, "cost_gold":0, "reward_chance":0.001,"reward_item":"recipe"},
 {"name":"mining", "cost_energy":1, "cost_gold":0, "reward_chance":0.9,"reward_item":"stone"},
+{"name":"herb", "cost_energy":0.01, "cost_gold":0, "reward_chance":0.5,"reward_item":"herb"},
+]
+
+object_types = [
+{"name":"food", "placeable":"N", "wearable":"N", "wieldable":"N"},
+{"name":"craft", "placeable":"Y", "wearable":"N", "wieldable":"N"},
+{"name":"weapon", "placeable":"N", "wearable":"N", "wieldable":"Y"},
+{"name":"armor", "placeable":"N", "wearable":"Y", "wieldable":"N"},
+]
+
+objects = [
+{"name":"furnace", "type":"craft", "cost_gold":200, "uses":["coal", "iron_ore"],"outputs":"iron"},
 ]
 
 
@@ -51,8 +65,12 @@ def main():
       print('my_char = ', my_char)
   for i in range(1,50):
       do_action(my_char, actions[2])
-  for i in range(1,50):
-      do_action(my_char, actions[0])
+
+
+
+  for i in range(1,10):
+           do_action(my_char, actions[4])
+
 
   print("Your character = ", my_char)
 
@@ -73,23 +91,29 @@ def do_action(character, action):
 
     # get reward from action by running chance
     roll = random.randint(1,100)
-    #print("you rolled a " + str(roll))
     act = get_action_by_name(character["skills"][ndx_action_skill]["name"])
     reward_item = actions[act]["reward_item"]
     #print('reward_item = ', reward_item)
     #print('act = ', actions[act])
 
+
+    inv = get_inventory_by_name(reward_item, my_char)
+    #print('inv=', inv)
+
     if roll > actions[act]["reward_chance"] * 100 :
-        my_char["inventory"][get_inventory_by_name(reward_item, my_char)][reward_item] += 1
+        my_char["inventory"][inv]["val"] += 1
+        #my_char["inventory"][inv] += 1
+        #my_char["inventory"][inv][reward_item] += 1
 
 
 
 def get_inventory_by_name(nme, character):
     """
-    returns the Action by name
+    returns the inventory index by name
     """
 
-    for ndx, sk in enumerate(character["skills"]):
+    for ndx, sk in enumerate(character["inventory"]):
+        #print("sk = ", sk, " , nme = ", nme)
         if sk["name"] == nme:
             return ndx
     return 0
