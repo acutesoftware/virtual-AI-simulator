@@ -23,7 +23,8 @@ my_char = {"name":"player1", "energy":100, "max_energy":100,
             ],
             "inventory": [
                 {"stone":0},
-                {"gold":10}
+                {"gold":10},
+                {"herb":0}
             ]
             }
 
@@ -35,7 +36,7 @@ materials = [
 ]
 
 actions = [
-{"name":"walk", "cost_energy":0.01, "cost_gold":0, "reward_chance":0.08,"reward_item":"herb"},
+{"name":"walk", "cost_energy":0.01, "cost_gold":0, "reward_chance":0.8,"reward_item":"herb"},
 {"name":"run", "cost_energy":0.05, "cost_gold":0, "reward_chance":0.0002,"reward_item":"herb"},
 {"name":"rest", "cost_energy":-1, "cost_gold":0, "reward_chance":0.001,"reward_item":"recipe"},
 {"name":"mining", "cost_energy":1, "cost_gold":0, "reward_chance":0.9,"reward_item":"stone"},
@@ -48,8 +49,10 @@ def main():
       for i in range(1,5):
         do_action(my_char, actions[3])
       print('my_char = ', my_char)
-  for i in range(1,5):
+  for i in range(1,50):
       do_action(my_char, actions[2])
+  for i in range(1,50):
+      do_action(my_char, actions[0])
 
   print("Your character = ", my_char)
 
