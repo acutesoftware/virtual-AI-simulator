@@ -161,11 +161,18 @@ def do_action(character, action):
     """
     called by main game loop to run an action
     """
-    stats = "Energy=" + str(round(character["energy"], 0)) + ", "
-    stats += "Gold=" + str(round(character["gold"], 0)) + ", "
+    #stats = "Energy=" + str(round(character["energy"], 0)) + ", "
+    #stats += "Gold=" + str(round(character["gold"], 0)) + ", "
 
     ndx_action_skill = get_skill_by_name(action["name"], character)
-    stats += "Skill=" + str(round(character["skills"][ndx_action_skill]["level"], 1))
+    #stats += "Skill=" + str(round(character["skills"][ndx_action_skill]["level"], 1))
+
+
+    stats = {}
+    stats["Energy"] = round(character["energy"], 0)
+    stats["gold"] = round(character["gold"], 0)
+    stats["skills"] = round(character["skills"][ndx_action_skill]["level"], 1)
+    
 
     my_char["energy"] -= action["cost_energy"]
     my_char["skills"][ndx_action_skill]["level"] += action["exp_gain"]
@@ -182,11 +189,31 @@ def do_action(character, action):
         my_char["inventory"][inv]["val"] += 1
         #my_char["inventory"][inv] += 1
         #my_char["inventory"][inv][reward_item] += 1
-        print(character["name"] + " is " + action["name"] + ". " + stats + ' FOUND ' + reward_item)
+        #print(character["name"] + " is " + action["name"] + ". " + str(stats) + ' FOUND ' + reward_item)
+        print_line_stat(character["name"], action["name"], stats, ' FOUND ' + reward_item)
 
     else:
-        print(character["name"] + " is " + action["name"] + ". " + stats)
+        print_line_stat(character["name"], action["name"], stats, '')
+        time.sleep(0.06)
 
+
+def print_line_stat(nme, action, stats, event):
+    """
+    prints progress on one line, formatted nicely
+    """
+    res = nme.ljust(9) + ' '
+    res += action.ljust(9) + ': '
+    for k,v in stats.items():
+        res += k.ljust(10) + '='
+        res += str(v).ljust(8) + ', '
+
+    if event:
+        res += event
+        print(res.ljust(79) )
+        time.sleep(0.1)
+    else:   # print on same line
+        res += '                       '
+        print(res.ljust(79),  end='\r' )
 
 
 def roll_dice(num):
