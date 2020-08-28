@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='vais',
-    version='0.0.7',
+    version='0.0.8',
     author='Duncan Murray',
     author_email='djmurray@acutesoftware.com.au',
     packages=['vais', 'vais.data','vais.examples','vais.npc'],
