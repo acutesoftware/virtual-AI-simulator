@@ -12,12 +12,14 @@ num_farmers = 4
 num_zombies = 3
 num_bandits = 5
 num_traders = 2
+num_villagers = 3
 
 # peaceful mode
 num_farmers = 7
 num_zombies = 1
 num_bandits = 1
 num_traders = 3
+num_villagers = 3
 
 # grid size
 min_x = 3
@@ -47,7 +49,10 @@ class NPCs(object):
             self.npc_def.append(self.generate_npc('bandits'))
         for _ in range(0,num_traders):
             self.npc_def.append(self.generate_npc('trader'))
-        
+        for _ in range(0,num_villagers):
+            self.npc_def.append(self.generate_npc('villagers'))
+    
+    
         
     def __str__(self):
         res = 'List of my NPCs\n'
