@@ -33,7 +33,7 @@ class TestEnvirosim(unittest.TestCase):
 
         for n in my_npcs.npc_def:
             #print(n['type'])
-            self.assertTrue(n['type'] in ['farmer', 'trader', 'bandit', 'zombie'])
+            self.assertTrue(n['type'] in ['farmer', 'trader', 'bandit', 'zombie', 'villager'])
  
 
 
