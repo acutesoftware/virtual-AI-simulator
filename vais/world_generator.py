@@ -18,24 +18,25 @@ def main():
      TODO - need to change pieces in multiple places (see worlds.py, cls_grid, world_generator)
      (takes about 5 minutes to make 500x400 grid with 8% blockages)
     """
-    width       =  20   # grid width 
-    height      =  10   # grid height
-    iterations  =  20   # how many simulations to run
-    num_agents  =   6   # number of agents to enter the world
+    width       =  40   # grid width 
+    height      =  20   # grid height
+    num_seeds   =   6   # number of seed points to start land generation
+    perc_land   =  20   # % of world that is land
+    perc_sea    =  80   # % of world that is sea
+    perc_blocked=   4   # % of world that is blocked
+        
+    iterations  =  40   # how many simulations to run
+    num_agents  =   16   # number of agents to enter the world
     
-    w = build_world(height, width)
+    w = build_world(height, width, num_seeds, perc_land, perc_sea, perc_blocked)
     print(w)
     a = create_random_agents(w, num_agents)
     sim = my_world.WorldSimulation(w, a, 1)
     sim.run(iterations, 'Y', log_folder + os.sep + 'agt_run')
     sim.world.grd.save('test_world_traversed.txt')
     
-def build_world(height, width):    
-    num_seeds   =   6   # number of seed points to start land generation
-    perc_land   =  20   # % of world that is land
-    perc_sea    =  80   # % of world that is sea
-    perc_blocked=   4   # % of world that is blocked
-    
+def build_world(height, width, num_seeds, perc_land, perc_sea, perc_blocked):    
+
     myWorld = my_world.World( height, width, ['.','X','#'])  # TODO - fix passing
     myWorld.build_random( num_seeds, perc_land, perc_sea, perc_blocked)
     myWorld.grd.save('test_world.txt')
@@ -51,5 +52,6 @@ def create_random_agents(myWorld, num_agents):
         ag.set_world(myWorld.grd, [start_y, start_x], [target_coords[0], target_coords[1]])
         agt_list.append(ag)
     return agt_list
-  
-main()
+
+if __name__ == '__main__':  
+    main()
