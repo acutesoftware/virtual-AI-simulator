@@ -18,18 +18,19 @@ def main():
      TODO - need to change pieces in multiple places (see worlds.py, cls_grid, world_generator)
      (takes about 5 minutes to make 500x400 grid with 8% blockages)
     """
-    width       =  40   # grid width 
-    height      =  20   # grid height
-    num_seeds   =   6   # number of seed points to start land generation
+    width       =  180   # grid width 
+    height      =  90   # grid height
+    num_seeds   =   5   # number of seed points to start land generation
     perc_land   =  20   # % of world that is land
     perc_sea    =  80   # % of world that is sea
-    perc_blocked=   4   # % of world that is blocked
+    perc_blocked=   3   # % of world that is blocked
         
-    iterations  =  40   # how many simulations to run
-    num_agents  =   16   # number of agents to enter the world
+    iterations  =  10   # how many simulations to run
+    num_agents  =   3   # number of agents to enter the world
     
     w = build_world(height, width, num_seeds, perc_land, perc_sea, perc_blocked)
     print(w)
+    w.save_grid_to_image('test_output.png', 'Y')
     a = create_random_agents(w, num_agents)
     sim = my_world.WorldSimulation(w, a, 1)
     sim.run(iterations, 'Y', log_folder + os.sep + 'agt_run')
@@ -46,7 +47,7 @@ def create_random_agents(myWorld, num_agents):
     #Create some agents to walk the grid
     target_coords = myWorld.pick_random_target()
     agt_list = []
-    for agt_num in range(0,num_agents):
+    for agt_num in range(1, num_agents):
         ag = agt.ExploreAgent( 'exploring_agent' + str(agt_num),  log_folder, False,1)
         start_y, start_x = myWorld.grd.find_safe_starting_point()
         ag.set_world(myWorld.grd, [start_y, start_x], [target_coords[0], target_coords[1]])

@@ -21,7 +21,7 @@ class World(object):
     def __init__(self, height, width, terrain):
         self.grd = grd.Grid(height, width, terrain, 1)
         self.refresh_stats()
-        print(self.grd)
+        # print(self.grd)
     
     def __str__(self):
         txt_summary = '\nWorld'
@@ -92,7 +92,8 @@ class World(object):
                 self.expand_seed(self.add_new_seed(), 50, TERRAIN_LAND)
             else:
                 old_land = self.tot_land
-        self.add_blocks(perc_blocked)
+        #self.add_blocks(perc_blocked)
+        self.add_mountains(  perc_blocked)
         self.refresh_stats()
 
     def pick_random_target(self):
@@ -195,7 +196,7 @@ class World(object):
             self.refresh_stats()
             #print(self.show_grid_stats())
  
-    def add_mountains(self):
+    def add_mountains(self, perc_blocked=5):
         """
         instead of the add_blocks function which was to produce
         line shaped walls for blocking path finding agents, this
@@ -206,7 +207,9 @@ class World(object):
         import random
         random.seed()
         octaves = (random.random() * 0.5) + 0.5
-        freq = 17.0 * octaves  # 
+        freq = perc_blocked * octaves  # 
+        if freq == 0:
+            return
         for y in range(self.grd.grid_height - 1):
             for x in range(self.grd.grid_width - 1):
                 pixel = self.grd.get_tile(y,x)
@@ -242,6 +245,39 @@ class World(object):
             for c in range(col, col + x_len):
                 self.grd.set_tile(r,c,TERRAIN_BLOCKED)
         
+
+    def save_grid_to_image(self, fname, launch_image='N'):
+        """
+        saves the grid as an image
+        """
+        pic_y = self.grd.get_grid_height() * 4 + 4
+        pic_x = self.grd.get_grid_width() * 4 + 4
+        from PIL import Image, ImageDraw
+        im= Image.new('RGB', (pic_x, pic_y))
+        
+        draw = ImageDraw.Draw(im) 
+
+
+        for y in range(self.grd.get_grid_height()):
+
+            for x in range(self.grd.get_grid_width()):
+                val = self.grd.grid[y][x]
+                if val == 'X':
+                    fill_col = 'green'
+                if val == '.':
+                    fill_col = 'blue'
+                if val == '#':
+                    fill_col = 'grey'
+
+                dx = x * 4
+                dy = y * 4     
+                draw.rectangle((dx,dy,dx+4,dy+4),  fill=fill_col)
+
+        if launch_image == 'Y':
+            im.show()
+
+        im.save(fname)
+
 
 
 class WorldSimulation(object):
